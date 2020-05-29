@@ -6,19 +6,19 @@ public class BagColPointStub extends SharedRegionStub {
         super(serverHostName, serverPort);
     }
 
-    public synchronized void goCollectABag(){
+    public void goCollectABag(){
 
     }
 
-    public synchronized void carryItToAppropriateStore(int [] bag){
+    public void carryItToAppropriateStore(int [] bag){
 
     }
 
-    public synchronized void setNoMoreBags(boolean noMoreBags){
+    public void setNoMoreBags(boolean noMoreBags){
 
     }
 
-    public synchronized void resetBagColPoint(){
+    public void resetBagColPoint(){
 
     }
 }

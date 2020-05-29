@@ -6,7 +6,7 @@ public class BagRecOfficeStub extends SharedRegionStub {
         super(serverHostName, serverPort);
     }
 
-    public synchronized void reportMissingBags(){
+    public void reportMissingBags(){
 
     }
 }

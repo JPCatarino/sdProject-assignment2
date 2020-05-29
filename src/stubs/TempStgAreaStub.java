@@ -7,7 +7,7 @@ public class TempStgAreaStub extends SharedRegionStub {
         super(serverHostName, serverPort);
     }
 
-    public synchronized void carryItToAppropriateStore(int [] bag){
+    public void carryItToAppropriateStore(int [] bag){
 
     }
 }

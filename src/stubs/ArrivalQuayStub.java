@@ -6,27 +6,27 @@ public class ArrivalQuayStub extends SharedRegionStub {
         super(serverHostName, serverPort);
     }
 
-    public synchronized void hasDaysWorkEnded(){
+    public void hasDaysWorkEnded(){
 
     }
 
-    public synchronized void announcingBusBoarding(){
+    public void announcingBusBoarding(){
 
     }
 
-    public synchronized void goToDepartureTerminal(){
+    public void goToDepartureTerminal(){
 
     }
 
-    public synchronized void parkTheBus(){
+    public void parkTheBus(){
 
     }
 
-    public synchronized void enterTheBus(){
+    public void enterTheBus(){
 
     }
 
-    public synchronized void sitOnTheBus(){
+    public void sitOnTheBus(){
 
     }
 }

@@ -6,15 +6,15 @@ public class DepartureTerminalEntranceStub extends SharedRegionStub {
         super(serverHostName, serverPort);
     }
 
-    public synchronized void prepareNextLeg(){
+    public void prepareNextLeg(){
 
     }
 
-    public synchronized void setAllPassengersFinished(boolean allPassengersFinished){
+    public void setAllPassengersFinished(boolean allPassengersFinished){
 
     }
 
-    public synchronized void getPassengersDTE(){
+    public void getPassengersDTE(){
 
     }
 }

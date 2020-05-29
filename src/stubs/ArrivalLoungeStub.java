@@ -1,5 +1,8 @@
 package stubs;
 
+import common.ClientCom;
+import common.Message;
+import common.MessageType;
 import states.PassengerDecisions;
 
 import java.util.List;
@@ -11,7 +14,13 @@ public class ArrivalLoungeStub extends SharedRegionStub {
     }
 
     public void takeABus() {
+        Message newMessage = new Message();
 
+        newMessage.setMessageType(MessageType.TAKEABUS);
+
+        ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
+        cc.open();
+        cc.writeObject(newMessage);
     }
 
     public void whatShouldIDo() {
@@ -30,27 +39,27 @@ public class ArrivalLoungeStub extends SharedRegionStub {
 
     }
 
-    public synchronized void setPlainBags(List<int[]> plainBags){
+    public void setPlainBags(List<int[]> plainBags){
 
     }
 
-    public synchronized void setFlightNumber(int flightNumber){
+    public void setFlightNumber(int flightNumber){
 
     }
 
-    public synchronized void isDayFinished(){
+    public void isDayFinished(){
 
     }
 
-    public synchronized void getMaxNumberOfPassengers(){
+    public void getMaxNumberOfPassengers(){
 
     }
 
-    public synchronized void setFinishedFlight(boolean finishedFlight){
+    public void setFinishedFlight(boolean finishedFlight){
 
     }
 
-    public synchronized void ispWake(){
+    public void ispWake(){
 
     }
 

@@ -14,4 +14,12 @@ public class SharedRegionStub {
         this.serverHostName = serverHostName;
         this.serverPort = serverPort;
     }
+
+    public String getServerHostName() {
+        return serverHostName;
+    }
+
+    public int getServerPort() {
+        return serverPort;
+    }
 }

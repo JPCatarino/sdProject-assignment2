@@ -8,19 +8,19 @@ public class ArrivalTerminalExitStub extends SharedRegionStub {
         super(serverHostName, serverPort);
     }
 
-    public synchronized void goHome(){
+    public void goHome(){
 
     }
 
-    public synchronized void setDte(DepartureTerminalEntrance dte){
+    public void setDte(DepartureTerminalEntrance dte){
 
     }
 
-    public synchronized void setAllPassengersFinished(boolean allPassengersFinished){
+    public void setAllPassengersFinished(boolean allPassengersFinished){
 
     }
 
-    public synchronized void getPassengersATE(){
+    public void getPassengersATE(){
 
     }
 }
