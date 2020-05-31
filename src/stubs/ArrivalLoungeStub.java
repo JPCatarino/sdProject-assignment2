@@ -39,7 +39,15 @@ public class ArrivalLoungeStub extends SharedRegionStub {
     }
 
     public void noMoreBagsToCollect() {
+        Message newMessage = new Message();
 
+        newMessage.setMessageType(MessageType.NOMOREBAGSTOCOLLECT);
+
+        ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
+        cc.open();
+        cc.writeObject(newMessage);
+
+        newMessage =(Message) cc.readObject();
     }
 
     public void setPlainBags(List<int[]> plainBags){
