@@ -60,10 +60,14 @@ public class ArrivalQuayStub extends SharedRegionStub {
     }
 
     public void enterTheBus(){
+        Message newMessage = new Message();
 
-    }
+        newMessage.setMessageType(MessageType.ENTERTHEBUS);
 
-    public void sitOnTheBus(){
+        ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
+        cc.open();
+        cc.writeObject(newMessage);
 
+        newMessage =(Message) cc.readObject();
     }
 }

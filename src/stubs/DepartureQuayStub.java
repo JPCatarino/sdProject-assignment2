@@ -35,7 +35,15 @@ public class DepartureQuayStub extends SharedRegionStub {
     }
 
     public void leaveTheBus(){
+        Message newMessage = new Message();
 
+        newMessage.setMessageType(MessageType.LEAVETHEBUS);
+
+        ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
+        cc.open();
+        cc.writeObject(newMessage);
+
+        newMessage =(Message) cc.readObject();
     }
 
     public void getOffTheSeat(){
