@@ -21,6 +21,9 @@ public class ArrivalLoungeStub extends SharedRegionStub {
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
         cc.open();
         cc.writeObject(newMessage);
+
+        newMessage =(Message) cc.readObject();
+
     }
 
     public void whatShouldIDo() {
