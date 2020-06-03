@@ -23,10 +23,28 @@ public class DepartureTerminalEntranceStub extends SharedRegionStub {
     }
 
     public void setAllPassengersFinished(boolean allPassengersFinished){
+        Message newMessage = new Message();
 
+        newMessage.setMessageType(MessageType.SETALLPASSENGERSFINISHED);
+        newMessage.setBooleanValue1(allPassengersFinished);
+
+        ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
+        cc.open();
+        cc.writeObject(newMessage);
+
+        newMessage =(Message) cc.readObject();
     }
 
-    public void getPassengersDTE(){
+    public int getPassengersDTE(){
+        Message newMessage = new Message();
 
+        newMessage.setMessageType(MessageType.GETPASSENGERSDTE);
+
+        ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
+        cc.open();
+        cc.writeObject(newMessage);
+
+        newMessage =(Message) cc.readObject();
+        return newMessage.getIntValue1();
     }
 }
