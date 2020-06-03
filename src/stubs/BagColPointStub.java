@@ -25,7 +25,7 @@ public class BagColPointStub extends SharedRegionStub {
     public void carryItToAppropriateStore(int [] bag){
         Message newMessage = new Message();
 
-        newMessage.setMessageType(MessageType.CARRYITTOAPPROPRIATESTORE);
+        newMessage.setMessageType(MessageType.CARRYITTOAPPROPRIATESTOREBCP);
         newMessage.setBag1(bag);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
