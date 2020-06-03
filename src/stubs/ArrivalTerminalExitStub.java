@@ -23,15 +23,34 @@ public class ArrivalTerminalExitStub extends SharedRegionStub {
         newMessage =(Message) cc.readObject();
     }
 
-    public void setDte(DepartureTerminalEntrance dte){
+    // This probably can't be done, we gotta check if there's another way
+    public void setDte(DepartureTerminalEntranceStub dte){
 
     }
 
     public void setAllPassengersFinished(boolean allPassengersFinished){
+        Message newMessage = new Message();
 
+        newMessage.setMessageType(MessageType.SETALLPASSENGERSFINISHED);
+        newMessage.setBooleanValue1(allPassengersFinished);
+
+        ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
+        cc.open();
+        cc.writeObject(newMessage);
+
+        newMessage =(Message) cc.readObject();
     }
 
-    public void getPassengersATE(){
+    public int getPassengersATE(){
+        Message newMessage = new Message();
 
+        newMessage.setMessageType(MessageType.GETPASSENGERSATE);
+
+        ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
+        cc.open();
+        cc.writeObject(newMessage);
+
+        newMessage =(Message) cc.readObject();
+        return newMessage.getIntValue1();
     }
 }
