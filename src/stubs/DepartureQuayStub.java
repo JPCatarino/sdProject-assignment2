@@ -45,8 +45,5 @@ public class DepartureQuayStub extends SharedRegionStub {
 
         newMessage =(Message) cc.readObject();
     }
-
-    public void getOffTheSeat(){
-
-    }
+    
 }
