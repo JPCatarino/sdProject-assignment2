@@ -1,10 +1,22 @@
 package common;
 
+import states.PassengerDecisions;
+
+import java.util.List;
+
 public class Message {
 
     private MessageType messageType;
 
+    private int intValue1;
+
     private Boolean booleanValue1;
+
+    private PassengerDecisions passengerDecisions1;
+
+    private int[] bag1;
+
+    private List<int[]> bagList1;
 
     public Message(){}
 
@@ -12,8 +24,40 @@ public class Message {
         return booleanValue1;
     }
 
+    public PassengerDecisions getPassengerDecisions1() {
+        return passengerDecisions1;
+    }
+
+    public int[] getBag1() {
+        return bag1;
+    }
+
+    public List<int[]> getBagList1() {
+        return bagList1;
+    }
+
+    public int getIntValue1() {
+        return intValue1;
+    }
+
+    public void setIntValue1(int intValue1) {
+        this.intValue1 = intValue1;
+    }
+
+    public void setBagList1(List<int[]> bagList1) {
+        this.bagList1 = bagList1;
+    }
+
+    public void setBag1(int[] bagValue1) {
+        this.bag1 = bagValue1;
+    }
+
     public void setBooleanValue1(Boolean booleanValue1) {
         this.booleanValue1 = booleanValue1;
+    }
+
+    public void setPassengerDecisions1(PassengerDecisions passengerDecisions1) {
+        this.passengerDecisions1 = passengerDecisions1;
     }
 
     public void setMessageType(MessageType messageType) {

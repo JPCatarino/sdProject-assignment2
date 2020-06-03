@@ -26,16 +26,43 @@ public class ArrivalLoungeStub extends SharedRegionStub {
 
     }
 
-    public void whatShouldIDo() {
+    public PassengerDecisions whatShouldIDo() {
+        Message newMessage = new Message();
 
+        newMessage.setMessageType(MessageType.WHATSHOULDIDO);
+
+        ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
+        cc.open();
+        cc.writeObject(newMessage);
+
+        newMessage =(Message) cc.readObject();
+        return newMessage.getPassengerDecisions1();
     }
 
-    public void takeARest() {
+    public boolean takeARest() {
+        Message newMessage = new Message();
 
+        newMessage.setMessageType(MessageType.TAKEAREST);
+
+        ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
+        cc.open();
+        cc.writeObject(newMessage);
+
+        newMessage =(Message) cc.readObject();
+        return newMessage.getBooleanValue1();
     }
 
-    public void tryToCollectABag() {
+    public int[] tryToCollectABag() {
+        Message newMessage = new Message();
 
+        newMessage.setMessageType(MessageType.TRYTOCOLLECTABAG);
+
+        ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
+        cc.open();
+        cc.writeObject(newMessage);
+
+        newMessage =(Message) cc.readObject();
+        return newMessage.getBag1();
     }
 
     public void noMoreBagsToCollect() {
@@ -51,27 +78,74 @@ public class ArrivalLoungeStub extends SharedRegionStub {
     }
 
     public void setPlainBags(List<int[]> plainBags){
+        Message newMessage = new Message();
 
+        newMessage.setMessageType(MessageType.SETPLAINBAGS);
+        newMessage.setBagList1(plainBags);
+
+        ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
+        cc.open();
+        cc.writeObject(newMessage);
+
+        newMessage =(Message) cc.readObject();
     }
 
     public void setFlightNumber(int flightNumber){
+        Message newMessage = new Message();
 
+        newMessage.setMessageType(MessageType.SETFLIGHTNUMBER);
+        newMessage.setIntValue1(flightNumber);
+
+        ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
+        cc.open();
+        cc.writeObject(newMessage);
+
+        newMessage =(Message) cc.readObject();
     }
 
-    public void isDayFinished(){
+    public boolean isDayFinished(){
+        Message newMessage = new Message();
 
+        newMessage.setMessageType(MessageType.ISDAYFINISHED);
+
+        ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
+        cc.open();
+        cc.writeObject(newMessage);
+
+        newMessage =(Message) cc.readObject();
+        return newMessage.getBooleanValue1();
     }
 
-    public void getMaxNumberOfPassengers(){
+    // This function might need to be changed.
+    // Maybe we need to just pass max passengers parameter to dte and ate instead of calling this function
+/*    public int getMaxNumberOfPassengers(){
 
-    }
+    }*/
 
     public void setFinishedFlight(boolean finishedFlight){
+        Message newMessage = new Message();
 
+        newMessage.setMessageType(MessageType.SETFINISHEDFLIGHT);
+        newMessage.setBooleanValue1(finishedFlight);
+
+        ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
+        cc.open();
+        cc.writeObject(newMessage);
+
+        newMessage =(Message) cc.readObject();
     }
 
-    public void ispWake(){
+    public boolean ispWake(){
+        Message newMessage = new Message();
 
+        newMessage.setMessageType(MessageType.ISPWAKE);
+
+        ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
+        cc.open();
+        cc.writeObject(newMessage);
+
+        newMessage =(Message) cc.readObject();
+        return newMessage.getBooleanValue1();
     }
 
 }

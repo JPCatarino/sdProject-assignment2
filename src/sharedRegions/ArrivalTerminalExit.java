@@ -63,7 +63,7 @@ public class ArrivalTerminalExit implements ATEPassenger{
     public ArrivalTerminalExit(Repository repo, ArrivalLounge al) {
         this.repo = repo;
         this.al = al;
-        this.maxNumberOfPassengers = al.getMaxNumberOfPassengers();
+        this.maxNumberOfPassengers = al.getMaxNumberOfPassengers(); // This probably has to be changed
         this.allPassengersFinished = false;
         this.passengersATE = 0;
     }
