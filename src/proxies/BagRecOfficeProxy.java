@@ -20,7 +20,15 @@ public class BagRecOfficeProxy implements SharedRegionProxy {
 
     @Override
     public Message processAndReply(Message msg) {
-        return null;
+        Message nm = new Message();
+
+        switch (msg.getMessageType()){
+            case REPORTMISSINGBAGS:
+                bagRecOffice.reportMissingBags();
+                break;
+        }
+
+        return nm;
     }
 
     @Override
