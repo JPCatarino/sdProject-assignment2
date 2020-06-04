@@ -18,6 +18,8 @@ public class Message {
 
     private String stringValue1;
 
+    private List<Integer> intList1;
+
     private PassengerDecisions passengerDecisions1;
 
     private int[] bag1;
@@ -56,6 +58,14 @@ public class Message {
 
     public int getIntValue2() {
         return intValue2;
+    }
+
+    public List<Integer> getIntList1() {
+        return intList1;
+    }
+
+    public void setIntList1(List<Integer> intList1) {
+        this.intList1 = intList1;
     }
 
     public int getEntityID() {

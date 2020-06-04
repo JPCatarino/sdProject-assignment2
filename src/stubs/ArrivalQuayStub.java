@@ -3,6 +3,8 @@ package stubs;
 import common.ClientCom;
 import common.Message;
 import common.MessageType;
+import entities.BusDriver;
+import entities.Passenger;
 
 public class ArrivalQuayStub extends SharedRegionStub {
 
@@ -36,6 +38,7 @@ public class ArrivalQuayStub extends SharedRegionStub {
     }
 
     public void goToDepartureTerminal(){
+        BusDriver bd = (BusDriver) Thread.currentThread();
         Message newMessage = new Message();
 
         newMessage.setMessageType(MessageType.GOTODEPARTURETERMINAL);
@@ -45,6 +48,7 @@ public class ArrivalQuayStub extends SharedRegionStub {
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        bd.setBusSeats(newMessage.getIntList1());
     }
 
     public void parkTheBus(){
@@ -61,8 +65,10 @@ public class ArrivalQuayStub extends SharedRegionStub {
 
     public void enterTheBus(){
         Message newMessage = new Message();
+        Passenger p = (Passenger) Thread.currentThread();
 
         newMessage.setMessageType(MessageType.ENTERTHEBUS);
+        newMessage.setEntityID(p.getID());
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
         cc.open();

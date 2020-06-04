@@ -32,11 +32,13 @@ public class ArrivalQuayProxy implements SharedRegionProxy {
                 break;
             case GOTODEPARTURETERMINAL:
                 arrivalQuay.goToDepartureTerminal();
+                nm.setIntList1(serviceProviderProxy.getBusSeats());
                 break;
             case PARKTHEBUS:
                 arrivalQuay.parkTheBus();
                 break;
             case ENTERTHEBUS:
+                serviceProviderProxy.setId(msg.getEntityID());
                 arrivalQuay.enterTheBus();
                 break;
         }
