@@ -220,7 +220,7 @@ public class ServiceProviderProxy extends Thread implements BusDriverInterface, 
         this.planeHoldEmpty = planeHoldEmpty;
     }
 
-    public void setPassengerId(int id){
+    public void setId(int id){
         this.id = id;
     }
 }
