@@ -18,9 +18,25 @@ public class ArrivalTerminalExitProxy implements SharedRegionProxy {
         this.simFinished = false;
     }
 
+    // check how to do setDTE
     @Override
     public Message processAndReply(Message msg) {
-        return null;
+        Message nm = new Message();
+        ServiceProviderProxy serviceProviderProxy = (ServiceProviderProxy) Thread.currentThread();
+
+        switch (msg.getMessageType()){
+            case GOHOME:
+                arrivalTerminalExit.goHome();
+                break;
+            case SETALLPASSENGERSFINISHED:
+                arrivalTerminalExit.setAllPassengersFinished(msg.getBooleanValue1());
+                break;
+            case GETPASSENGERSATE:
+                nm.setIntValue1(arrivalTerminalExit.getPassengersATE());
+                break;
+        }
+
+        return nm;
     }
 
     @Override

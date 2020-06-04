@@ -20,7 +20,22 @@ public class DepartureTerminalEntranceProxy implements  SharedRegionProxy {
 
     @Override
     public Message processAndReply(Message msg) {
-        return null;
+        Message nm = new Message();
+        ServiceProviderProxy serviceProviderProxy = (ServiceProviderProxy) Thread.currentThread();
+
+        switch (msg.getMessageType()){
+            case PREPARENEXTLEG:
+                departureTerminalEntrance.prepareNextLeg();
+                break;
+            case SETALLPASSENGERSFINISHED:
+                departureTerminalEntrance.setAllPassengersFinished(msg.getBooleanValue1());
+                break;
+            case GETPASSENGERSDTE:
+                nm.setIntValue1(departureTerminalEntrance.getPassengersDTE());
+                break;
+        }
+
+        return nm;
     }
 
     @Override
