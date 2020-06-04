@@ -20,7 +20,77 @@ public class RepositoryProxy implements SharedRegionProxy {
 
     @Override
     public Message processAndReply(Message msg) {
-        return null;
+        Message nm = new Message();
+
+        switch(msg.getMessageType()) {
+            case SETFN:
+                repository.setFN(msg.getIntValue1());
+                break;
+            case SETBN:
+                repository.setBN(msg.getIntValue1());
+                break;
+            case SETCB:
+                repository.setCB(msg.getIntValue1());
+                break;
+            case SETSR:
+                repository.setSR(msg.getIntValue1());
+                break;
+            case SETPSTAT:
+                repository.setP_Stat(msg.getStringValue1());
+                break;
+            case SETDSTAT:
+                repository.setD_Stat(msg.getStringValue1());
+                break;
+            case SETQIN:
+                repository.setQIn(msg.getIntValue1(), msg.getStringValue1());
+                break;
+            case SETQOUT:
+                repository.setQOut();
+                break;
+            case SETS:
+                repository.setS(msg.getIntValue1(), msg.getStringValue1());
+                break;
+            case SETST:
+                repository.setST(msg.getIntValue1(), msg.getStringValue1());
+                break;
+            case SETSI:
+                repository.setSI(msg.getIntValue1(), msg.getStringValue1());
+                break;
+            case SETNR:
+                repository.setNR(msg.getIntValue1(), msg.getIntValue2());
+                break;
+            case SETNA:
+                repository.setNA(msg.getIntValue1(), msg.getIntValue2());
+                break;
+            case ADDBAGSLOST:
+                repository.addBagsLost(msg.getIntValue1());
+                break;
+            case RESETPASSENGER:
+                repository.reset_Passenger(msg.getIntValue1());
+                break;
+            case HEADERDEBUG:
+                nm.setStringValue1(repository.header_debug());
+                break;
+            case TOSTRINGDEBUG:
+                nm.setStringValue1(repository.toString_debug());
+                break;
+            case HEADERREQ:
+                nm.setStringValue1(repository.header_requested());
+                break;
+            case TOSTRINGREQ:
+                nm.setStringValue1(repository.toString());
+                break;
+            case REPORTINITIALSTATUS:
+                repository.reportInitialStatus();
+                break;
+            case REPORTSTATUS:
+                repository.reportStatus();
+                break;
+            case FINALREPORT:
+                repository.finalReport();
+                break;
+        }
+        return nm;
     }
 
     @Override

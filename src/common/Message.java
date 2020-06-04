@@ -24,6 +24,10 @@ public class Message {
 
     public Message(){}
 
+    public MessageType getMessageType() {
+        return messageType;
+    }
+
     public Boolean getBooleanValue1() {
         return booleanValue1;
     }
