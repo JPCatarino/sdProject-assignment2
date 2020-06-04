@@ -20,7 +20,25 @@ public class BagColPointProxy implements SharedRegionProxy {
 
     @Override
     public Message processAndReply(Message msg) {
-        return null;
+        Message nm = new Message();
+        ServiceProviderProxy sp = (ServiceProviderProxy) Thread.currentThread();
+
+        switch (msg.getMessageType()){
+            case GOCOLLECTABAG:
+                bagColPoint.goCollectABag();
+                break;
+            case CARRYITTOAPPROPRIATESTOREBCP:
+                bagColPoint.carryItToAppropriateStore(msg.getBag1());
+                break;
+            case SETNOMOREBAGS:
+                bagColPoint.setNoMoreBags(nm.getBooleanValue1());
+                break;
+            case RESETBAGCOLPOINT:
+                bagColPoint.resetBagColPoint();
+                break;
+        }
+
+        return nm;
     }
 
     @Override
