@@ -21,7 +21,7 @@ public class BagColPointProxy implements SharedRegionProxy {
     @Override
     public Message processAndReply(Message msg) {
         Message nm = new Message();
-        ServiceProviderProxy sp = (ServiceProviderProxy) Thread.currentThread();
+        ServiceProviderProxy serviceProviderProxy = (ServiceProviderProxy) Thread.currentThread();
 
         switch (msg.getMessageType()){
             case GOCOLLECTABAG:

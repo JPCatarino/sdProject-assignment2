@@ -21,6 +21,7 @@ public class BagRecOfficeProxy implements SharedRegionProxy {
     @Override
     public Message processAndReply(Message msg) {
         Message nm = new Message();
+        ServiceProviderProxy serviceProviderProxy = (ServiceProviderProxy) Thread.currentThread();
 
         switch (msg.getMessageType()){
             case REPORTMISSINGBAGS:

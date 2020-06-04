@@ -20,7 +20,28 @@ public class ArrivalQuayProxy implements SharedRegionProxy {
 
     @Override
     public Message processAndReply(Message msg) {
-        return null;
+        Message nm = new Message();
+        ServiceProviderProxy serviceProviderProxy = (ServiceProviderProxy) Thread.currentThread();
+
+        switch (msg.getMessageType()){
+            case HASDAYSWORKENDED:
+                nm.setBooleanValue1(arrivalQuay.hasDaysWorkEnded());
+                break;
+            case ANNOUNCINGBUSBOARDING:
+                arrivalQuay.announcingBusBoarding();
+                break;
+            case GOTODEPARTURETERMINAL:
+                arrivalQuay.goToDepartureTerminal();
+                break;
+            case PARKTHEBUS:
+                arrivalQuay.parkTheBus();
+                break;
+            case ENTERTHEBUS:
+                arrivalQuay.enterTheBus();
+                break;
+        }
+
+        return nm;
     }
 
     @Override
