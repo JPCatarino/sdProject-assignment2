@@ -4,6 +4,7 @@ import common.ClientCom;
 import common.Message;
 import common.MessageType;
 import entities.Passenger;
+import entities.Porter;
 import states.PassengerDecisions;
 
 import java.util.List;
@@ -30,9 +31,14 @@ public class ArrivalLoungeStub extends SharedRegionStub {
     }
 
     public PassengerDecisions whatShouldIDo() {
+        Passenger p = (Passenger) Thread.currentThread();
+
         Message newMessage = new Message();
 
         newMessage.setMessageType(MessageType.WHATSHOULDIDO);
+        newMessage.setEntityID(p.getID());
+        newMessage.setBooleanValue1(p.isJourneyEnding());
+        newMessage.setIntValue1(p.getnBagsToCollect());
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
         cc.open();
@@ -44,9 +50,10 @@ public class ArrivalLoungeStub extends SharedRegionStub {
 
     public boolean takeARest() {
         Message newMessage = new Message();
+        Porter pt = (Porter) Thread.currentThread();
 
         newMessage.setMessageType(MessageType.TAKEAREST);
-
+        newMessage.setBooleanValue1(pt.isPlaneHoldEmpty());
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
         cc.open();
         cc.writeObject(newMessage);

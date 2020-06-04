@@ -220,6 +220,30 @@ public class ServiceProviderProxy extends Thread implements BusDriverInterface, 
         this.planeHoldEmpty = planeHoldEmpty;
     }
 
+    public void setTTL(int TTL) {
+        this.TTL = TTL;
+    }
+
+    public void setnBagsToCollect(int nBagsToCollect) {
+        this.nBagsToCollect = nBagsToCollect;
+    }
+
+    public void setnBagsCollected(int nBagsCollected) {
+        this.nBagsCollected = nBagsCollected;
+    }
+
+    public void setJourneyEnding(boolean journeyEnding) {
+        this.journeyEnding = journeyEnding;
+    }
+
+    public int[] getBag() {
+        return bag;
+    }
+
+    public void setBag(int[] bag) {
+        this.bag = bag;
+    }
+
     public void setId(int id){
         this.id = id;
     }
