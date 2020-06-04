@@ -1,7 +1,9 @@
 package sharedRegions;
 
 import entities.Passenger;
+import entities.PassengerInterface;
 import interfaces.BROPassenger;
+import proxies.ServiceProviderProxy;
 import states.PassengerStates;
 
 /**
@@ -32,7 +34,7 @@ public class BagRecOffice implements BROPassenger {
 
     @Override
     public synchronized void reportMissingBags(){
-        Passenger p = (Passenger) Thread.currentThread();
+        PassengerInterface p = (ServiceProviderProxy) Thread.currentThread();
         p.setPassengerState(PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
         repo.setST(p.getID(), PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE.getState());
         repo.addBagsLost(p.getnBagsToCollect() - p.getnBagsCollected());

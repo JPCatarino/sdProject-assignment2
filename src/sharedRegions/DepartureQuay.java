@@ -1,10 +1,13 @@
 package sharedRegions;
 
 import entities.BusDriver;
+import entities.BusDriverInterface;
 import entities.Passenger;
+import entities.PassengerInterface;
 import exceptions.SharedRegException;
 import interfaces.DTTQBusDriver;
 import interfaces.DTTQPassenger;
+import proxies.ServiceProviderProxy;
 import states.BusDriverStates;
 import states.PassengerStates;
 
@@ -51,7 +54,7 @@ public class DepartureQuay implements DTTQBusDriver, DTTQPassenger {
 
     @Override
     public synchronized void parkTheBusAndLetPassOff(){
-        BusDriver bd = (BusDriver) Thread.currentThread();
+        BusDriverInterface bd = (ServiceProviderProxy) Thread.currentThread();
         bd.setBusDriverState(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
         repo.setD_Stat(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL.getState());
         repo.reportStatus();
@@ -74,12 +77,12 @@ public class DepartureQuay implements DTTQBusDriver, DTTQPassenger {
 
     @Override
     public synchronized void goToArrivalTerminal(){
-        BusDriver bd = (BusDriver) Thread.currentThread();
+        BusDriverInterface bd = (ServiceProviderProxy) Thread.currentThread();
         bd.setBusDriverState(BusDriverStates.DRIVING_BACKWARD);
         repo.setD_Stat(BusDriverStates.DRIVING_BACKWARD.getState());
         repo.reportStatus();
         try {
-            bd.sleep(10);
+            Thread.sleep(10);
         }
         catch(InterruptedException ex){
             System.err.println("goToArrivalTerminal - Thread Interrupted");
@@ -88,7 +91,7 @@ public class DepartureQuay implements DTTQBusDriver, DTTQPassenger {
 
     @Override
     public synchronized void leaveTheBus(){
-        Passenger p = (Passenger) Thread.currentThread();
+        PassengerInterface p = (ServiceProviderProxy) Thread.currentThread();
 
         try{
             while(!busHasArrived){
@@ -104,7 +107,7 @@ public class DepartureQuay implements DTTQBusDriver, DTTQPassenger {
             getOffTheSeat();
         }
         catch(SharedRegException ex){
-            System.out.println("Thread " + p.getName() + "terminated");
+            System.out.println("Thread " + p.getID() + "terminated");
             System.out.println("Error on operation :" + ex.getMessage());
             System.exit(1);
         }
@@ -120,7 +123,7 @@ public class DepartureQuay implements DTTQBusDriver, DTTQPassenger {
 
     @Override
     public synchronized void getOffTheSeat() throws SharedRegException{
-        Passenger p = (Passenger) Thread.currentThread();
+        PassengerInterface p = (ServiceProviderProxy) Thread.currentThread();
         try{
             repo.setS(p.getBusSeat(), "-");
             repo.reportStatus();

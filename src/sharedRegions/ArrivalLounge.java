@@ -1,9 +1,12 @@
 package sharedRegions;
 
 import entities.Passenger;
+import entities.PassengerInterface;
 import entities.Porter;
+import entities.PorterInterface;
 import interfaces.ALPassenger;
 import interfaces.ALPorter;
+import proxies.ServiceProviderProxy;
 import states.PassengerDecisions;
 import states.PassengerStates;
 import states.PorterStates;
@@ -100,7 +103,7 @@ public class ArrivalLounge implements ALPassenger, ALPorter {
 
     @Override
     public synchronized void takeABus(){
-        Passenger p = (Passenger) Thread.currentThread();
+        PassengerInterface p = (ServiceProviderProxy) Thread.currentThread();
         p.setPassengerState(PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
         repo.setST(p.getID(), PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL.getState());
         repo.reportStatus();
@@ -108,7 +111,7 @@ public class ArrivalLounge implements ALPassenger, ALPorter {
 
     @Override
     public synchronized boolean takeARest() {
-        Porter pt = (Porter) Thread.currentThread();
+        PorterInterface pt = (ServiceProviderProxy) Thread.currentThread();
 
         try {
             while (!pWake) {
@@ -151,7 +154,7 @@ public class ArrivalLounge implements ALPassenger, ALPorter {
 
     @Override
     public synchronized PassengerDecisions whatShouldIDo(){
-        Passenger p = (Passenger) Thread.currentThread();
+        PassengerInterface p = (ServiceProviderProxy) Thread.currentThread();
         p.setPassengerState(PassengerStates.AT_THE_DISEMBARKING_ZONE);
         repo.setST(p.getID(), PassengerStates.AT_THE_DISEMBARKING_ZONE.getState());
         repo.setNR(p.getID(),p.getnBagsToCollect());

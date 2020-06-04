@@ -1,9 +1,11 @@
 package sharedRegions;
 
 import entities.Passenger;
+import entities.PassengerInterface;
 import entities.Porter;
 import interfaces.BCPPassenger;
 import interfaces.BCPPorter;
+import proxies.ServiceProviderProxy;
 import states.PassengerStates;
 import states.PorterStates;
 
@@ -62,7 +64,7 @@ public class BagColPoint implements BCPPassenger, BCPPorter {
 
     @Override
     public  void goCollectABag (){
-        Passenger p = (Passenger) Thread.currentThread();
+        PassengerInterface p = (ServiceProviderProxy) Thread.currentThread();
 
         p.setPassengerState(PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
         repo.setST(p.getID(), PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT.getState());

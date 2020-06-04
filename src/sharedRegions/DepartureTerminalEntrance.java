@@ -1,7 +1,9 @@
 package sharedRegions;
 
 import entities.Passenger;
+import entities.PassengerInterface;
 import interfaces.DTEPassenger;
+import proxies.ServiceProviderProxy;
 import states.PassengerStates;
 
 /**
@@ -73,7 +75,7 @@ public class DepartureTerminalEntrance implements DTEPassenger {
 
     @Override
     public synchronized void prepareNextLeg() {
-        Passenger p = (Passenger) Thread.currentThread();
+        PassengerInterface p = (ServiceProviderProxy) Thread.currentThread();
         p.setPassengerState(PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
         repo.setST(p.getID(), PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL.getState());
 

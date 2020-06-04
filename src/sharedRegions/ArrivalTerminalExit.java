@@ -1,7 +1,9 @@
 package sharedRegions;
 
 import entities.Passenger;
+import entities.PassengerInterface;
 import interfaces.ATEPassenger;
+import proxies.ServiceProviderProxy;
 import states.PassengerStates;
 
 /**
@@ -70,7 +72,7 @@ public class ArrivalTerminalExit implements ATEPassenger{
 
     @Override
     public synchronized void goHome(){
-        Passenger p = (Passenger) Thread.currentThread();
+        PassengerInterface p = (ServiceProviderProxy) Thread.currentThread();
         p.setPassengerState(PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
         repo.setST(p.getID(), PassengerStates.EXITING_THE_ARRIVAL_TERMINAL.getState());
         repo.reportStatus();

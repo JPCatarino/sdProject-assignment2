@@ -1,9 +1,12 @@
 package sharedRegions;
 
 import entities.BusDriver;
+import entities.BusDriverInterface;
 import entities.Passenger;
+import entities.PassengerInterface;
 import interfaces.ATTQBusDriver;
 import interfaces.ATTQPassenger;
+import proxies.ServiceProviderProxy;
 import states.BusDriverStates;
 import states.PassengerStates;
 
@@ -83,7 +86,7 @@ public class ArrivalQuay implements ATTQBusDriver, ATTQPassenger {
 
     @Override
     public synchronized boolean hasDaysWorkEnded(){
-        BusDriver bd = (BusDriver)Thread.currentThread();
+        BusDriverInterface bd = (ServiceProviderProxy)Thread.currentThread();
 
         try {
             while (((busWaitingLine.size() != maxNumberOfSeats) && busWaitingLine.isEmpty()) && !al.isDayFinished()) {
@@ -99,7 +102,7 @@ public class ArrivalQuay implements ATTQBusDriver, ATTQPassenger {
 
     @Override
     public synchronized void announcingBusBoarding(){
-        BusDriver bd = (BusDriver)Thread.currentThread();
+        BusDriverInterface bd = (ServiceProviderProxy) Thread.currentThread();
         try {
             boardingTheBus = true;
 
@@ -117,7 +120,7 @@ public class ArrivalQuay implements ATTQBusDriver, ATTQPassenger {
 
     @Override
     public synchronized void goToDepartureTerminal(){
-        BusDriver bd = (BusDriver) Thread.currentThread();
+        BusDriverInterface bd = (ServiceProviderProxy) Thread.currentThread();
         bd.setBusSeats(parkedBus);
         bd.setBusDriverState(BusDriverStates.DRIVING_FORWARD);
         repo.setD_Stat(BusDriverStates.DRIVING_FORWARD.getState());
@@ -133,7 +136,7 @@ public class ArrivalQuay implements ATTQBusDriver, ATTQPassenger {
 
     @Override
     public synchronized void parkTheBus(){
-        BusDriver bd = (BusDriver) Thread.currentThread();
+        BusDriverInterface bd = (ServiceProviderProxy) Thread.currentThread();
         this.parkedBus = new ArrayList<>();
         bd.setBusDriverState(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
         repo.setD_Stat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL.getState());
@@ -148,7 +151,7 @@ public class ArrivalQuay implements ATTQBusDriver, ATTQPassenger {
 
     @Override
     public void enterTheBus(){
-        Passenger p = (Passenger) Thread.currentThread();
+        PassengerInterface p = (ServiceProviderProxy) Thread.currentThread();
         boolean notOnBoard = true;
 
         synchronized (this) {
@@ -205,7 +208,7 @@ public class ArrivalQuay implements ATTQBusDriver, ATTQPassenger {
 
     @Override
     public synchronized void sitOnTheBus(){
-        Passenger p = (Passenger) Thread.currentThread();
+        PassengerInterface p = (ServiceProviderProxy) Thread.currentThread();
         if(parkedBus.size() < maxNumberOfSeats){
             repo.setQOut();
             busWaitingLine.remove();
