@@ -10,7 +10,11 @@ public class Message {
 
     private int intValue1;
 
+    private int intValue2;
+
     private Boolean booleanValue1;
+
+    private String stringValue1;
 
     private PassengerDecisions passengerDecisions1;
 
@@ -38,6 +42,22 @@ public class Message {
 
     public int getIntValue1() {
         return intValue1;
+    }
+
+    public String getStringValue1() {
+        return stringValue1;
+    }
+
+    public int getIntValue2() {
+        return intValue2;
+    }
+
+    public void setIntValue2(int intValue2) {
+        this.intValue2 = intValue2;
+    }
+
+    public void setStringValue1(String stringValue1) {
+        this.stringValue1 = stringValue1;
     }
 
     public void setIntValue1(int intValue1) {
