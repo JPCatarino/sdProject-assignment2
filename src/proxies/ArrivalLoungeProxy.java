@@ -20,7 +20,43 @@ public class ArrivalLoungeProxy implements SharedRegionProxy {
 
     @Override
     public Message processAndReply(Message msg) {
-        return null;
+        Message nm = new Message();
+        ServiceProviderProxy serviceProviderProxy = (ServiceProviderProxy) Thread.currentThread();
+
+        switch (msg.getMessageType()){
+            case TAKEABUS:
+                arrivalLounge.takeABus();
+                break;
+            case WHATSHOULDIDO:
+                arrivalLounge.whatShouldIDo();
+                break;
+            case TAKEAREST:
+                arrivalLounge.takeARest();
+                break;
+            case TRYTOCOLLECTABAG:
+                arrivalLounge.tryToCollectABag();
+                break;
+            case NOMOREBAGSTOCOLLECT:
+                arrivalLounge.noMoreBagsToCollect();
+                break;
+            case SETPLAINBAGS:
+                arrivalLounge.setPlainBags(msg.getBagList1());
+                break;
+            case SETFLIGHTNUMBER:
+                arrivalLounge.setFlightNumber(msg.getIntValue1());
+                break;
+            case ISDAYFINISHED:
+                nm.setBooleanValue1(arrivalLounge.isDayFinished());
+                break;
+            case SETFINISHEDFLIGHT:
+                arrivalLounge.setFinishedFlight(msg.getBooleanValue1());
+                break;
+            case ISPWAKE:
+                nm.setBooleanValue1(arrivalLounge.ispWake());
+                break;
+        }
+
+        return nm;
     }
 
     @Override
