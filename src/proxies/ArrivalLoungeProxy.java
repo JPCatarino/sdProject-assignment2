@@ -25,6 +25,7 @@ public class ArrivalLoungeProxy implements SharedRegionProxy {
 
         switch (msg.getMessageType()){
             case TAKEABUS:
+                serviceProviderProxy.setId(msg.getEntityID());
                 arrivalLounge.takeABus();
                 break;
             case WHATSHOULDIDO:

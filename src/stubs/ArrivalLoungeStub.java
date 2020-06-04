@@ -3,6 +3,7 @@ package stubs;
 import common.ClientCom;
 import common.Message;
 import common.MessageType;
+import entities.Passenger;
 import states.PassengerDecisions;
 
 import java.util.List;
@@ -14,9 +15,11 @@ public class ArrivalLoungeStub extends SharedRegionStub {
     }
 
     public void takeABus() {
+        Passenger p = (Passenger) Thread.currentThread();
         Message newMessage = new Message();
 
         newMessage.setMessageType(MessageType.TAKEABUS);
+        newMessage.setEntityID(p.getID());
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
         cc.open();

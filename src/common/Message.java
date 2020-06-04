@@ -8,6 +8,8 @@ public class Message {
 
     private MessageType messageType;
 
+    private int entityID;
+
     private int intValue1;
 
     private int intValue2;
@@ -54,6 +56,14 @@ public class Message {
 
     public int getIntValue2() {
         return intValue2;
+    }
+
+    public int getEntityID() {
+        return entityID;
+    }
+
+    public void setEntityID(int entityID) {
+        this.entityID = entityID;
     }
 
     public void setIntValue2(int intValue2) {
