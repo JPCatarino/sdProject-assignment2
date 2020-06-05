@@ -38,21 +38,21 @@ public class ArrivalQuay implements ATTQBusDriver, ATTQPassenger {
      *
      * @serialField  busWaitingLine
      */
-    private ArrayBlockingQueue<Integer> busWaitingLine;
+    private ArrayBlockingQueue<Integer> busWaitingLine = new ArrayBlockingQueue<>(6);
 
     /**
      * Represents a parked bus, which the passengers board.
      *
      * @serialField parkedBus
      */
-    private List<Integer> parkedBus;
+    private List<Integer> parkedBus= new ArrayList<>();
 
     /**
      * Tells the passengers that it's okay to board the bus.
      *
      * @serialField boardingTheBus
      */
-    private boolean boardingTheBus;
+    private boolean boardingTheBus = false;
 
     /**
      * Dictates the capacity of the bus.
@@ -79,11 +79,12 @@ public class ArrivalQuay implements ATTQBusDriver, ATTQPassenger {
      */
     public ArrivalQuay(Repository repo, int T_SEATS, ArrivalLounge al){
         this.repo = repo;
-        this.boardingTheBus = false;
-        this.parkedBus = new ArrayList<>();
-        this.busWaitingLine = new ArrayBlockingQueue<>(6);
         this.maxNumberOfSeats = T_SEATS;
         this.al = al;
+    }
+
+    public void setMaxNumberOfSeats(int maxNumberOfSeats) {
+        this.maxNumberOfSeats = maxNumberOfSeats;
     }
 
     @Override

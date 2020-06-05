@@ -52,6 +52,18 @@ public class Message implements Serializable {
         this.n_passengers = n_passengers;
     }
 
+    public int getT_seats() {
+        return t_seats;
+    }
+
+    public int getN_passengers() {
+        return n_passengers;
+    }
+
+    public int getK_landings() {
+        return k_landings;
+    }
+
     public MessageType getMessageType() {
         return messageType;
     }

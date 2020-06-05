@@ -1,6 +1,7 @@
 package proxies;
 
 import common.Message;
+import common.MessageType;
 import common.ServerCom;
 import sharedRegions.ArrivalLounge;
 
@@ -109,6 +110,11 @@ public class ArrivalLoungeProxy extends Thread implements SharedRegionProxy {
                 break;
             case ISPWAKE:
                 nm.setBooleanValue1(arrivalLounge.ispWake());
+                break;
+            case SETNFIC:
+                arrivalLounge.setMaxNumberOfFlights(msg.getK_landings());
+                arrivalLounge.setMaxNumberOfPassengers(msg.getN_passengers());
+                nm.setMessageType(MessageType.NFICDONE);
                 break;
         }
 

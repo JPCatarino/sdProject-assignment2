@@ -36,7 +36,7 @@ public class ArrivalLounge implements ALPassenger, ALPorter {
      *
      * @serialField plainBags
      */
-    private List<int[]> plainBags;
+    private List<int[]> plainBags=new ArrayList<>();
 
     /**
      * Condition Variable that lets the porter wake up.
@@ -101,6 +101,14 @@ public class ArrivalLounge implements ALPassenger, ALPorter {
         this.maxNumberOfPassengers = N_PASSENGERS;
         this.maxNumberOfFlights = K_LANDINGS;
         this.plainBags = new ArrayList<>();
+    }
+
+    public void setMaxNumberOfPassengers(int maxNumberOfPassengers) {
+        this.maxNumberOfPassengers = maxNumberOfPassengers;
+    }
+
+    public void setMaxNumberOfFlights(int maxNumberOfFlights) {
+        this.maxNumberOfFlights = maxNumberOfFlights;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package proxies;
 
 import common.Message;
+import common.MessageType;
 import common.ServerCom;
 import sharedRegions.ArrivalQuay;
 
@@ -93,6 +94,10 @@ public class ArrivalQuayProxy extends Thread implements SharedRegionProxy {
                 serviceProviderProxy.setId(msg.getEntityID());
                 arrivalQuay.enterTheBus();
                 nm.setIntValue1(serviceProviderProxy.getBusSeat());
+                break;
+            case SETNFIC:
+                arrivalQuay.setMaxNumberOfSeats(msg.getT_seats());
+                nm.setMessageType(MessageType.NFICDONE);
                 break;
         }
 

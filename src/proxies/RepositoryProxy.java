@@ -1,6 +1,7 @@
 package proxies;
 
 import common.Message;
+import common.MessageType;
 import common.ServerCom;
 import sharedRegions.Repository;
 
@@ -139,6 +140,11 @@ public class RepositoryProxy extends Thread implements SharedRegionProxy {
                 break;
             case FINALREPORT:
                 repository.finalReport();
+                break;
+            case SETNFIC:
+                repository.setN_PASSENGERS(msg.getN_passengers());
+                repository.setT_seats(msg.getT_seats());
+                nm.setMessageType(MessageType.NFICDONE);
                 break;
         }
         return nm;

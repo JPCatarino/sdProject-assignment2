@@ -148,7 +148,24 @@ public class Repository {
      */
     private int bagsLost = 0;
 
-    public Repository(){}
+    private int T_seats;
+
+    public void setT_seats(int t_seats) {
+        this.T_seats = t_seats;
+        this.S = new String[T_seats];
+    }
+
+    public void setN_PASSENGERS(int n_PASSENGERS) {
+        this.N_PASSENGERS = n_PASSENGERS;
+        this.ST = new String[N_PASSENGERS];
+        this.SI = new String[N_PASSENGERS];
+        this.NR = new int[N_PASSENGERS];
+        this.NA = new int[N_PASSENGERS];
+    }
+
+    public Repository(){
+        this.Q = new LinkedList<>();
+    }
 
     /**
      * Repository Instantiation.
@@ -157,7 +174,7 @@ public class Repository {
      * @param T_seats      Capacity of the transfer bus.
      */
     public Repository(int N_passengers, int T_seats) {
-
+        this.T_seats=T_seats;
         this.N_PASSENGERS = N_passengers;
         this.Q = new LinkedList<>();
         this.S = new String[T_seats];
