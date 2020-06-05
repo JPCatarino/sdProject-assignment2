@@ -55,5 +55,6 @@ public enum MessageType implements Serializable {
     REPORTSTATUS,
     FINALREPORT,
     SETNFIC,
-    NFICDONE
+    NFICDONE,
+    GETMAXNUMBEROFPASSENGERS
 }

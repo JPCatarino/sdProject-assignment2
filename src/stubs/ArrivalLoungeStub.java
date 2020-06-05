@@ -128,9 +128,18 @@ public class ArrivalLoungeStub extends SharedRegionStub {
 
     // This function might need to be changed.
     // Maybe we need to just pass max passengers parameter to dte and ate instead of calling this function
-/*    public int getMaxNumberOfPassengers(){
+    public int getMaxNumberOfPassengers(){
+        Message newMessage = new Message();
 
-    }*/
+        newMessage.setMessageType(MessageType.GETMAXNUMBEROFPASSENGERS);
+
+        ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
+        cc.open();
+        cc.writeObject(newMessage);
+
+        newMessage =(Message) cc.readObject();
+        return newMessage.getIntValue1();
+    }
 
     public void setFinishedFlight(boolean finishedFlight){
         Message newMessage = new Message();

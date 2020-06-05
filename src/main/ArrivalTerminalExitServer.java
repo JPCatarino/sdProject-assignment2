@@ -4,6 +4,9 @@ import common.ServerCom;
 import proxies.ArrivalTerminalExitProxy;
 import proxies.ServiceProviderProxy;
 import sharedRegions.ArrivalTerminalExit;
+import stubs.ArrivalLoungeStub;
+import stubs.ArrivalTerminalExitStub;
+import stubs.DepartureTerminalEntranceStub;
 import stubs.RepositoryStub;
 
 import java.net.SocketTimeoutException;
@@ -24,7 +27,7 @@ public class ArrivalTerminalExitServer {
 
         scon = new ServerCom(portNumb);
         scon.start ();
-        arrivalTerminalExit = new ArrivalTerminalExit(new RepositoryStub("localhost", 33001));
+        arrivalTerminalExit = new ArrivalTerminalExit(new RepositoryStub("localhost", 33001),new ArrivalLoungeStub("localhost", 33002), new DepartureTerminalEntranceStub("localhost", 33008));
         System.out.println ("O serviço foi estabelecido!");
         System.out.println ("O servidor esta em escuta.");
 

@@ -5,6 +5,8 @@ import entities.PassengerInterface;
 import interfaces.ATEPassenger;
 import proxies.ServiceProviderProxy;
 import states.PassengerStates;
+import stubs.ArrivalLoungeStub;
+import stubs.DepartureTerminalEntranceStub;
 import stubs.RepositoryStub;
 
 /**
@@ -29,7 +31,7 @@ public class ArrivalTerminalExit implements ATEPassenger{
      *
      * @serialField al
      */
-    private ArrivalLounge al;
+    private ArrivalLoungeStub al;
 
     /**
      * True if all the passengers have arrived to the exit zones.
@@ -43,7 +45,7 @@ public class ArrivalTerminalExit implements ATEPassenger{
      *
      * @serialField dte
      */
-    private DepartureTerminalEntrance dte;
+    private DepartureTerminalEntranceStub dte;
 
     /**
      * Number of passengers currently waiting on this terminal.
@@ -63,13 +65,22 @@ public class ArrivalTerminalExit implements ATEPassenger{
         this.repo = repo;
     }
 
+    public ArrivalTerminalExit(RepositoryStub repo, ArrivalLoungeStub al, DepartureTerminalEntranceStub dte) {
+        this.repo = repo;
+        this.al = al;
+        this.dte = dte;
+        this.maxNumberOfPassengers = al.getMaxNumberOfPassengers(); // This probably has to be changed
+        this.allPassengersFinished = false;
+        this.passengersATE = 0;
+    }
+
     /**
      * ArrivalTerminalExit Constructor.
      *
      * @param repo General Repository of Information.
      * @param al Arrival Lounge for the latest information on flights.
      */
-    public ArrivalTerminalExit(RepositoryStub repo, ArrivalLounge al) {
+    public ArrivalTerminalExit(RepositoryStub repo, ArrivalLoungeStub al) {
         this.repo = repo;
         this.al = al;
         this.maxNumberOfPassengers = al.getMaxNumberOfPassengers(); // This probably has to be changed
@@ -113,7 +124,7 @@ public class ArrivalTerminalExit implements ATEPassenger{
      *
      * @param dte Departure Terminal Entrance object.
      */
-    public void setDte(DepartureTerminalEntrance dte) {
+    public void setDte(DepartureTerminalEntranceStub dte) {
         this.dte = dte;
     }
 
