@@ -25,6 +25,9 @@ public class BagRecOfficeProxy implements SharedRegionProxy {
 
         switch (msg.getMessageType()){
             case REPORTMISSINGBAGS:
+                serviceProviderProxy.setId(msg.getEntityID());
+                serviceProviderProxy.setnBagsCollected(msg.getIntValue1());
+                serviceProviderProxy.setnBagsToCollect(msg.getIntValue2());
                 bagRecOffice.reportMissingBags();
                 break;
         }
