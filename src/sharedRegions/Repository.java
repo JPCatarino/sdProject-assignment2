@@ -165,6 +165,8 @@ public class Repository {
 
     public Repository(){
         this.Q = new LinkedList<>();
+        for(int i = 0; i < N_PASSENGERS; i++)
+            Q.add("-");
     }
 
     /**
