@@ -38,7 +38,7 @@ public class ArrivalLoungeProxy implements SharedRegionProxy {
                 break;
             case TAKEAREST:
                 serviceProviderProxy.setPlaneHoldEmpty(msg.getBooleanValue1());
-                arrivalLounge.takeARest();
+                nm.setBooleanValue1(arrivalLounge.takeARest());
                 break;
             case TRYTOCOLLECTABAG:
                 arrivalLounge.tryToCollectABag();
