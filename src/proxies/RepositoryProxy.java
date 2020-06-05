@@ -5,7 +5,7 @@ import common.MessageType;
 import common.ServerCom;
 import sharedRegions.Repository;
 
-public class RepositoryProxy extends Thread implements SharedRegionProxy {
+public class RepositoryProxy implements SharedRegionProxy {
 
     private final Repository repository;
 
@@ -15,59 +15,9 @@ public class RepositoryProxy extends Thread implements SharedRegionProxy {
      */
     private boolean simFinished;
 
-    private static int nProxy = 0;
-
-    private ServerCom sconi;
-
-    public RepositoryProxy(ServerCom sconi, Repository repository) {
-        super ("Proxy_" + RepositoryProxy.getProxyId ());
-
-        this.sconi = sconi;
+    public RepositoryProxy(Repository repository) {
         this.repository = repository;
         this.simFinished = false;
-    }
-
-    @Override
-    public void run ()
-    {
-        Message inMessage = null,
-                outMessage = null;
-
-        inMessage = (Message) sconi.readObject ();
-
-        try {
-            outMessage = processAndReply (inMessage);
-        }
-        catch (Exception e) {
-            System.out.println ("Thread " + getName () + ": " + e.getMessage () + "!");
-            System.exit (1);
-        }
-
-        sconi.writeObject (outMessage);
-        sconi.close ();
-    }
-
-    private static int getProxyId ()
-    {
-        Class<?> cl = null;
-
-        int proxyId;
-
-        try {
-            cl = Class.forName ("proxies.RepositoryProxy");
-        }
-        catch (ClassNotFoundException e) {
-            System.out.println ("O tipo de dados RepositoryProxy não foi encontrado!");
-            e.printStackTrace ();
-            System.exit (1);
-        }
-
-        synchronized (cl) {
-            proxyId = nProxy;
-            nProxy += 1;
-        }
-
-        return proxyId;
     }
 
     @Override
