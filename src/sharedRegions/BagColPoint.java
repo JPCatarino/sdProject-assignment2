@@ -8,6 +8,7 @@ import interfaces.BCPPorter;
 import proxies.ServiceProviderProxy;
 import states.PassengerStates;
 import states.PorterStates;
+import stubs.RepositoryStub;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ public class BagColPoint implements BCPPassenger, BCPPorter {
      *
      * @serialField repo
      */
-    private Repository repo;
+    private RepositoryStub repo;
 
     /**
      * Data structure that simulates the conveyor belt.
@@ -59,7 +60,7 @@ public class BagColPoint implements BCPPassenger, BCPPorter {
      *
      * @param repo General repository of information.
      */
-    public BagColPoint(Repository repo){
+    public BagColPoint(RepositoryStub repo){
         this.repo = repo;
         this.conveyorBelt = new ArrayList<>();
     }

@@ -5,6 +5,7 @@ import entities.PassengerInterface;
 import interfaces.DTEPassenger;
 import proxies.ServiceProviderProxy;
 import states.PassengerStates;
+import stubs.RepositoryStub;
 
 /**
  * Implementation of the Departure Terminal Entrance Shared Memory
@@ -21,7 +22,7 @@ public class DepartureTerminalEntrance implements DTEPassenger {
      *
      * @serialField repo
      */
-    private Repository repo;
+    private RepositoryStub repo;
 
     /**
      * ArrivalLounge Shared Memory.
@@ -65,7 +66,7 @@ public class DepartureTerminalEntrance implements DTEPassenger {
      * @param al Arrival Lounge for the latest information on flights.
      * @param ate Arrival Terminal for synchronization.
      */
-    public DepartureTerminalEntrance(Repository repo, ArrivalLounge al, ArrivalTerminalExit ate){
+    public DepartureTerminalEntrance(RepositoryStub repo, ArrivalLounge al, ArrivalTerminalExit ate){
         this.repo = repo;
         this.al = al;
         this.maxNumberOfPassengers = al.getMaxNumberOfPassengers();

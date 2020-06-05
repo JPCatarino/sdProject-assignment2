@@ -10,6 +10,7 @@ import interfaces.DTTQPassenger;
 import proxies.ServiceProviderProxy;
 import states.BusDriverStates;
 import states.PassengerStates;
+import stubs.RepositoryStub;
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class DepartureQuay implements DTTQBusDriver, DTTQPassenger {
      *
      * @serialField repo
      */
-    private Repository repo;
+    private RepositoryStub repo;
 
     /**
      * Flag that lets the passenger know it's okay to drop off the bus.
@@ -49,7 +50,7 @@ public class DepartureQuay implements DTTQBusDriver, DTTQPassenger {
      *
      * @param repo General Information Repository.
      */
-    public DepartureQuay(Repository repo){
+    public DepartureQuay(RepositoryStub repo){
         this.repo = repo;
         this.busHasArrived = false;
     }

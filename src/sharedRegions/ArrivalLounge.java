@@ -10,6 +10,7 @@ import proxies.ServiceProviderProxy;
 import states.PassengerDecisions;
 import states.PassengerStates;
 import states.PorterStates;
+import stubs.RepositoryStub;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,7 +30,7 @@ public class ArrivalLounge implements ALPassenger, ALPorter {
      *
      * @serialField repo
      */
-    private Repository repo;
+    private RepositoryStub repo;
 
     /**
      * List of passengers bags for this flight.
@@ -96,7 +97,7 @@ public class ArrivalLounge implements ALPassenger, ALPorter {
      * @param N_PASSENGERS Total Number of Passengers
      * @param K_LANDINGS Max number of flights for the day
      */
-    public ArrivalLounge(Repository repo, int N_PASSENGERS, int K_LANDINGS){
+    public ArrivalLounge(RepositoryStub repo, int N_PASSENGERS, int K_LANDINGS){
         this.repo = repo;
         this.maxNumberOfPassengers = N_PASSENGERS;
         this.maxNumberOfFlights = K_LANDINGS;

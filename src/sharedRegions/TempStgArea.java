@@ -2,6 +2,7 @@ package sharedRegions;
 
 import interfaces.TSAPorter;
 import states.PorterStates;
+import stubs.RepositoryStub;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ public class TempStgArea implements TSAPorter {
      *
      * @serialField repo
      */
-    private Repository repo;
+    private RepositoryStub repo;
 
     /**
      * Data structure simulating a storeroom, where the porter stores the baggage.
@@ -33,7 +34,7 @@ public class TempStgArea implements TSAPorter {
      *
      * @param repo General Information Repository.
      */
-    public TempStgArea(Repository repo){
+    public TempStgArea(RepositoryStub repo){
         this.repo = repo;
         this.storeroom = new ArrayList<>();
     }

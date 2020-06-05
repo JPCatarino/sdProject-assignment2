@@ -5,6 +5,7 @@ import entities.PassengerInterface;
 import interfaces.BROPassenger;
 import proxies.ServiceProviderProxy;
 import states.PassengerStates;
+import stubs.RepositoryStub;
 
 /**
  * Implementation of the Baggage Reclaim Office Shared Memory
@@ -21,7 +22,7 @@ public class BagRecOffice implements BROPassenger {
      *
      * @serialField repo
      */
-    private Repository repo;
+    private RepositoryStub repo;
 
     public BagRecOffice(){}
 
@@ -30,7 +31,7 @@ public class BagRecOffice implements BROPassenger {
      *
      * @param repo General Repo Of Information.
      */
-    public BagRecOffice(Repository repo){
+    public BagRecOffice(RepositoryStub repo){
         this.repo = repo;
     }
 

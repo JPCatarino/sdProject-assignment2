@@ -5,6 +5,7 @@ import entities.PassengerInterface;
 import interfaces.ATEPassenger;
 import proxies.ServiceProviderProxy;
 import states.PassengerStates;
+import stubs.RepositoryStub;
 
 /**
  * Implementation of the Arrival Terminal Exit Shared Memory
@@ -21,7 +22,7 @@ public class ArrivalTerminalExit implements ATEPassenger{
      *
      * @serialField repo
      */
-    private Repository repo;
+    private RepositoryStub repo;
 
     /**
      * ArrivalLounge Shared Memory.
@@ -64,7 +65,7 @@ public class ArrivalTerminalExit implements ATEPassenger{
      * @param repo General Repository of Information.
      * @param al Arrival Lounge for the latest information on flights.
      */
-    public ArrivalTerminalExit(Repository repo, ArrivalLounge al) {
+    public ArrivalTerminalExit(RepositoryStub repo, ArrivalLounge al) {
         this.repo = repo;
         this.al = al;
         this.maxNumberOfPassengers = al.getMaxNumberOfPassengers(); // This probably has to be changed

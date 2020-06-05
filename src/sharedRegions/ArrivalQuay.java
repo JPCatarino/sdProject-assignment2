@@ -9,6 +9,7 @@ import interfaces.ATTQPassenger;
 import proxies.ServiceProviderProxy;
 import states.BusDriverStates;
 import states.PassengerStates;
+import stubs.RepositoryStub;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -31,7 +32,7 @@ public class ArrivalQuay implements ATTQBusDriver, ATTQPassenger {
      *
      * @serialField repo
      */
-    private Repository repo;
+    private RepositoryStub repo;
 
     /**
      * Bus Queue, where the passengers reside while waiting to board.
@@ -77,7 +78,7 @@ public class ArrivalQuay implements ATTQBusDriver, ATTQPassenger {
      * @param T_SEATS Maximum capacity of the bus.
      * @param al Arrival Lounge Shared Memory.
      */
-    public ArrivalQuay(Repository repo, int T_SEATS, ArrivalLounge al){
+    public ArrivalQuay(RepositoryStub repo, int T_SEATS, ArrivalLounge al){
         this.repo = repo;
         this.maxNumberOfSeats = T_SEATS;
         this.al = al;
