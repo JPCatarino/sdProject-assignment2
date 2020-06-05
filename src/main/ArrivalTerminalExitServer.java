@@ -21,7 +21,7 @@ public class ArrivalTerminalExitServer {
 
         scon = new ServerCom(portNumb);
         scon.start ();
-        arrivalTerminalExit = new ArrivalTerminalExitProxy();
+        arrivalTerminalExit = new ArrivalTerminalExit();
         System.out.println ("O serviço foi estabelecido!");
         System.out.println ("O servidor esta em escuta.");
 

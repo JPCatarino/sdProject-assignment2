@@ -23,6 +23,8 @@ public class BagRecOffice implements BROPassenger {
      */
     private Repository repo;
 
+    public BagRecOffice(){}
+
     /**
      * Constructor for BagRecOffice.
      *

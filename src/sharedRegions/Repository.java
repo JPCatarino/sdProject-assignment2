@@ -148,6 +148,8 @@ public class Repository {
      */
     private int bagsLost = 0;
 
+    public Repository(){}
+
     /**
      * Repository Instantiation.
      *

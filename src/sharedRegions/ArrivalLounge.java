@@ -57,14 +57,14 @@ public class ArrivalLounge implements ALPassenger, ALPorter {
      *
      * @serialField maxNumberOfPassengers
      */
-    private final int maxNumberOfPassengers;
+    private int maxNumberOfPassengers;
 
     /**
      * Number of flights that are arriving.
      *
      * @serialField maxNumberOfFlights
      */
-    private final int maxNumberOfFlights;
+    private int maxNumberOfFlights;
 
     /**
      * Number of the flight that just landed.
@@ -86,6 +86,8 @@ public class ArrivalLounge implements ALPassenger, ALPorter {
      * @serialField finishedFlight
      */
     private boolean finishedFlight;
+
+    public ArrivalLounge(){}
 
     /**
      * Arrival Lounge Constructor.

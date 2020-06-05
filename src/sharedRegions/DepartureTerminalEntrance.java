@@ -56,6 +56,7 @@ public class DepartureTerminalEntrance implements DTEPassenger {
      */
     private int maxNumberOfPassengers;
 
+    public DepartureTerminalEntrance(){}
 
     /**
      * DepartureTerminalEntrance Shared Memory.

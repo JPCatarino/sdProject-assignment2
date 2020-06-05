@@ -68,6 +68,8 @@ public class ArrivalQuay implements ATTQBusDriver, ATTQPassenger {
      */
     private ArrivalLounge al;
 
+    public ArrivalQuay(){}
+
     /**
      * Arrival Quay Constructor.
      *

@@ -56,6 +56,8 @@ public class ArrivalTerminalExit implements ATEPassenger{
      */
     private int maxNumberOfPassengers;
 
+    public ArrivalTerminalExit(){}
+
     /**
      * ArrivalTerminalExit Constructor.
      *

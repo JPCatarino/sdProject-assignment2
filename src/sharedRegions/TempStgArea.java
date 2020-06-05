@@ -26,6 +26,8 @@ public class TempStgArea implements TSAPorter {
      */
     private List<int[]> storeroom;
 
+    public TempStgArea(){}
+
     /**
      * Constructor method for TempStgArea.
      *

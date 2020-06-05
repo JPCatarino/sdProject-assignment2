@@ -42,6 +42,8 @@ public class DepartureQuay implements DTTQBusDriver, DTTQPassenger {
      */
     private List<Integer> parkedBus;
 
+    public DepartureQuay(){}
+
     /**
      * Constructor method for DepartureQuay.
      *
