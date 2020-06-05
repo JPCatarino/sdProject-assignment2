@@ -25,7 +25,9 @@ public class BagColPointProxy implements SharedRegionProxy {
 
         switch (msg.getMessageType()){
             case GOCOLLECTABAG:
+                serviceProviderProxy.setnBagsCollected(msg.getIntValue1());
                 bagColPoint.goCollectABag();
+                nm.setIntValue1(serviceProviderProxy.getnBagsCollected());
                 break;
             case CARRYITTOAPPROPRIATESTOREBCP:
                 bagColPoint.carryItToAppropriateStore(msg.getBag1());

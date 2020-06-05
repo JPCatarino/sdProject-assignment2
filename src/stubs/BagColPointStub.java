@@ -3,6 +3,7 @@ package stubs;
 import common.ClientCom;
 import common.Message;
 import common.MessageType;
+import entities.Passenger;
 
 public class BagColPointStub extends SharedRegionStub {
 
@@ -11,15 +12,17 @@ public class BagColPointStub extends SharedRegionStub {
     }
 
     public void goCollectABag(){
+        Passenger p = (Passenger) Thread.currentThread();
         Message newMessage = new Message();
 
         newMessage.setMessageType(MessageType.GOCOLLECTABAG);
-
+        newMessage.setIntValue1(p.getnBagsCollected());
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
         cc.open();
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        p.setnBagsCollected(newMessage.getIntValue1());
     }
 
     public void carryItToAppropriateStore(int [] bag){
