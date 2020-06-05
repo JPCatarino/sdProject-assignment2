@@ -3,6 +3,7 @@ package stubs;
 import common.ClientCom;
 import common.Message;
 import common.MessageType;
+import entities.Passenger;
 import sharedRegions.DepartureTerminalEntrance;
 
 public class ArrivalTerminalExitStub extends SharedRegionStub {
@@ -13,9 +14,10 @@ public class ArrivalTerminalExitStub extends SharedRegionStub {
 
     public void goHome(){
         Message newMessage = new Message();
+        Passenger p = (Passenger) Thread.currentThread();
 
         newMessage.setMessageType(MessageType.GOHOME);
-
+        newMessage.setEntityID(p.getID());
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
         cc.open();
         cc.writeObject(newMessage);

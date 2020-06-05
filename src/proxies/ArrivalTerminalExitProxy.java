@@ -26,6 +26,7 @@ public class ArrivalTerminalExitProxy implements SharedRegionProxy {
 
         switch (msg.getMessageType()){
             case GOHOME:
+                serviceProviderProxy.setId(msg.getEntityID());
                 arrivalTerminalExit.goHome();
                 break;
             case SETALLPASSENGERSFINISHED:

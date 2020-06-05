@@ -25,6 +25,7 @@ public class DepartureTerminalEntranceProxy implements  SharedRegionProxy {
 
         switch (msg.getMessageType()){
             case PREPARENEXTLEG:
+                serviceProviderProxy.setId(msg.getEntityID());
                 departureTerminalEntrance.prepareNextLeg();
                 break;
             case SETALLPASSENGERSFINISHED:
