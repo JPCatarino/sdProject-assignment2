@@ -75,5 +75,6 @@ public class ArrivalQuayStub extends SharedRegionStub {
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        p.setBusSeat(newMessage.getIntValue1());
     }
 }

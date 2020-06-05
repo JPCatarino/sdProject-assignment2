@@ -40,6 +40,7 @@ public class ArrivalQuayProxy implements SharedRegionProxy {
             case ENTERTHEBUS:
                 serviceProviderProxy.setId(msg.getEntityID());
                 arrivalQuay.enterTheBus();
+                nm.setIntValue1(serviceProviderProxy.getBusSeat());
                 break;
         }
 
