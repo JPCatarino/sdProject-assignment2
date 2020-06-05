@@ -161,7 +161,7 @@ public class Repository {
         this.SI = new String[N_PASSENGERS];
         this.NR = new int[N_PASSENGERS];
         this.NA = new int[N_PASSENGERS];
-        for(int i = 0; i < N_PASSENGERS; i++)
+        for(int i = 0; i < n_PASSENGERS; i++)
             Q.add("-");
     }
 
