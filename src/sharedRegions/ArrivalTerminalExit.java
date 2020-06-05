@@ -1,6 +1,5 @@
 package sharedRegions;
 
-import entities.Passenger;
 import entities.PassengerInterface;
 import interfaces.ATEPassenger;
 import proxies.ServiceProviderProxy;
@@ -59,31 +58,17 @@ public class ArrivalTerminalExit implements ATEPassenger{
      */
     private int maxNumberOfPassengers;
 
-    public ArrivalTerminalExit(){}
-
-    public ArrivalTerminalExit(RepositoryStub repo) {
-        this.repo = repo;
-    }
-
-    public ArrivalTerminalExit(RepositoryStub repo, ArrivalLoungeStub al, DepartureTerminalEntranceStub dte) {
-        this.repo = repo;
-        this.al = al;
-        this.dte = dte;
-        this.maxNumberOfPassengers = al.getMaxNumberOfPassengers(); // This probably has to be changed
-        this.allPassengersFinished = false;
-        this.passengersATE = 0;
-    }
-
     /**
      * ArrivalTerminalExit Constructor.
      *
      * @param repo General Repository of Information.
      * @param al Arrival Lounge for the latest information on flights.
+     * @param dte Departure terminal entrance for the latest information on flights.
      */
-    public ArrivalTerminalExit(RepositoryStub repo, ArrivalLoungeStub al) {
+    public ArrivalTerminalExit(RepositoryStub repo, ArrivalLoungeStub al, DepartureTerminalEntranceStub dte) {
         this.repo = repo;
         this.al = al;
-        this.maxNumberOfPassengers = al.getMaxNumberOfPassengers(); // This probably has to be changed
+        this.dte = dte;
         this.allPassengersFinished = false;
         this.passengersATE = 0;
     }
@@ -120,12 +105,12 @@ public class ArrivalTerminalExit implements ATEPassenger{
     }
 
     /**
-     * Setter for Departure Terminal Entrance.
+     * Setter for the total number of passengers in the flights.
      *
-     * @param dte Departure Terminal Entrance object.
+     * @param maxNumberOfPassengers set the number of passengers in the flights.
      */
-    public void setDte(DepartureTerminalEntranceStub dte) {
-        this.dte = dte;
+    public void setMaxNumberOfPassengers(int maxNumberOfPassengers) {
+        this.maxNumberOfPassengers = maxNumberOfPassengers;
     }
 
     /**

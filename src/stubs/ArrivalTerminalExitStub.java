@@ -55,4 +55,28 @@ public class ArrivalTerminalExitStub extends SharedRegionStub {
         newMessage =(Message) cc.readObject();
         return newMessage.getIntValue1();
     }
+
+    public void probPar (int n_passengers)
+    {
+        ClientCom con = new ClientCom (super.getServerHostName(), super.getServerPort());
+        Message inMessage, outMessage;
+
+        while (!con.open ()){
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+
+        outMessage = new Message (MessageType.SETNFIC, n_passengers);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+
+        if (inMessage.getMessageType() != MessageType.NFICDONE) {
+            System.out.println ("Arranque da simulação: Tipo inválido!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
+    }
 }

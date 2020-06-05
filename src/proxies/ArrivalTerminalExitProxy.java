@@ -1,6 +1,7 @@
 package proxies;
 
 import common.Message;
+import common.MessageType;
 import common.ServerCom;
 import sharedRegions.ArrivalTerminalExit;
 
@@ -35,6 +36,10 @@ public class ArrivalTerminalExitProxy implements SharedRegionProxy {
                 break;
             case GETPASSENGERSATE:
                 nm.setIntValue1(arrivalTerminalExit.getPassengersATE());
+                break;
+            case SETNFIC:
+                arrivalTerminalExit.setMaxNumberOfPassengers(msg.getN_passengers());
+                nm.setMessageType(MessageType.NFICDONE);
                 break;
         }
 
