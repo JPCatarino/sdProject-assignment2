@@ -14,8 +14,10 @@ public class ArrivalQuayStub extends SharedRegionStub {
 
     public boolean hasDaysWorkEnded(){
         Message newMessage = new Message();
+        BusDriver bd = (BusDriver) Thread.currentThread();
 
         newMessage.setMessageType(MessageType.HASDAYSWORKENDED);
+        newMessage.setIntValue1(bd.getTTL());
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
         cc.open();

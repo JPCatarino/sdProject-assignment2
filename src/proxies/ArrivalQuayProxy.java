@@ -25,6 +25,7 @@ public class ArrivalQuayProxy implements SharedRegionProxy {
 
         switch (msg.getMessageType()){
             case HASDAYSWORKENDED:
+                serviceProviderProxy.setTTL(msg.getIntValue1());
                 nm.setBooleanValue1(arrivalQuay.hasDaysWorkEnded());
                 break;
             case ANNOUNCINGBUSBOARDING:
