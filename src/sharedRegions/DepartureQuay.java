@@ -1,8 +1,6 @@
 package sharedRegions;
 
-import entities.BusDriver;
 import entities.BusDriverInterface;
-import entities.Passenger;
 import entities.PassengerInterface;
 import exceptions.SharedRegException;
 import interfaces.DTTQBusDriver;
@@ -42,10 +40,6 @@ public class DepartureQuay implements DTTQBusDriver, DTTQPassenger {
      * @serialField parkedBus
      */
     private List<Integer> parkedBus;
-
-    public DepartureQuay(){
-        this.busHasArrived = false;
-    }
 
     /**
      * Constructor method for DepartureQuay.

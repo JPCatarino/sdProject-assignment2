@@ -57,20 +57,7 @@ public class DepartureTerminalEntrance implements DTEPassenger {
      * Maximum number of passengers on this flight.
      * @serialField maxNumberOfPassengers
      */
-    private int maxNumberOfPassengers;
-
-    public DepartureTerminalEntrance(){
-        this.allPassengersFinished = false;
-        this.passengersDTE = 0;
-    }
-
-    // TODO add way to have ate stub here
-
-    public DepartureTerminalEntrance(RepositoryStub repo) {
-        this.repo = repo;
-        this.allPassengersFinished = false;
-        this.passengersDTE = 0;
-    }
+    private final int maxNumberOfPassengers;
 
     /**
      * DepartureTerminalEntrance Shared Memory.

@@ -1,6 +1,5 @@
 package sharedRegions;
 
-import entities.Passenger;
 import entities.PassengerInterface;
 import interfaces.BROPassenger;
 import proxies.ServiceProviderProxy;
@@ -23,8 +22,6 @@ public class BagRecOffice implements BROPassenger {
      * @serialField repo
      */
     private RepositoryStub repo;
-
-    public BagRecOffice(){}
 
     /**
      * Constructor for BagRecOffice.

@@ -1,8 +1,6 @@
 package sharedRegions;
 
-import entities.Passenger;
 import entities.PassengerInterface;
-import entities.Porter;
 import interfaces.BCPPassenger;
 import interfaces.BCPPorter;
 import proxies.ServiceProviderProxy;
@@ -29,14 +27,14 @@ public class BagColPoint implements BCPPassenger, BCPPorter {
      *
      * @serialField repo
      */
-    private RepositoryStub repo;
+    private final RepositoryStub repo;
 
     /**
      * Data structure that simulates the conveyor belt.
      *
      * @serialField conveyorBelt
      */
-    private List<int[]> conveyorBelt;
+    private final List<int[]> conveyorBelt;
 
     /**
      * Flag that signal the passenger that there's no more bags.
@@ -52,10 +50,6 @@ public class BagColPoint implements BCPPassenger, BCPPorter {
      * @serialField bagsInTheConveyorBelt
      */
     private boolean bagsInTheConveyorBelt;
-
-    public BagColPoint(){
-        this.conveyorBelt = new ArrayList<>();
-    }
 
     /**
      * Constructor for the BagColPoint.

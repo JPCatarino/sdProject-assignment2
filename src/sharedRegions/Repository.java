@@ -148,14 +148,30 @@ public class Repository {
      */
     private int bagsLost = 0;
 
-    private int T_seats;
+    /**
+     * Repository Instantiation.
+     */
+    public Repository(){
+        this.Q = new LinkedList<>();
+        this.P_Stat = PorterStates.WAITING_FOR_A_PLANE_TO_LAND.getState();
+        this.D_Stat = BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL.getState();
+    }
 
+    /**
+     * Set the number of seats from the actual flight and update related variables.
+     *
+     * @param t_seats number of seats from the actual flight.
+     */
     public void setT_seats(int t_seats) {
-        this.T_seats = t_seats;
-        this.S = new String[T_seats];
+        this.S = new String[t_seats];
         Arrays.fill(this.S, "-");
     }
 
+    /**
+     * Set the number of passengers from actual flight and update related variables.
+     *
+     * @param n_PASSENGERS number of passengers from the actual flight.
+     */
     public void setN_PASSENGERS(int n_PASSENGERS) {
         this.N_PASSENGERS = n_PASSENGERS;
         this.ST = new String[n_PASSENGERS];
@@ -167,41 +183,6 @@ public class Repository {
 
         Arrays.fill(this.ST, "-");
         Arrays.fill(this.SI, "-");
-    }
-
-    public Repository(){
-        this.Q = new LinkedList<>();
-        this.P_Stat = PorterStates.WAITING_FOR_A_PLANE_TO_LAND.getState();
-        this.D_Stat = BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL.getState();
-    }
-
-    /**
-     * Repository Instantiation.
-     *
-     * @param N_passengers Number of passengers for this simulation.
-     * @param T_seats      Capacity of the transfer bus.
-     */
-    public Repository(int N_passengers, int T_seats) {
-        this.T_seats=T_seats;
-        this.N_PASSENGERS = N_passengers;
-        this.Q = new LinkedList<>();
-        this.S = new String[T_seats];
-        this.ST = new String[N_PASSENGERS];
-        this.SI = new String[N_PASSENGERS];
-        this.NR = new int[N_PASSENGERS];
-        this.NA = new int[N_PASSENGERS];
-
-        for(int i = 0; i < N_PASSENGERS; i++)
-            Q.add("-");
-
-        Arrays.fill(this.S, "-");
-        Arrays.fill(this.ST, "-");
-        Arrays.fill(this.SI, "-");
-
-        this.P_Stat = PorterStates.WAITING_FOR_A_PLANE_TO_LAND.getState();
-        this.D_Stat = BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL.getState();
-
-        reportInitialStatus();
     }
 
     /**

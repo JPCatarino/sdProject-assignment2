@@ -23,14 +23,14 @@ public class ArrivalTerminalExit implements ATEPassenger{
      *
      * @serialField repo
      */
-    private RepositoryStub repo;
+    private final RepositoryStub repo;
 
     /**
      * ArrivalLounge Shared Memory.
      *
      * @serialField al
      */
-    private ArrivalLoungeStub al;
+    private final ArrivalLoungeStub al;
 
     /**
      * True if all the passengers have arrived to the exit zones.
@@ -44,7 +44,7 @@ public class ArrivalTerminalExit implements ATEPassenger{
      *
      * @serialField dte
      */
-    private DepartureTerminalEntranceStub dte;
+    private final DepartureTerminalEntranceStub dte;
 
     /**
      * Number of passengers currently waiting on this terminal.
