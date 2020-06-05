@@ -1,8 +1,6 @@
 package sharedRegions;
 
-import entities.Passenger;
 import entities.PassengerInterface;
-import entities.Porter;
 import entities.PorterInterface;
 import interfaces.ALPassenger;
 import interfaces.ALPorter;
@@ -13,7 +11,6 @@ import states.PorterStates;
 import stubs.RepositoryStub;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -30,14 +27,14 @@ public class ArrivalLounge implements ALPassenger, ALPorter {
      *
      * @serialField repo
      */
-    private RepositoryStub repo;
+    private final RepositoryStub repo;
 
     /**
      * List of passengers bags for this flight.
      *
      * @serialField plainBags
      */
-    private List<int[]> plainBags=new ArrayList<>();
+    private List<int[]> plainBags;
 
     /**
      * Condition Variable that lets the porter wake up.
@@ -88,36 +85,14 @@ public class ArrivalLounge implements ALPassenger, ALPorter {
      */
     private boolean finishedFlight;
 
-    public ArrivalLounge(){
-        this.plainBags = new ArrayList<>();
-    }
-
-    public ArrivalLounge(RepositoryStub repo){
-        this.repo = repo;
-        this.plainBags = new ArrayList<>();
-    }
-
-
     /**
      * Arrival Lounge Constructor.
      *
      * @param repo General Repository of Information
-     * @param N_PASSENGERS Total Number of Passengers
-     * @param K_LANDINGS Max number of flights for the day
-     */
-    public ArrivalLounge(RepositoryStub repo, int N_PASSENGERS, int K_LANDINGS){
+     **/
+    public ArrivalLounge(RepositoryStub repo){
         this.repo = repo;
-        this.maxNumberOfPassengers = N_PASSENGERS;
-        this.maxNumberOfFlights = K_LANDINGS;
         this.plainBags = new ArrayList<>();
-    }
-
-    public void setMaxNumberOfPassengers(int maxNumberOfPassengers) {
-        this.maxNumberOfPassengers = maxNumberOfPassengers;
-    }
-
-    public void setMaxNumberOfFlights(int maxNumberOfFlights) {
-        this.maxNumberOfFlights = maxNumberOfFlights;
     }
 
     @Override
@@ -220,6 +195,24 @@ public class ArrivalLounge implements ALPassenger, ALPorter {
     }
 
     /**
+     * Setter for the total number of passengers in the flight.
+     *
+     * @param maxNumberOfPassengers Number of passengers in the flight.
+     */
+    public void setMaxNumberOfPassengers(int maxNumberOfPassengers) {
+        this.maxNumberOfPassengers = maxNumberOfPassengers;
+    }
+
+    /**
+     * Setter for the total number of flights in the simulation.
+     *
+     * @param maxNumberOfFlights Total number of flights in the simulation.
+     */
+    public void setMaxNumberOfFlights(int maxNumberOfFlights) {
+        this.maxNumberOfFlights = maxNumberOfFlights;
+    }
+
+    /**
      * Checks if all the flights of the day have finished.
      * This is given by comparing the current flight to the total number of flights
      * and checking if it has finished.
@@ -232,6 +225,7 @@ public class ArrivalLounge implements ALPassenger, ALPorter {
 
     /**
      * Getter for the maximum number of passengers per flight.
+     *
      * @return maximum number of passengers per flight
      */
     public int getMaxNumberOfPassengers() {
@@ -240,6 +234,7 @@ public class ArrivalLounge implements ALPassenger, ALPorter {
 
     /**
      * Setter for finishedFlight, true if every passenger has finished.
+     *
      * @param finishedFlight True if every passenger has finished.
      */
     public void setFinishedFlight(boolean finishedFlight) {
@@ -248,6 +243,7 @@ public class ArrivalLounge implements ALPassenger, ALPorter {
 
     /**
      * Checks if porter has finished is cycle and is asleep
+     *
      * @return true if porter is still active.
      */
     public boolean ispWake() {
