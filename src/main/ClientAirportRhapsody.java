@@ -3,8 +3,7 @@ package main;
 import entities.BusDriver;
 import entities.Passenger;
 import entities.Porter;
-import exceptions.SharedRegException;
-import sharedRegions.*;
+import stubs.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +16,9 @@ import java.util.Random;
  * @author Fábio Alves
  * @author Jorge Catarino
  */
-public class AirportRhapsody {
+public class ClientAirportRhapsody {
 
-    public static void main(String[] args) throws SharedRegException{
+    public static void main(String[] args) {
 
         // Global variables.
         int K_landings = 5;
@@ -27,9 +26,10 @@ public class AirportRhapsody {
         int M_luggage = 2;
         int T_seats = 3;
 
-        if(K_landings <= 0 || N_passengers <= 0 || M_luggage < 0 || T_seats <= 0){
-            throw new SharedRegException("Invalid Global Parameters");
-        }
+        //
+        String fName="Log.txt";                                 // logging file name
+        String baseServerHostName = "Server";                       // name from the machine where the server is
+        int baseServerPortNumb=33000;                               // server port number
 
         // Constant that characterize the state of the passenger/piece of luggage.
         final int TRANSIT = 0,
@@ -58,16 +58,15 @@ public class AirportRhapsody {
         }
 
         // Initiate Shared Regions
-        Repository repository = new Repository(N_passengers, T_seats);
-        ArrivalLounge arrivalLounge = new ArrivalLounge(repository,N_passengers,K_landings);
-        ArrivalQuay arrivalQuay = new ArrivalQuay(repository,T_seats, arrivalLounge);
-        ArrivalTerminalExit arrivalTerminalExit = new ArrivalTerminalExit(repository, arrivalLounge);
-        BagColPoint bagColPoint = new BagColPoint(repository);
-        BagRecOffice bagRecOffice = new BagRecOffice(repository);
-        DepartureQuay departureQuay = new DepartureQuay(repository);
-        DepartureTerminalEntrance departureTerminalEntrance = new DepartureTerminalEntrance(repository, arrivalLounge, arrivalTerminalExit);
-        arrivalTerminalExit.setDte(departureTerminalEntrance);
-        TempStgArea tempStgArea = new TempStgArea(repository);
+        RepositoryStub repository = new RepositoryStub(baseServerHostName+1, baseServerPortNumb+1);
+        ArrivalLoungeStub arrivalLounge = new ArrivalLoungeStub(baseServerHostName+2, baseServerPortNumb+2);
+        ArrivalQuayStub arrivalQuay = new ArrivalQuayStub(baseServerHostName+3, baseServerPortNumb+3);
+        ArrivalTerminalExitStub arrivalTerminalExit = new ArrivalTerminalExitStub(baseServerHostName+4, baseServerPortNumb+4);
+        BagColPointStub bagColPoint = new BagColPointStub(baseServerHostName+5, baseServerPortNumb+5);
+        BagRecOfficeStub bagRecOffice = new BagRecOfficeStub(baseServerHostName+6, baseServerPortNumb+6);
+        DepartureQuayStub departureQuay = new DepartureQuayStub(baseServerHostName+7, baseServerPortNumb+7);
+        DepartureTerminalEntranceStub departureTerminalEntrance = new DepartureTerminalEntranceStub(baseServerHostName+8, baseServerPortNumb+8);
+        TempStgAreaStub tempStgArea = new TempStgAreaStub(baseServerHostName+9, baseServerPortNumb+9);
 
         // Initiate entities
 
@@ -76,12 +75,17 @@ public class AirportRhapsody {
         // Initiate Porter
         Porter porter = new Porter(arrivalLounge, bagColPoint, tempStgArea);
         // Initiate passengers (For each flight, initiate N passenger)
-        Passenger[][] flights = new Passenger [K_landings][N_passengers];
+        Passenger[][] flights = new Passenger[K_landings][N_passengers];
         for(int i = 0; i < flights.length; i++) {
             for (int z = 0; z < flights[i].length; z++){
                 flights[i][z] = new Passenger(z, numBagsPassenger[i][z][0], statePassenger[i][z] == 1, arrivalLounge, bagColPoint, bagRecOffice, arrivalQuay, departureQuay, departureTerminalEntrance, arrivalTerminalExit);
             }
         }
+
+        //Communicate parameters
+        repository.probPar(N_passengers, T_seats);
+        arrivalLounge.probPar(N_passengers,K_landings);
+        arrivalQuay.probPar(T_seats);
 
         // Join BusDriver and Porter
         porter.start();

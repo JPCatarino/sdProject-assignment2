@@ -3,6 +3,7 @@ package entities;
 import sharedRegions.*;
 import states.PassengerDecisions;
 import states.PassengerStates;
+import stubs.*;
 
 /**
  * Passenger thread and life cycle.
@@ -55,49 +56,49 @@ public class Passenger extends Thread {
      *
      * @serialField al
      */
-    private ArrivalLounge al;
+    private ArrivalLoungeStub al;
 
     /**
      * BagColPoint Shared Memory.
      *
      * @serialField bcp
      */
-    private BagColPoint bcp;
+    private BagColPointStub bcp;
 
     /**
      * BagRecOffice Shared Memory.
      *
      * @serialField bro
      */
-    private BagRecOffice bro;
+    private BagRecOfficeStub bro;
 
     /**
      * ArrivalQuay Shared Memory.
      *
      * @serialField aq
      */
-    private ArrivalQuay aq;
+    private ArrivalQuayStub aq;
 
     /**
      * DepartureQuay Shared Memory.
      *
      * @serialField dq
      */
-    private DepartureQuay dq;
+    private DepartureQuayStub dq;
 
     /**
      * DepartureTerminalEntrance Shared Memory.
      *
      * @serialField dte
      */
-    private DepartureTerminalEntrance dte;
+    private DepartureTerminalEntranceStub dte;
 
     /**
      * ArrivalTerminalExit Shared Memory.
      *
      * @serialField ate
      */
-    private ArrivalTerminalExit ate;
+    private ArrivalTerminalExitStub ate;
 
     /**
      * Passenger Constructor.
@@ -114,7 +115,7 @@ public class Passenger extends Thread {
      * @param dte Departure Terminal Exit Shared Region.
      * @param ate Arrival Terminal Exit Shared Region.
      */
-    public Passenger(int id, int nBagsToCollect, boolean journeyEnding, ArrivalLounge al, BagColPoint bcp, BagRecOffice bro, ArrivalQuay aq, DepartureQuay dq, DepartureTerminalEntrance dte, ArrivalTerminalExit ate) {
+    public Passenger(int id, int nBagsToCollect, boolean journeyEnding, ArrivalLoungeStub al, BagColPointStub bcp, BagRecOfficeStub bro, ArrivalQuayStub aq, DepartureQuayStub dq, DepartureTerminalEntranceStub dte, ArrivalTerminalExitStub ate) {
         this.id = id;
         this.nBagsToCollect = nBagsToCollect;
         this.nBagsCollected = 0;

@@ -300,4 +300,28 @@ public class RepositoryStub extends SharedRegionStub {
 
         newMessage =(Message) cc.readObject();
     }
+
+    public void probPar (int n_passengers, int t_seats)
+    {
+        ClientCom con = new ClientCom (super.getServerHostName(), super.getServerPort());
+        Message inMessage, outMessage;
+
+        while (!con.open ()){
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+
+        outMessage = new Message (n_passengers, MessageType.SETNFIC, t_seats);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+
+        if (inMessage.getMessageType() != MessageType.NFICDONE) {
+            System.out.println ("Arranque da simulação: Tipo inválido!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
+    }
 }

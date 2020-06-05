@@ -4,6 +4,9 @@ import sharedRegions.ArrivalLounge;
 import sharedRegions.BagColPoint;
 import sharedRegions.TempStgArea;
 import states.PorterStates;
+import stubs.ArrivalLoungeStub;
+import stubs.BagColPointStub;
+import stubs.TempStgAreaStub;
 
 import java.util.Arrays;
 
@@ -25,21 +28,21 @@ public class Porter extends Thread {
      *
      *  @serialField al
      */
-    private ArrivalLounge al;
+    private ArrivalLoungeStub al;
 
     /**
      *  Baggage collection point.
      *
      *  @serialField bcp
      */
-    private BagColPoint bcp;
+    private BagColPointStub bcp;
 
     /**
      *  Temporary Storage Area.
      *
      *  @serialField tsa
      */
-    private TempStgArea tsa;
+    private TempStgAreaStub tsa;
 
     /**
      *  Bag being carried from the plane hold to the baggage collection point or to the temporary storage area.
@@ -63,7 +66,7 @@ public class Porter extends Thread {
      * @param bcp Baggage collection point.
      * @param tsa Temporary Storage Area.
      */
-    public Porter(ArrivalLounge al, BagColPoint bcp, TempStgArea tsa) {
+    public Porter(ArrivalLoungeStub al, BagColPointStub bcp, TempStgAreaStub tsa) {
         this.al = al;
         this.bcp = bcp;
         this.tsa = tsa;

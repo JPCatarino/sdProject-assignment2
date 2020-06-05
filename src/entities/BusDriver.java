@@ -3,6 +3,8 @@ package entities;
 import sharedRegions.ArrivalQuay;
 import sharedRegions.DepartureQuay;
 import states.BusDriverStates;
+import stubs.ArrivalQuayStub;
+import stubs.DepartureQuayStub;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,14 +44,14 @@ public class BusDriver extends Thread {
      *
      * @serialField aq
      */
-    private final ArrivalQuay aq;
+    private final ArrivalQuayStub aq;
 
     /**
      * DepartureQuay Shared Memory.
      *
      * @serialField dq
      */
-    private final DepartureQuay dq;
+    private final DepartureQuayStub dq;
 
     /**
      * BusDriver Constructor.
@@ -59,7 +61,7 @@ public class BusDriver extends Thread {
      * @param aq  Arrival Quay Shared Region.
      * @param dq  Departure Quay Shared Region.
      */
-    public BusDriver(int TTL, ArrivalQuay aq, DepartureQuay dq) {
+    public BusDriver(int TTL, ArrivalQuayStub aq, DepartureQuayStub dq) {
         this.busSeats = new ArrayList<>();
         this.TTL = TTL;
         this.aq = aq;

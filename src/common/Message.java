@@ -14,6 +14,12 @@ public class Message {
 
     private int intValue2;
 
+    private int t_seats;
+
+    private int n_passengers;
+
+    private int k_landings;
+
     private Boolean booleanValue1;
 
     private String stringValue1;
@@ -27,6 +33,23 @@ public class Message {
     private List<int[]> bagList1;
 
     public Message(){}
+
+    public Message (MessageType type, int t_seats) {
+        this.messageType = type;
+        this.t_seats = t_seats;
+    }
+
+    public Message (MessageType type, int n_passengers, int k_landings) {
+        this.messageType = type;
+        this.n_passengers = n_passengers;
+        this.k_landings = k_landings;
+    }
+
+    public Message (int n_passengers, MessageType type, int t_seats) {
+        this.messageType = type;
+        this.t_seats = t_seats;
+        this.n_passengers = n_passengers;
+    }
 
     public MessageType getMessageType() {
         return messageType;

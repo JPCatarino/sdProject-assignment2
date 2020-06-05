@@ -79,4 +79,28 @@ public class ArrivalQuayStub extends SharedRegionStub {
         newMessage =(Message) cc.readObject();
         p.setBusSeat(newMessage.getIntValue1());
     }
+
+    public void probPar (int t_seats) {
+
+        ClientCom con = new ClientCom (super.getServerHostName(), super.getServerPort());
+        Message inMessage, outMessage;
+
+        while (!con.open ()){
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+
+        outMessage = new Message (MessageType.SETNFIC, t_seats);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+
+        if (inMessage.getMessageType() != MessageType.NFICDONE) {
+            System.out.println ("Arranque da simulação: Tipo inválido!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
+    }
 }
