@@ -25,12 +25,15 @@ public class DepartureQuayProxy implements SharedRegionProxy {
 
         switch (msg.getMessageType()){
             case PARKTHEBUSANDLETPASSOFF:
+                serviceProviderProxy.setBusSeats(msg.getIntList1());
                 departureQuay.parkTheBusAndLetPassOff();
                 break;
             case GOTOARRIVALTERMINAL:
                 departureQuay.goToArrivalTerminal();
                 break;
             case LEAVETHEBUS:
+                serviceProviderProxy.setId(msg.getEntityID());
+                serviceProviderProxy.setBusSeat(msg.getIntValue1());
                 departureQuay.leaveTheBus();
                 break;
         }
