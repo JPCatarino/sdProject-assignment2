@@ -28,7 +28,7 @@ public class ClientAirportRhapsody {
 
         //
         String fName="Log.txt";                                 // logging file name
-        String baseServerHostName = "Server";                       // name from the machine where the server is
+        String baseServerHostName = "localhost";                       // name from the machine where the server is
         int baseServerPortNumb=33000;                               // server port number
 
         // Constant that characterize the state of the passenger/piece of luggage.
@@ -58,15 +58,15 @@ public class ClientAirportRhapsody {
         }
 
         // Initiate Shared Regions
-        RepositoryStub repository = new RepositoryStub(baseServerHostName+1, baseServerPortNumb+1);
-        ArrivalLoungeStub arrivalLounge = new ArrivalLoungeStub(baseServerHostName+2, baseServerPortNumb+2);
-        ArrivalQuayStub arrivalQuay = new ArrivalQuayStub(baseServerHostName+3, baseServerPortNumb+3);
-        ArrivalTerminalExitStub arrivalTerminalExit = new ArrivalTerminalExitStub(baseServerHostName+4, baseServerPortNumb+4);
-        BagColPointStub bagColPoint = new BagColPointStub(baseServerHostName+5, baseServerPortNumb+5);
-        BagRecOfficeStub bagRecOffice = new BagRecOfficeStub(baseServerHostName+6, baseServerPortNumb+6);
-        DepartureQuayStub departureQuay = new DepartureQuayStub(baseServerHostName+7, baseServerPortNumb+7);
-        DepartureTerminalEntranceStub departureTerminalEntrance = new DepartureTerminalEntranceStub(baseServerHostName+8, baseServerPortNumb+8);
-        TempStgAreaStub tempStgArea = new TempStgAreaStub(baseServerHostName+9, baseServerPortNumb+9);
+        RepositoryStub repository = new RepositoryStub(baseServerHostName, baseServerPortNumb+1);
+        ArrivalLoungeStub arrivalLounge = new ArrivalLoungeStub(baseServerHostName, baseServerPortNumb+2);
+        ArrivalQuayStub arrivalQuay = new ArrivalQuayStub(baseServerHostName, baseServerPortNumb+3);
+        ArrivalTerminalExitStub arrivalTerminalExit = new ArrivalTerminalExitStub(baseServerHostName, baseServerPortNumb+4);
+        BagColPointStub bagColPoint = new BagColPointStub(baseServerHostName, baseServerPortNumb+5);
+        BagRecOfficeStub bagRecOffice = new BagRecOfficeStub(baseServerHostName, baseServerPortNumb+6);
+        DepartureQuayStub departureQuay = new DepartureQuayStub(baseServerHostName, baseServerPortNumb+7);
+        DepartureTerminalEntranceStub departureTerminalEntrance = new DepartureTerminalEntranceStub(baseServerHostName, baseServerPortNumb+8);
+        TempStgAreaStub tempStgArea = new TempStgAreaStub(baseServerHostName, baseServerPortNumb+9);
 
         // Initiate entities
 
