@@ -2,9 +2,10 @@ package common;
 
 import states.PassengerDecisions;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Message {
+public class Message implements Serializable {
 
     private MessageType messageType;
 
