@@ -54,4 +54,6 @@ public interface PassengerInterface {
      * @return Number of the seat the passenger is using.
      */
     public int getBusSeat();
+
+    public void setnBagsCollected(int nBagsCollected);
 }

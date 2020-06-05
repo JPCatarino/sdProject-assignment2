@@ -226,4 +226,8 @@ public class Passenger extends Thread {
     public int getBusSeat() {
         return busSeat;
     }
+
+    public void setnBagsCollected(int nBagsCollected) {
+        this.nBagsCollected = nBagsCollected;
+    }
 }
