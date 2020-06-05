@@ -2,6 +2,7 @@ package main;
 
 import common.ServerCom;
 import proxies.BagRecOfficeProxy;
+import proxies.ServiceProviderProxy;
 import sharedRegions.BagRecOffice;
 
 import java.net.SocketTimeoutException;
@@ -13,9 +14,10 @@ public class BagRecOfficeServer {
 
     public static void main (String [] args)
     {
+        ServiceProviderProxy serviceProviderProxy;
+        BagRecOfficeProxy bagRecOfficeProxy;
         BagRecOffice bagRecOffice ;
         ServerCom scon, sconi;
-        BagRecOfficeProxy bagRecOfficeProxy;
 
         // Start service
 
@@ -31,8 +33,9 @@ public class BagRecOfficeServer {
         while (waitConnection)
             try
             { sconi = scon.accept ();
-                bagRecOfficeProxy = new BagRecOfficeProxy(sconi, bagRecOffice);
-                bagRecOfficeProxy.start ();
+                bagRecOfficeProxy= new BagRecOfficeProxy(bagRecOffice);
+                serviceProviderProxy= new ServiceProviderProxy( bagRecOfficeProxy,sconi);
+                serviceProviderProxy.start ();
             }
             catch (SocketTimeoutException e)
             {

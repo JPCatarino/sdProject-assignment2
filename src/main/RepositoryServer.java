@@ -2,6 +2,7 @@ package main;
 
 import common.ServerCom;
 import proxies.RepositoryProxy;
+import proxies.ServiceProviderProxy;
 import sharedRegions.Repository;
 
 import java.net.SocketTimeoutException;
@@ -13,9 +14,10 @@ public class RepositoryServer {
 
     public static void main (String [] args)
     {
+        ServiceProviderProxy serviceProviderProxy;
+        RepositoryProxy repositoryProxy;
         Repository repository;
         ServerCom scon, sconi;
-        RepositoryProxy repositoryProxy;
 
         // Start service
 
@@ -31,8 +33,9 @@ public class RepositoryServer {
         while (waitConnection)
             try
             { sconi = scon.accept ();
-                repositoryProxy = new RepositoryProxy(sconi, repository);
-                repositoryProxy.start ();
+                repositoryProxy = new RepositoryProxy(repository);
+                serviceProviderProxy= new ServiceProviderProxy( repositoryProxy,sconi);
+                serviceProviderProxy.start ();
             }
             catch (SocketTimeoutException e)
             {

@@ -2,6 +2,7 @@ package main;
 
 import common.ServerCom;
 import proxies.BagColPointProxy;
+import proxies.ServiceProviderProxy;
 import sharedRegions.BagColPoint;
 
 import java.net.SocketTimeoutException;
@@ -13,9 +14,10 @@ public class BagColPointServer {
 
     public static void main (String [] args)
     {
+        ServiceProviderProxy serviceProviderProxy;
+        BagColPointProxy bagColPointProxy;
         BagColPoint bagColPoint ;
         ServerCom scon, sconi;
-        BagColPointProxy bagColPointProxy;
 
         // Start service
 
@@ -31,8 +33,9 @@ public class BagColPointServer {
         while (waitConnection)
             try
             { sconi = scon.accept ();
-                bagColPointProxy = new BagColPointProxy(sconi, bagColPoint);
-                bagColPointProxy.start ();
+                bagColPointProxy = new BagColPointProxy(bagColPoint);
+                serviceProviderProxy= new ServiceProviderProxy( bagColPointProxy,sconi);
+                serviceProviderProxy.start ();
             }
             catch (SocketTimeoutException e)
             {

@@ -2,6 +2,7 @@ package main;
 
 import common.ServerCom;
 import proxies.DepartureQuayProxy;
+import proxies.ServiceProviderProxy;
 import sharedRegions.DepartureQuay;
 
 import java.net.SocketTimeoutException;
@@ -13,9 +14,10 @@ public class DepartureQuayServer {
 
     public static void main (String [] args)
     {
+        ServiceProviderProxy serviceProviderProxy;
+        DepartureQuayProxy departureQuayProxy;
         DepartureQuay departureQuay;
         ServerCom scon, sconi;
-        DepartureQuayProxy departureQuayProxy;
 
         // Start service
 
@@ -31,8 +33,9 @@ public class DepartureQuayServer {
         while (waitConnection)
             try
             { sconi = scon.accept ();
-                departureQuayProxy = new DepartureQuayProxy(sconi, departureQuay);
-                departureQuayProxy.start ();
+                departureQuayProxy = new DepartureQuayProxy(departureQuay);
+                serviceProviderProxy= new ServiceProviderProxy( departureQuayProxy,sconi);
+                serviceProviderProxy.start ();
             }
             catch (SocketTimeoutException e)
             {

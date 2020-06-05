@@ -2,6 +2,7 @@ package main;
 
 import common.ServerCom;
 import proxies.DepartureTerminalEntranceProxy;
+import proxies.ServiceProviderProxy;
 import sharedRegions.DepartureTerminalEntrance;
 
 import java.net.SocketTimeoutException;
@@ -13,9 +14,10 @@ public class DepartureTerminalEntranceServer {
 
     public static void main (String [] args)
     {
+        ServiceProviderProxy serviceProviderProxy;
+        DepartureTerminalEntranceProxy departureTerminalEntranceProxy;
         DepartureTerminalEntrance departureTerminalEntrance;
         ServerCom scon, sconi;
-        DepartureTerminalEntranceProxy departureTerminalEntranceProxy;
 
         // Start service
 
@@ -31,8 +33,9 @@ public class DepartureTerminalEntranceServer {
         while (waitConnection)
             try
             { sconi = scon.accept ();
-                departureTerminalEntranceProxy = new DepartureTerminalEntranceProxy(sconi, departureTerminalEntrance);
-                departureTerminalEntranceProxy.start ();
+                departureTerminalEntranceProxy = new DepartureTerminalEntranceProxy(departureTerminalEntrance);
+                serviceProviderProxy= new ServiceProviderProxy( departureTerminalEntranceProxy,sconi);
+                serviceProviderProxy.start ();
             }
             catch (SocketTimeoutException e)
             {

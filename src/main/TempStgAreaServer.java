@@ -1,6 +1,7 @@
 package main;
 
 import common.ServerCom;
+import proxies.ServiceProviderProxy;
 import proxies.TempStgAreaProxy;
 import sharedRegions.TempStgArea;
 
@@ -13,9 +14,10 @@ public class TempStgAreaServer {
 
     public static void main (String [] args)
     {
+        ServiceProviderProxy serviceProviderProxy;
+        TempStgAreaProxy tempStgAreaProxy;
         TempStgArea tempStgArea;
         ServerCom scon, sconi;
-        TempStgAreaProxy tempStgAreaProxy;
 
         // Start service
 
@@ -31,8 +33,9 @@ public class TempStgAreaServer {
         while (waitConnection)
             try
             { sconi = scon.accept ();
-                tempStgAreaProxy = new TempStgAreaProxy(sconi, tempStgArea);
-                tempStgAreaProxy.start ();
+                tempStgAreaProxy = new TempStgAreaProxy(tempStgArea);
+                serviceProviderProxy= new ServiceProviderProxy( tempStgAreaProxy,sconi);
+                serviceProviderProxy.start ();
             }
             catch (SocketTimeoutException e)
             {

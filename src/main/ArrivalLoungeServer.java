@@ -2,6 +2,7 @@ package main;
 
 import common.ServerCom;
 import proxies.ArrivalLoungeProxy;
+import proxies.ServiceProviderProxy;
 import sharedRegions.ArrivalLounge;
 
 import java.net.SocketTimeoutException;
@@ -13,9 +14,10 @@ public class ArrivalLoungeServer {
 
     public static void main (String [] args)
     {
+        ServiceProviderProxy serviceProviderProxy;
+        ArrivalLoungeProxy arrivalLoungeProxy;
         ArrivalLounge arrivalLounge ;
         ServerCom scon, sconi;
-        ArrivalLoungeProxy arrivalLoungeProxy;
 
         // Start service
 
@@ -31,8 +33,9 @@ public class ArrivalLoungeServer {
         while (waitConnection)
             try
             { sconi = scon.accept ();
-                arrivalLoungeProxy = new ArrivalLoungeProxy(sconi, arrivalLounge);
-                arrivalLoungeProxy.start ();
+                arrivalLoungeProxy = new ArrivalLoungeProxy(arrivalLounge);
+                serviceProviderProxy= new ServiceProviderProxy( arrivalLoungeProxy,sconi);
+                serviceProviderProxy.start ();
             }
             catch (SocketTimeoutException e)
             {
