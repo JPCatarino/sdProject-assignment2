@@ -1,8 +1,6 @@
 package sharedRegions;
 
-import entities.BusDriver;
 import entities.BusDriverInterface;
-import entities.Passenger;
 import entities.PassengerInterface;
 import interfaces.ATTQBusDriver;
 import interfaces.ATTQPassenger;
@@ -13,9 +11,7 @@ import stubs.ArrivalLoungeStub;
 import stubs.RepositoryStub;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 
 /**
@@ -40,7 +36,7 @@ public class ArrivalQuay implements ATTQBusDriver, ATTQPassenger {
      *
      * @serialField  busWaitingLine
      */
-    private ArrayBlockingQueue<Integer> busWaitingLine = new ArrayBlockingQueue<>(6);
+    private ArrayBlockingQueue<Integer> busWaitingLine;
 
     /**
      * Represents a parked bus, which the passengers board.
@@ -68,32 +64,25 @@ public class ArrivalQuay implements ATTQBusDriver, ATTQPassenger {
      *
      * @serialField al
      */
-    private ArrivalLoungeStub al;
-
-    public ArrivalQuay(){}
-
-    public ArrivalQuay(RepositoryStub repo) {
-        this.repo = repo;
-    }
-
-    public ArrivalQuay(RepositoryStub repo, ArrivalLoungeStub al) {
-        this.repo = repo;
-        this.al = al;
-    }
+    private final ArrivalLoungeStub al;
 
     /**
      * Arrival Quay Constructor.
      *
      * @param repo General Repository of information.
-     * @param T_SEATS Maximum capacity of the bus.
      * @param al Arrival Lounge Shared Memory.
      */
-    public ArrivalQuay(RepositoryStub repo, int T_SEATS, ArrivalLoungeStub al){
+    public ArrivalQuay(RepositoryStub repo, ArrivalLoungeStub al) {
+        this.busWaitingLine = new ArrayBlockingQueue<>(6);
         this.repo = repo;
-        this.maxNumberOfSeats = T_SEATS;
         this.al = al;
     }
 
+    /**
+     * Setter for the total number of seats in the bus.
+     *
+     * @param maxNumberOfSeats Number of seats in the bus.
+     */
     public void setMaxNumberOfSeats(int maxNumberOfSeats) {
         this.maxNumberOfSeats = maxNumberOfSeats;
     }

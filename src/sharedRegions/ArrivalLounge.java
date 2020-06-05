@@ -149,7 +149,6 @@ public class ArrivalLounge implements ALPassenger, ALPorter {
     @Override
     public synchronized PassengerDecisions whatShouldIDo(){
         PassengerInterface p = (ServiceProviderProxy) Thread.currentThread();
-        System.out.println("im doing stuff");
         p.setPassengerState(PassengerStates.AT_THE_DISEMBARKING_ZONE);
         repo.setST(p.getID(), PassengerStates.AT_THE_DISEMBARKING_ZONE.getState());
         repo.setNR(p.getID(),p.getnBagsToCollect());
