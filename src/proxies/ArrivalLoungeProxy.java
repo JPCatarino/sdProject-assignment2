@@ -34,7 +34,7 @@ public class ArrivalLoungeProxy implements SharedRegionProxy {
                 serviceProviderProxy.setId(msg.getEntityID());
                 serviceProviderProxy.setJourneyEnding(msg.getBooleanValue1());
                 serviceProviderProxy.setnBagsToCollect(msg.getIntValue1());
-                arrivalLounge.whatShouldIDo();
+                nm.setPassengerDecisions1(arrivalLounge.whatShouldIDo());
                 break;
             case TAKEAREST:
                 serviceProviderProxy.setPlaneHoldEmpty(msg.getBooleanValue1());
