@@ -163,10 +163,16 @@ public class Repository {
         this.NA = new int[N_PASSENGERS];
         for(int i = 0; i < n_PASSENGERS; i++)
             Q.add("-");
+
+        Arrays.fill(this.S, "-");
+        Arrays.fill(this.ST, "-");
+        Arrays.fill(this.SI, "-");
     }
 
     public Repository(){
         this.Q = new LinkedList<>();
+        this.P_Stat = PorterStates.WAITING_FOR_A_PLANE_TO_LAND.getState();
+        this.D_Stat = BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL.getState();
     }
 
     /**
