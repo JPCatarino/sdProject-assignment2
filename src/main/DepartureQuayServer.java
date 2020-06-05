@@ -4,6 +4,7 @@ import common.ServerCom;
 import proxies.DepartureQuayProxy;
 import proxies.ServiceProviderProxy;
 import sharedRegions.DepartureQuay;
+import stubs.RepositoryStub;
 
 import java.net.SocketTimeoutException;
 
@@ -23,7 +24,7 @@ public class DepartureQuayServer {
 
         scon = new ServerCom(portNumb);
         scon.start ();
-        departureQuay = new DepartureQuay();
+        departureQuay = new DepartureQuay(new RepositoryStub("localhost", 33001));
         System.out.println ("O serviço foi estabelecido!");
         System.out.println ("O servidor esta em escuta.");
 

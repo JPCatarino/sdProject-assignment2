@@ -4,6 +4,7 @@ import common.ServerCom;
 import proxies.ServiceProviderProxy;
 import proxies.TempStgAreaProxy;
 import sharedRegions.TempStgArea;
+import stubs.RepositoryStub;
 
 import java.net.SocketTimeoutException;
 
@@ -23,7 +24,7 @@ public class TempStgAreaServer {
 
         scon = new ServerCom(portNumb);
         scon.start ();
-        tempStgArea = new TempStgArea();
+        tempStgArea = new TempStgArea(new RepositoryStub("localhost", 33001));
         System.out.println ("O serviço foi estabelecido!");
         System.out.println ("O servidor esta em escuta.");
 

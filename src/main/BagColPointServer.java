@@ -4,6 +4,7 @@ import common.ServerCom;
 import proxies.BagColPointProxy;
 import proxies.ServiceProviderProxy;
 import sharedRegions.BagColPoint;
+import stubs.RepositoryStub;
 
 import java.net.SocketTimeoutException;
 
@@ -23,7 +24,7 @@ public class BagColPointServer {
 
         scon = new ServerCom(portNumb);
         scon.start ();
-        bagColPoint = new BagColPoint();
+        bagColPoint = new BagColPoint(new RepositoryStub("localhost", 33001));
         System.out.println ("O serviço foi estabelecido!");
         System.out.println ("O servidor esta em escuta.");
 

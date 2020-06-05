@@ -9,6 +9,7 @@ import interfaces.ATTQPassenger;
 import proxies.ServiceProviderProxy;
 import states.BusDriverStates;
 import states.PassengerStates;
+import stubs.ArrivalLoungeStub;
 import stubs.RepositoryStub;
 
 import java.util.ArrayList;
@@ -67,12 +68,17 @@ public class ArrivalQuay implements ATTQBusDriver, ATTQPassenger {
      *
      * @serialField al
      */
-    private ArrivalLounge al;
+    private ArrivalLoungeStub al;
 
     public ArrivalQuay(){}
 
     public ArrivalQuay(RepositoryStub repo) {
         this.repo = repo;
+    }
+
+    public ArrivalQuay(RepositoryStub repo, ArrivalLoungeStub al) {
+        this.repo = repo;
+        this.al = al;
     }
 
     /**
@@ -82,7 +88,7 @@ public class ArrivalQuay implements ATTQBusDriver, ATTQPassenger {
      * @param T_SEATS Maximum capacity of the bus.
      * @param al Arrival Lounge Shared Memory.
      */
-    public ArrivalQuay(RepositoryStub repo, int T_SEATS, ArrivalLounge al){
+    public ArrivalQuay(RepositoryStub repo, int T_SEATS, ArrivalLoungeStub al){
         this.repo = repo;
         this.maxNumberOfSeats = T_SEATS;
         this.al = al;
@@ -95,7 +101,7 @@ public class ArrivalQuay implements ATTQBusDriver, ATTQPassenger {
     @Override
     public synchronized boolean hasDaysWorkEnded(){
         BusDriverInterface bd = (ServiceProviderProxy)Thread.currentThread();
-
+        System.out.println("this is max: " + maxNumberOfSeats);
         try {
             while (((busWaitingLine.size() != maxNumberOfSeats) && busWaitingLine.isEmpty()) && !al.isDayFinished()) {
                 wait(bd.getTTL());                                          // Block while passengers enter queue

@@ -67,7 +67,7 @@ public class ClientAirportRhapsody {
         DepartureQuayStub departureQuay = new DepartureQuayStub(baseServerHostName, baseServerPortNumb+7);
         DepartureTerminalEntranceStub departureTerminalEntrance = new DepartureTerminalEntranceStub(baseServerHostName, baseServerPortNumb+8);
         TempStgAreaStub tempStgArea = new TempStgAreaStub(baseServerHostName, baseServerPortNumb+9);
-
+        repository.reportInitialStatus();
         // Initiate entities
 
         // Initiate Bus Driver

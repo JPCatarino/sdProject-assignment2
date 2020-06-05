@@ -4,6 +4,7 @@ import common.ServerCom;
 import proxies.ArrivalLoungeProxy;
 import proxies.ServiceProviderProxy;
 import sharedRegions.ArrivalLounge;
+import stubs.RepositoryStub;
 
 import java.net.SocketTimeoutException;
 
@@ -23,7 +24,7 @@ public class ArrivalLoungeServer {
 
         scon = new ServerCom(portNumb);
         scon.start ();
-        arrivalLounge = new ArrivalLounge();
+        arrivalLounge = new ArrivalLounge(new RepositoryStub("localhost", 33001));
         System.out.println ("O serviço foi estabelecido!");
         System.out.println ("O servidor esta em escuta.");
 

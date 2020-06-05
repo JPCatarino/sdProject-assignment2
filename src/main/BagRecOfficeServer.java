@@ -4,6 +4,7 @@ import common.ServerCom;
 import proxies.BagRecOfficeProxy;
 import proxies.ServiceProviderProxy;
 import sharedRegions.BagRecOffice;
+import stubs.RepositoryStub;
 
 import java.net.SocketTimeoutException;
 
@@ -23,7 +24,7 @@ public class BagRecOfficeServer {
 
         scon = new ServerCom(portNumb);
         scon.start ();
-        bagRecOffice = new BagRecOffice();
+        bagRecOffice = new BagRecOffice(new RepositoryStub("localhost", 33001));
         System.out.println ("O serviço foi estabelecido!");
         System.out.println ("O servidor esta em escuta.");
 

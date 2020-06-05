@@ -4,6 +4,8 @@ import common.ServerCom;
 import proxies.ArrivalQuayProxy;
 import proxies.ServiceProviderProxy;
 import sharedRegions.ArrivalQuay;
+import stubs.ArrivalLoungeStub;
+import stubs.RepositoryStub;
 
 import java.net.SocketTimeoutException;
 
@@ -23,7 +25,7 @@ public class ArrivalQuayServer {
 
         scon = new ServerCom(portNumb);
         scon.start ();
-        arrivalQuay = new ArrivalQuay();
+        arrivalQuay = new ArrivalQuay(new RepositoryStub("localhost", 33001), new ArrivalLoungeStub("localhost", 33002));
         System.out.println ("O serviço foi estabelecido!");
         System.out.println ("O servidor esta em escuta.");
 
