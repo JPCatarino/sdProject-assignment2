@@ -153,18 +153,18 @@ public class Repository {
     public void setT_seats(int t_seats) {
         this.T_seats = t_seats;
         this.S = new String[T_seats];
+        Arrays.fill(this.S, "-");
     }
 
     public void setN_PASSENGERS(int n_PASSENGERS) {
         this.N_PASSENGERS = n_PASSENGERS;
-        this.ST = new String[N_PASSENGERS];
-        this.SI = new String[N_PASSENGERS];
-        this.NR = new int[N_PASSENGERS];
-        this.NA = new int[N_PASSENGERS];
+        this.ST = new String[n_PASSENGERS];
+        this.SI = new String[n_PASSENGERS];
+        this.NR = new int[n_PASSENGERS];
+        this.NA = new int[n_PASSENGERS];
         for(int i = 0; i < n_PASSENGERS; i++)
             Q.add("-");
 
-        Arrays.fill(this.S, "-");
         Arrays.fill(this.ST, "-");
         Arrays.fill(this.SI, "-");
     }
