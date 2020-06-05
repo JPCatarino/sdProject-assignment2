@@ -53,7 +53,9 @@ public class BagColPoint implements BCPPassenger, BCPPorter {
      */
     private boolean bagsInTheConveyorBelt;
 
-    public BagColPoint(){}
+    public BagColPoint(){
+        this.conveyorBelt = new ArrayList<>();
+    }
 
     /**
      * Constructor for the BagColPoint.

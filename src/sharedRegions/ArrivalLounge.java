@@ -88,7 +88,15 @@ public class ArrivalLounge implements ALPassenger, ALPorter {
      */
     private boolean finishedFlight;
 
-    public ArrivalLounge(){}
+    public ArrivalLounge(){
+        this.plainBags = new ArrayList<>();
+    }
+
+    public ArrivalLounge(RepositoryStub repo){
+        this.repo = repo;
+        this.plainBags = new ArrayList<>();
+    }
+
 
     /**
      * Arrival Lounge Constructor.

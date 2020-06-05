@@ -5,6 +5,7 @@ import entities.PassengerInterface;
 import interfaces.DTEPassenger;
 import proxies.ServiceProviderProxy;
 import states.PassengerStates;
+import stubs.ArrivalTerminalExitStub;
 import stubs.RepositoryStub;
 
 /**
@@ -43,7 +44,7 @@ public class DepartureTerminalEntrance implements DTEPassenger {
      *
      * @serialField ate
      */
-    private ArrivalTerminalExit ate;
+    private ArrivalTerminalExitStub ate;
 
     /**
      * Number of passengers currently waiting on this terminal.
@@ -57,7 +58,19 @@ public class DepartureTerminalEntrance implements DTEPassenger {
      */
     private int maxNumberOfPassengers;
 
-    public DepartureTerminalEntrance(){}
+    public DepartureTerminalEntrance(){
+        this.allPassengersFinished = false;
+        this.passengersDTE = 0;
+    }
+
+    // TODO add way to have ate stub here
+
+
+    public DepartureTerminalEntrance(RepositoryStub repo) {
+        this.repo = repo;
+        this.allPassengersFinished = false;
+        this.passengersDTE = 0;
+    }
 
     /**
      * DepartureTerminalEntrance Shared Memory.
@@ -66,7 +79,7 @@ public class DepartureTerminalEntrance implements DTEPassenger {
      * @param al Arrival Lounge for the latest information on flights.
      * @param ate Arrival Terminal for synchronization.
      */
-    public DepartureTerminalEntrance(RepositoryStub repo, ArrivalLounge al, ArrivalTerminalExit ate){
+    public DepartureTerminalEntrance(RepositoryStub repo, ArrivalLounge al, ArrivalTerminalExitStub ate){
         this.repo = repo;
         this.al = al;
         this.maxNumberOfPassengers = al.getMaxNumberOfPassengers();

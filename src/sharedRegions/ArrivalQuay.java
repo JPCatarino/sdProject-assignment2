@@ -71,6 +71,10 @@ public class ArrivalQuay implements ATTQBusDriver, ATTQPassenger {
 
     public ArrivalQuay(){}
 
+    public ArrivalQuay(RepositoryStub repo) {
+        this.repo = repo;
+    }
+
     /**
      * Arrival Quay Constructor.
      *

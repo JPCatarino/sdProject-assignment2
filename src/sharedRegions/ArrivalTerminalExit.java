@@ -59,6 +59,10 @@ public class ArrivalTerminalExit implements ATEPassenger{
 
     public ArrivalTerminalExit(){}
 
+    public ArrivalTerminalExit(RepositoryStub repo) {
+        this.repo = repo;
+    }
+
     /**
      * ArrivalTerminalExit Constructor.
      *
