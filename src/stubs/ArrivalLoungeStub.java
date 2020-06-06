@@ -59,6 +59,7 @@ public class ArrivalLoungeStub extends SharedRegionStub {
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        pt.setPlaneHoldEmpty(newMessage.getBooleanValue2());
         return newMessage.getBooleanValue1();
     }
 
@@ -72,6 +73,7 @@ public class ArrivalLoungeStub extends SharedRegionStub {
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        System.out.println(newMessage.getBag1());
         return newMessage.getBag1();
     }
 
