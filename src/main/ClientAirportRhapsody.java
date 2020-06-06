@@ -129,6 +129,7 @@ public class ClientAirportRhapsody {
             }
             // check if porter has collected all baggage
             while(arrivalLounge.ispWake() && i+1 != K_landings);
+            plainBags = new ArrayList<>();
         }
 
         try {
