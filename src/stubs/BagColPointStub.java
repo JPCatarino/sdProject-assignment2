@@ -17,8 +17,6 @@ public class BagColPointStub extends SharedRegionStub {
 
         newMessage.setMessageType(MessageType.GOCOLLECTABAG);
         newMessage.setIntValue1(p.getnBagsCollected());
-        newMessage.setIntValue2(p.getnBagsToCollect());
-        newMessage.setEntityID(p.getID());
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
         cc.open();
         cc.writeObject(newMessage);

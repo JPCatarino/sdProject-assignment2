@@ -22,15 +22,7 @@ public class TempStgAreaProxy implements SharedRegionProxy {
 
     @Override
     public Message processAndReply(Message msg) {
-        Message nm = new Message();
-        ServiceProviderProxy serviceProviderProxy = (ServiceProviderProxy) Thread.currentThread();
-
-        switch (msg.getMessageType()){
-            case CARRYITTOAPPROPRIATESTORETMP:
-                tempStgArea.carryItToAppropriateStore(msg.getBag1());
-                break;
-        }
-        return nm;
+        return null;
     }
 
     @Override
