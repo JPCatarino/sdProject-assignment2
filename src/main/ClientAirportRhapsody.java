@@ -86,7 +86,6 @@ public class ClientAirportRhapsody {
         arrivalLounge.probPar(N_passengers,K_landings);
         arrivalQuay.probPar(T_seats);
         arrivalTerminalExit.probPar(N_passengers);
-        departureTerminalEntrance.probPar(N_passengers);
         repository.reportInitialStatus();
 
 
