@@ -34,7 +34,7 @@ public class BagColPointProxy implements SharedRegionProxy {
                 bagColPoint.carryItToAppropriateStore(msg.getBag1());
                 break;
             case SETNOMOREBAGS:
-                bagColPoint.setNoMoreBags(nm.getBooleanValue1());
+                bagColPoint.setNoMoreBags(msg.getBooleanValue1());
                 break;
             case RESETBAGCOLPOINT:
                 bagColPoint.resetBagColPoint();
