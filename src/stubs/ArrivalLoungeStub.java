@@ -73,7 +73,6 @@ public class ArrivalLoungeStub extends SharedRegionStub {
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
-        System.out.println(newMessage.getBag1());
         return newMessage.getBag1();
     }
 
