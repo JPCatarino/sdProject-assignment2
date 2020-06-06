@@ -86,6 +86,7 @@ public class ClientAirportRhapsody {
         arrivalLounge.probPar(N_passengers,K_landings);
         arrivalQuay.probPar(T_seats);
         arrivalTerminalExit.probPar(N_passengers);
+        departureTerminalEntrance.probPar(N_passengers);
         repository.reportInitialStatus();
 
 
@@ -128,6 +129,7 @@ public class ClientAirportRhapsody {
             }
             // check if porter has collected all baggage
             while(arrivalLounge.ispWake() && i+1 != K_landings);
+            plainBags.clear();
         }
 
         try {
