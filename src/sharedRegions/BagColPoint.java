@@ -68,6 +68,8 @@ public class BagColPoint implements BCPPassenger, BCPPorter {
         p.setPassengerState(PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
         repo.setST(p.getID(), PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT.getState());
         repo.reportStatus();
+        System.out.println("id: " + p.getID() + "bCd: " + p.getnBagsCollected());
+        System.out.println("id: " + p.getID() + "bCt: " + p.getnBagsToCollect());
 
         // While there's bags on the hold the passenger waits
         // If there's bags on the conveyor belt it tries to collect one with it's ID
