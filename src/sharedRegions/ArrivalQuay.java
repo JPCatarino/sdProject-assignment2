@@ -90,7 +90,6 @@ public class ArrivalQuay implements ATTQBusDriver, ATTQPassenger {
     @Override
     public synchronized boolean hasDaysWorkEnded(){
         BusDriverInterface bd = (ServiceProviderProxy)Thread.currentThread();
-        System.out.println("this is max: " + maxNumberOfSeats);
         try {
             while (((busWaitingLine.size() != maxNumberOfSeats) && busWaitingLine.isEmpty()) && !al.isDayFinished()) {
                 wait(bd.getTTL());                                          // Block while passengers enter queue
