@@ -16,155 +16,299 @@ public class ArrivalLoungeStub extends SharedRegionStub {
     }
 
     public void takeABus() {
-        Passenger p = (Passenger) Thread.currentThread();
-        Message newMessage = new Message();
 
-        newMessage.setMessageType(MessageType.TAKEABUS);
-        newMessage.setEntityID(p.getID());
+        Passenger p = (Passenger) Thread.currentThread();
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
-        cc.writeObject(newMessage);
+        Message inMessage, outMessage;
 
-        newMessage =(Message) cc.readObject();
+        while (!cc.open ()){
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
 
+        outMessage = new Message();
+        outMessage.setMessageType(MessageType.TAKEABUS);
+        outMessage.setEntityID(p.getID());
+
+        cc.writeObject(outMessage);
+
+        inMessage = (Message) cc.readObject();
+        if (inMessage.getMessageType() != MessageType.ACK) {
+            System.out.println ("Thread " + Thread.currentThread ().getName () + ": Invalid type!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
+        cc.close ();
     }
 
     public PassengerDecisions whatShouldIDo() {
+
         Passenger p = (Passenger) Thread.currentThread();
 
-        Message newMessage = new Message();
-
-        newMessage.setMessageType(MessageType.WHATSHOULDIDO);
-        newMessage.setEntityID(p.getID());
-        newMessage.setBooleanValue1(p.isJourneyEnding());
-        newMessage.setIntValue1(p.getnBagsToCollect());
-
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
-        cc.writeObject(newMessage);
+        Message inMessage, outMessage;
 
-        newMessage =(Message) cc.readObject();
-        return newMessage.getPassengerDecisions1();
+        while (!cc.open ()){
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+
+        outMessage = new Message();
+        outMessage.setMessageType(MessageType.WHATSHOULDIDO);
+        outMessage.setEntityID(p.getID());
+        outMessage.setBooleanValue1(p.isJourneyEnding());
+        outMessage.setIntValue1(p.getnBagsToCollect());
+
+        cc.writeObject(outMessage);
+
+        inMessage =(Message) cc.readObject();
+
+        if (inMessage.getMessageType() != MessageType.ACK) {
+            System.out.println ("Thread " + Thread.currentThread ().getName () + ": Invalid type!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
+
+        cc.close ();
+
+        return inMessage.getPassengerDecisions1();
     }
 
     public boolean takeARest() {
-        Message newMessage = new Message();
+
         Porter pt = (Porter) Thread.currentThread();
 
-        newMessage.setMessageType(MessageType.TAKEAREST);
-        newMessage.setBooleanValue1(pt.isPlaneHoldEmpty());
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
-        cc.writeObject(newMessage);
+        Message inMessage, outMessage;
 
-        newMessage =(Message) cc.readObject();
-        return newMessage.getBooleanValue1();
+        while (!cc.open ()){
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+
+        outMessage = new Message();
+        outMessage.setMessageType(MessageType.TAKEAREST);
+        outMessage.setBooleanValue1(pt.isPlaneHoldEmpty());
+
+        cc.writeObject(outMessage);
+
+        inMessage =(Message) cc.readObject();
+
+        if (inMessage.getMessageType() != MessageType.ACK) {
+            System.out.println ("Thread " + Thread.currentThread ().getName () + ": Invalid type!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
+
+        cc.close ();
+
+        return inMessage.getBooleanValue1();
     }
 
     public int[] tryToCollectABag() {
-        Message newMessage = new Message();
-
-        newMessage.setMessageType(MessageType.TRYTOCOLLECTABAG);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
-        cc.writeObject(newMessage);
+        Message inMessage, outMessage;
 
-        newMessage =(Message) cc.readObject();
-        return newMessage.getBag1();
+        while (!cc.open ()){
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+
+        outMessage = new Message();
+        outMessage.setMessageType(MessageType.TRYTOCOLLECTABAG);
+
+        cc.writeObject(outMessage);
+
+        inMessage =(Message) cc.readObject();
+
+        if (inMessage.getMessageType() != MessageType.ACK) {
+            System.out.println ("Thread " + Thread.currentThread ().getName () + ": Invalid type!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
+
+        cc.close ();
+
+        return inMessage.getBag1();
     }
 
     public void noMoreBagsToCollect() {
-        Message newMessage = new Message();
-
-        newMessage.setMessageType(MessageType.NOMOREBAGSTOCOLLECT);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
-        cc.writeObject(newMessage);
+        Message inMessage, outMessage;
 
-        newMessage =(Message) cc.readObject();
+        while (!cc.open ()){
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+
+        outMessage = new Message();
+        outMessage.setMessageType(MessageType.NOMOREBAGSTOCOLLECT);
+
+        cc.writeObject(outMessage);
+
+        inMessage =(Message) cc.readObject();
+
+        if (inMessage.getMessageType() != MessageType.ACK) {
+            System.out.println ("Thread " + Thread.currentThread ().getName () + ": Invalid type!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
+        cc.close ();
     }
 
     public void setPlainBags(List<int[]> plainBags){
-        Message newMessage = new Message();
-
-        newMessage.setMessageType(MessageType.SETPLAINBAGS);
-        newMessage.setBagList1(plainBags);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
-        cc.writeObject(newMessage);
+        Message inMessage, outMessage;
 
-        newMessage =(Message) cc.readObject();
+        while (!cc.open ()){
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+
+        outMessage = new Message();
+        outMessage.setMessageType(MessageType.SETPLAINBAGS);
+        outMessage.setBagList1(plainBags);
+
+        cc.writeObject(outMessage);
+
+        inMessage =(Message) cc.readObject();
+
+        if (inMessage.getMessageType() != MessageType.ACK) {
+            System.out.println ("Thread " + Thread.currentThread ().getName () + ": Invalid type!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
+        cc.close ();
     }
 
     public void setFlightNumber(int flightNumber){
-        Message newMessage = new Message();
-
-        newMessage.setMessageType(MessageType.SETFLIGHTNUMBER);
-        newMessage.setIntValue1(flightNumber);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
-        cc.writeObject(newMessage);
+        Message inMessage, outMessage;
 
-        newMessage =(Message) cc.readObject();
+        while (!cc.open ()){
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+
+        outMessage = new Message();
+        outMessage.setMessageType(MessageType.SETFLIGHTNUMBER);
+        outMessage.setIntValue1(flightNumber);
+
+        cc.writeObject(outMessage);
+
+        inMessage = (Message) cc.readObject();
+
+        if (inMessage.getMessageType() != MessageType.ACK) {
+            System.out.println ("Thread " + Thread.currentThread ().getName () + ": Invalid type!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
+        cc.close ();
     }
 
     public boolean isDayFinished(){
-        Message newMessage = new Message();
-
-        newMessage.setMessageType(MessageType.ISDAYFINISHED);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
-        cc.writeObject(newMessage);
+        Message inMessage, outMessage;
 
-        newMessage =(Message) cc.readObject();
-        return newMessage.getBooleanValue1();
-    }
+        while (!cc.open ()){
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
 
-    // This function might need to be changed.
-    // Maybe we need to just pass max passengers parameter to dte and ate instead of calling this function
-    public int getMaxNumberOfPassengers(){
-        Message newMessage = new Message();
+        outMessage = new Message();
+        outMessage.setMessageType(MessageType.ISDAYFINISHED);
 
-        newMessage.setMessageType(MessageType.GETMAXNUMBEROFPASSENGERS);
+        cc.writeObject(outMessage);
 
-        ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
-        cc.writeObject(newMessage);
+        inMessage =(Message) cc.readObject();
 
-        newMessage =(Message) cc.readObject();
-        return newMessage.getIntValue1();
+        if (inMessage.getMessageType() != MessageType.ACK) {
+            System.out.println ("Thread " + Thread.currentThread ().getName () + ": Invalid type!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
+        cc.close ();
+
+        return inMessage.getBooleanValue1();
     }
 
     public void setFinishedFlight(boolean finishedFlight){
-        Message newMessage = new Message();
-
-        newMessage.setMessageType(MessageType.SETFINISHEDFLIGHT);
-        newMessage.setBooleanValue1(finishedFlight);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
-        cc.writeObject(newMessage);
+        Message inMessage, outMessage;
 
-        newMessage =(Message) cc.readObject();
+        while (!cc.open ()){
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+
+        outMessage = new Message();
+        outMessage.setMessageType(MessageType.SETFINISHEDFLIGHT);
+        outMessage.setBooleanValue1(finishedFlight);
+
+        cc.writeObject(outMessage);
+
+        inMessage =(Message) cc.readObject();
+
+        if (inMessage.getMessageType() != MessageType.ACK) {
+            System.out.println ("Thread " + Thread.currentThread ().getName () + ": Invalid type!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
+        cc.close ();
     }
 
     public boolean ispWake(){
-        Message newMessage = new Message();
-
-        newMessage.setMessageType(MessageType.ISPWAKE);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
-        cc.writeObject(newMessage);
+        Message inMessage, outMessage;
 
-        newMessage =(Message) cc.readObject();
-        return newMessage.getBooleanValue1();
+        while (!cc.open ()){
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+
+        outMessage = new Message();
+        outMessage.setMessageType(MessageType.ISPWAKE);
+
+        cc.writeObject(outMessage);
+
+        inMessage =(Message) cc.readObject();
+
+        if (inMessage.getMessageType() != MessageType.ACK) {
+            System.out.println ("Thread " + Thread.currentThread ().getName () + ": Invalid type!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
+        cc.close ();
+
+        return inMessage.getBooleanValue1();
     }
 
     public void probPar (int n_passengers, int k_landings)
@@ -184,7 +328,7 @@ public class ArrivalLoungeStub extends SharedRegionStub {
         inMessage = (Message) con.readObject ();
 
         if (inMessage.getMessageType() != MessageType.NFICDONE) {
-            System.out.println ("Arranque da simulação: Tipo inválido!");
+            System.out.println ("Simulation start: Invalid type!");
             System.out.println (inMessage.toString ());
             System.exit (1);
         }
