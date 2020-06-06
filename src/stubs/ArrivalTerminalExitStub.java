@@ -4,7 +4,6 @@ import common.ClientCom;
 import common.Message;
 import common.MessageType;
 import entities.Passenger;
-import sharedRegions.DepartureTerminalEntrance;
 
 public class ArrivalTerminalExitStub extends SharedRegionStub {
 
@@ -13,12 +12,11 @@ public class ArrivalTerminalExitStub extends SharedRegionStub {
     }
 
     public void goHome(){
-        Message newMessage = new Message();
+
         Passenger p = (Passenger) Thread.currentThread();
 
-        newMessage.setMessageType(MessageType.GOHOME);
-        newMessage.setEntityID(p.getID());
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
+        Message inMessage, outMessage;
 
         while (!cc.open ()) {
             try {
@@ -26,20 +24,23 @@ public class ArrivalTerminalExitStub extends SharedRegionStub {
             }
             catch (InterruptedException e) {}
         }
-        cc.writeObject(newMessage);
 
-        newMessage =(Message) cc.readObject();
+        outMessage = new Message();
+
+        outMessage.setMessageType(MessageType.GOHOME);
+        outMessage.setEntityID(p.getID());
+
+        cc.writeObject(outMessage);
+
+        inMessage =(Message) cc.readObject();
+
         cc.close();
-
     }
 
     public void setAllPassengersFinished(boolean allPassengersFinished){
-        Message newMessage = new Message();
-
-        newMessage.setMessageType(MessageType.SETALLPASSENGERSFINISHED);
-        newMessage.setBooleanValue1(allPassengersFinished);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
+        Message inMessage, outMessage;
 
         while (!cc.open ()) {
             try {
@@ -47,19 +48,22 @@ public class ArrivalTerminalExitStub extends SharedRegionStub {
             }
             catch (InterruptedException e) {}
         }
-        cc.writeObject(newMessage);
 
-        newMessage =(Message) cc.readObject();
+        outMessage = new Message();
+        outMessage.setMessageType(MessageType.SETALLPASSENGERSFINISHED);
+        outMessage.setBooleanValue1(allPassengersFinished);
+
+        cc.writeObject(outMessage);
+
+        inMessage =(Message) cc.readObject();
+
         cc.close();
-
     }
 
     public int getPassengersATE(){
-        Message newMessage = new Message();
-
-        newMessage.setMessageType(MessageType.GETPASSENGERSATE);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
+        Message inMessage, outMessage;
 
         while (!cc.open ()) {
             try {
@@ -67,12 +71,17 @@ public class ArrivalTerminalExitStub extends SharedRegionStub {
             }
             catch (InterruptedException e) {}
         }
-        cc.writeObject(newMessage);
 
-        newMessage =(Message) cc.readObject();
+        outMessage = new Message();
+        outMessage.setMessageType(MessageType.GETPASSENGERSATE);
+
+        cc.writeObject(outMessage);
+
+        inMessage = (Message) cc.readObject();
+
         cc.close();
 
-        return newMessage.getIntValue1();
+        return inMessage.getIntValue1();
     }
 
     public void probPar (int n_passengers)
@@ -90,7 +99,9 @@ public class ArrivalTerminalExitStub extends SharedRegionStub {
         outMessage = new Message();
         outMessage.setMessageType(MessageType.SETNFIC);
         outMessage.setN_passengers(n_passengers);
+
         con.writeObject (outMessage);
+
         inMessage = (Message) con.readObject ();
 
         if (inMessage.getMessageType() != MessageType.NFICDONE) {

@@ -12,14 +12,11 @@ public class BagRecOfficeStub extends SharedRegionStub {
     }
 
     public void reportMissingBags(){
-        Message newMessage = new Message();
+
         Passenger p = (Passenger) Thread.currentThread();
 
-        newMessage.setMessageType(MessageType.REPORTMISSINGBAGS);
-        newMessage.setEntityID(p.getID());
-        newMessage.setIntValue1(p.getnBagsCollected());
-        newMessage.setIntValue2(p.getnBagsToCollect());
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
+        Message inMessage, outMessage;
 
         while (!cc.open ()) {
             try {
@@ -28,10 +25,16 @@ public class BagRecOfficeStub extends SharedRegionStub {
             catch (InterruptedException e) {}
         }
 
-        cc.writeObject(newMessage);
+        outMessage = new Message();
+        outMessage.setMessageType(MessageType.REPORTMISSINGBAGS);
+        outMessage.setEntityID(p.getID());
+        outMessage.setIntValue1(p.getnBagsCollected());
+        outMessage.setIntValue2(p.getnBagsToCollect());
 
-        newMessage =(Message) cc.readObject();
+        cc.writeObject(outMessage);
+
+        inMessage = (Message) cc.readObject();
+
         cc.close();
-
     }
 }
