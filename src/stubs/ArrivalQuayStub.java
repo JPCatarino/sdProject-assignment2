@@ -13,71 +13,128 @@ public class ArrivalQuayStub extends SharedRegionStub {
     }
 
     public boolean hasDaysWorkEnded(){
-        Message newMessage = new Message();
+
         BusDriver bd = (BusDriver) Thread.currentThread();
 
-        newMessage.setMessageType(MessageType.HASDAYSWORKENDED);
-        newMessage.setIntValue1(bd.getTTL());
-
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
-        cc.writeObject(newMessage);
+        Message inMessage, outMessage;
 
-        newMessage =(Message) cc.readObject();
-        return newMessage.getBooleanValue1();
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+
+        outMessage = new Message();
+
+        outMessage.setMessageType(MessageType.HASDAYSWORKENDED);
+        outMessage.setIntValue1(bd.getTTL());
+
+        cc.writeObject(outMessage);
+
+        inMessage =(Message) cc.readObject();
+
+        cc.close();
+
+        return inMessage.getBooleanValue1();
     }
 
     public void announcingBusBoarding(){
-        Message newMessage = new Message();
-
-        newMessage.setMessageType(MessageType.ANNOUNCINGBUSBOARDING);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
-        cc.writeObject(newMessage);
+        Message inMessage, outMessage;
 
-        newMessage =(Message) cc.readObject();
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+
+        outMessage = new Message();
+        outMessage.setMessageType(MessageType.ANNOUNCINGBUSBOARDING);
+
+        cc.writeObject(outMessage);
+
+        inMessage =(Message) cc.readObject();
+
+        cc.close();
     }
 
     public void goToDepartureTerminal(){
-        BusDriver bd = (BusDriver) Thread.currentThread();
-        Message newMessage = new Message();
 
-        newMessage.setMessageType(MessageType.GOTODEPARTURETERMINAL);
+        BusDriver bd = (BusDriver) Thread.currentThread();
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
-        cc.writeObject(newMessage);
+        Message inMessage, outMessage;
 
-        newMessage =(Message) cc.readObject();
-        bd.setBusSeats(newMessage.getIntList1());
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+
+        outMessage = new Message();
+        outMessage.setMessageType(MessageType.GOTODEPARTURETERMINAL);
+
+        cc.writeObject(outMessage);
+
+        inMessage =(Message) cc.readObject();
+
+        bd.setBusSeats(inMessage.getIntList1());
+
+        cc.close();
     }
 
     public void parkTheBus(){
-        Message newMessage = new Message();
-
-        newMessage.setMessageType(MessageType.PARKTHEBUS);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
-        cc.writeObject(newMessage);
+        Message inMessage, outMessage;
 
-        newMessage =(Message) cc.readObject();
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+
+        outMessage = new Message();
+        outMessage.setMessageType(MessageType.PARKTHEBUS);
+
+        cc.writeObject(outMessage);
+
+        inMessage = (Message) cc.readObject();
+
+        cc.close();
     }
 
     public void enterTheBus(){
-        Message newMessage = new Message();
+
         Passenger p = (Passenger) Thread.currentThread();
 
-        newMessage.setMessageType(MessageType.ENTERTHEBUS);
-        newMessage.setEntityID(p.getID());
-
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
-        cc.writeObject(newMessage);
+        Message inMessage, outMessage;
 
-        newMessage =(Message) cc.readObject();
-        p.setBusSeat(newMessage.getIntValue1());
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+
+        outMessage = new Message();
+        outMessage.setMessageType(MessageType.ENTERTHEBUS);
+        outMessage.setEntityID(p.getID());
+
+        cc.writeObject(outMessage);
+
+        inMessage =(Message) cc.readObject();
+
+        p.setBusSeat(inMessage.getIntValue1());
+
+        cc.close();
     }
 
     public void probPar (int t_seats) {
@@ -93,7 +150,9 @@ public class ArrivalQuayStub extends SharedRegionStub {
         }
 
         outMessage = new Message (MessageType.SETNFIC, t_seats);
+
         con.writeObject (outMessage);
+
         inMessage = (Message) con.readObject ();
 
         if (inMessage.getMessageType() != MessageType.NFICDONE) {

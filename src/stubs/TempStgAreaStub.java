@@ -12,15 +12,25 @@ public class TempStgAreaStub extends SharedRegionStub {
     }
 
     public void carryItToAppropriateStore(int [] bag){
-        Message newMessage = new Message();
-
-        newMessage.setMessageType(MessageType.CARRYITTOAPPROPRIATESTORETMP);
-        newMessage.setBag1(bag);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
-        cc.writeObject(newMessage);
+        Message inMessage, outMessage;
 
-        newMessage =(Message) cc.readObject();
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+
+        outMessage = new Message();
+        outMessage.setMessageType(MessageType.CARRYITTOAPPROPRIATESTORETMP);
+        outMessage.setBag1(bag);
+
+        cc.writeObject(outMessage);
+
+        inMessage =(Message) cc.readObject();
+
+        cc.close();
     }
 }

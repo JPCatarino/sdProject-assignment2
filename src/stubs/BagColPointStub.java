@@ -12,57 +12,101 @@ public class BagColPointStub extends SharedRegionStub {
     }
 
     public void goCollectABag(){
-        Passenger p = (Passenger) Thread.currentThread();
-        Message newMessage = new Message();
 
-        newMessage.setMessageType(MessageType.GOCOLLECTABAG);
-        newMessage.setIntValue1(p.getnBagsCollected());
-        newMessage.setIntValue2(p.getnBagsToCollect());
-        newMessage.setEntityID(p.getID());
+        Passenger p = (Passenger) Thread.currentThread();
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
-        cc.writeObject(newMessage);
+        Message inMessage, outMessage;
 
-        newMessage =(Message) cc.readObject();
-        p.setnBagsCollected(newMessage.getIntValue1());
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+
+        outMessage = new Message();
+
+        outMessage.setMessageType(MessageType.GOCOLLECTABAG);
+        outMessage.setIntValue1(p.getnBagsCollected());
+        outMessage.setIntValue2(p.getnBagsToCollect());
+        outMessage.setEntityID(p.getID());
+
+        cc.writeObject(outMessage);
+
+        inMessage =(Message) cc.readObject();
+
+        p.setnBagsCollected(inMessage.getIntValue1());
+
+        cc.close();
     }
 
     public void carryItToAppropriateStore(int [] bag){
-        Message newMessage = new Message();
-
-        newMessage.setMessageType(MessageType.CARRYITTOAPPROPRIATESTOREBCP);
-        newMessage.setBag1(bag);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
-        cc.writeObject(newMessage);
+        Message inMessage, outMessage;
 
-        newMessage =(Message) cc.readObject();
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+
+        outMessage = new Message();
+
+        outMessage.setMessageType(MessageType.CARRYITTOAPPROPRIATESTOREBCP);
+        outMessage.setBag1(bag);
+
+        cc.writeObject(outMessage);
+
+        inMessage =(Message) cc.readObject();
+
+        cc.close();
     }
 
     public void setNoMoreBags(boolean noMoreBags){
-        Message newMessage = new Message();
-
-        newMessage.setMessageType(MessageType.SETNOMOREBAGS);
-        newMessage.setBooleanValue1(noMoreBags);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
-        cc.writeObject(newMessage);
+        Message inMessage, outMessage;
 
-        newMessage =(Message) cc.readObject();
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+
+        outMessage = new Message();
+        outMessage.setMessageType(MessageType.SETNOMOREBAGS);
+        outMessage.setBooleanValue1(noMoreBags);
+
+        cc.writeObject(outMessage);
+
+        inMessage = (Message) cc.readObject();
+
+        cc.close();
     }
 
     public void resetBagColPoint(){
-        Message newMessage = new Message();
-
-        newMessage.setMessageType(MessageType.RESETBAGCOLPOINT);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
-        cc.writeObject(newMessage);
+        Message inMessage, outMessage;
 
-        newMessage =(Message) cc.readObject();
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+
+        outMessage = new Message();
+        outMessage.setMessageType(MessageType.RESETBAGCOLPOINT);
+
+        cc.writeObject(outMessage);
+
+        inMessage =(Message) cc.readObject();
+
+        cc.close();
     }
 }

@@ -13,44 +13,75 @@ public class DepartureQuayStub extends SharedRegionStub {
     }
 
     public void parkTheBusAndLetPassOff(){
-        Message newMessage = new Message();
+
         BusDriver bd = (BusDriver) Thread.currentThread();
 
-        newMessage.setMessageType(MessageType.PARKTHEBUSANDLETPASSOFF);
-        newMessage.setIntList1(bd.getBusSeats());
-
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
-        cc.writeObject(newMessage);
+        Message inMessage, outMessage;
 
-        newMessage =(Message) cc.readObject();
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+
+        outMessage = new Message();
+        outMessage.setMessageType(MessageType.PARKTHEBUSANDLETPASSOFF);
+        outMessage.setIntList1(bd.getBusSeats());
+
+        cc.writeObject(outMessage);
+
+        inMessage =(Message) cc.readObject();
+
+        cc.close();
     }
 
     public void goToArrivalTerminal(){
-        Message newMessage = new Message();
-
-        newMessage.setMessageType(MessageType.GOTOARRIVALTERMINAL);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
-        cc.writeObject(newMessage);
+        Message inMessage, outMessage;
 
-        newMessage =(Message) cc.readObject();
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+
+        outMessage = new Message();
+        outMessage.setMessageType(MessageType.GOTOARRIVALTERMINAL);
+
+        cc.writeObject(outMessage);
+
+        inMessage = (Message) cc.readObject();
+
+        cc.close();
     }
 
     public void leaveTheBus(){
-        Message newMessage = new Message();
+
         Passenger p = (Passenger) Thread.currentThread();
 
-        newMessage.setMessageType(MessageType.LEAVETHEBUS);
-        newMessage.setEntityID(p.getID());
-        newMessage.setIntValue1(p.getBusSeat());
-
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
-        cc.writeObject(newMessage);
+        Message inMessage, outMessage;
 
-        newMessage =(Message) cc.readObject();
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+
+        outMessage = new Message();
+        outMessage.setMessageType(MessageType.LEAVETHEBUS);
+        outMessage.setEntityID(p.getID());
+        outMessage.setIntValue1(p.getBusSeat());
+
+        cc.writeObject(outMessage);
+
+        inMessage =(Message) cc.readObject();
+
+        cc.close();
     }
-
 }
