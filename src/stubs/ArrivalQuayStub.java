@@ -20,10 +20,18 @@ public class ArrivalQuayStub extends SharedRegionStub {
         newMessage.setIntValue1(bd.getTTL());
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
         return newMessage.getBooleanValue1();
     }
 
@@ -33,10 +41,18 @@ public class ArrivalQuayStub extends SharedRegionStub {
         newMessage.setMessageType(MessageType.ANNOUNCINGBUSBOARDING);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
     public void goToDepartureTerminal(){
@@ -46,11 +62,19 @@ public class ArrivalQuayStub extends SharedRegionStub {
         newMessage.setMessageType(MessageType.GOTODEPARTURETERMINAL);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
         bd.setBusSeats(newMessage.getIntList1());
+        cc.close();
+
     }
 
     public void parkTheBus(){
@@ -59,10 +83,18 @@ public class ArrivalQuayStub extends SharedRegionStub {
         newMessage.setMessageType(MessageType.PARKTHEBUS);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
     public void enterTheBus(){
@@ -73,11 +105,19 @@ public class ArrivalQuayStub extends SharedRegionStub {
         newMessage.setEntityID(p.getID());
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
         p.setBusSeat(newMessage.getIntValue1());
+        cc.close();
+
     }
 
     public void probPar (int t_seats) {

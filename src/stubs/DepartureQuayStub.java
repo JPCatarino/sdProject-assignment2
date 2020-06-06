@@ -24,6 +24,8 @@ public class DepartureQuayStub extends SharedRegionStub {
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
     public void goToArrivalTerminal(){
@@ -36,6 +38,8 @@ public class DepartureQuayStub extends SharedRegionStub {
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
     public void leaveTheBus(){
@@ -47,10 +51,19 @@ public class DepartureQuayStub extends SharedRegionStub {
         newMessage.setIntValue1(p.getBusSeat());
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
 }

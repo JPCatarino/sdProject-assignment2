@@ -17,10 +17,18 @@ public class RepositoryStub extends SharedRegionStub {
         newMessage.setIntValue1(fn);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
     public void setBN(int bn){
@@ -30,10 +38,18 @@ public class RepositoryStub extends SharedRegionStub {
         newMessage.setIntValue1(bn);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
     public void setCB(int cb){
@@ -43,10 +59,18 @@ public class RepositoryStub extends SharedRegionStub {
         newMessage.setIntValue1(cb);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
     public void setSR(int sr){
@@ -56,10 +80,18 @@ public class RepositoryStub extends SharedRegionStub {
         newMessage.setIntValue1(sr);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
     public void setP_Stat(String p_Stat){
@@ -69,10 +101,18 @@ public class RepositoryStub extends SharedRegionStub {
         newMessage.setStringValue1(p_Stat);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
     public void setD_Stat(String d_Stat){
@@ -82,10 +122,18 @@ public class RepositoryStub extends SharedRegionStub {
         newMessage.setStringValue1(d_Stat);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
     public void setQIn(int num, String q){
@@ -96,10 +144,18 @@ public class RepositoryStub extends SharedRegionStub {
         newMessage.setIntValue1(num);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
     public void setQOut(){
@@ -108,10 +164,18 @@ public class RepositoryStub extends SharedRegionStub {
         newMessage.setMessageType(MessageType.SETQOUT);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
     public void setS(int num, String s){
@@ -122,10 +186,18 @@ public class RepositoryStub extends SharedRegionStub {
         newMessage.setIntValue1(num);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
     public void setST(int num, String st){
@@ -136,10 +208,18 @@ public class RepositoryStub extends SharedRegionStub {
         newMessage.setIntValue1(num);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
     public void setSI(int num, String si){
@@ -150,10 +230,18 @@ public class RepositoryStub extends SharedRegionStub {
         newMessage.setIntValue1(num);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
     public void setNR(int num, int nr){
@@ -164,10 +252,18 @@ public class RepositoryStub extends SharedRegionStub {
         newMessage.setIntValue2(nr);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
     public void setNA(int num, int na){
@@ -178,10 +274,18 @@ public class RepositoryStub extends SharedRegionStub {
         newMessage.setIntValue2(na);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
     public void addBagsLost(int nBagsLost){
@@ -191,10 +295,18 @@ public class RepositoryStub extends SharedRegionStub {
         newMessage.setIntValue1(nBagsLost);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
     public void reset_Passenger(int num) {
@@ -204,10 +316,18 @@ public class RepositoryStub extends SharedRegionStub {
         newMessage.setIntValue1(num);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
     public String header_debug(){
@@ -216,10 +336,18 @@ public class RepositoryStub extends SharedRegionStub {
         newMessage.setMessageType(MessageType.HEADERDEBUG);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
         return newMessage.getStringValue1();
     }
 
@@ -229,10 +357,18 @@ public class RepositoryStub extends SharedRegionStub {
         newMessage.setMessageType(MessageType.TOSTRINGDEBUG);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
         return newMessage.getStringValue1();
     }
 
@@ -242,10 +378,18 @@ public class RepositoryStub extends SharedRegionStub {
         newMessage.setMessageType(MessageType.HEADERREQ);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
         return newMessage.getStringValue1();
     }
 
@@ -255,10 +399,18 @@ public class RepositoryStub extends SharedRegionStub {
         newMessage.setMessageType(MessageType.TOSTRINGREQ);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
         return newMessage.getStringValue1();
     }
 
@@ -269,10 +421,18 @@ public class RepositoryStub extends SharedRegionStub {
 
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
     public void reportStatus() {
@@ -282,10 +442,18 @@ public class RepositoryStub extends SharedRegionStub {
 
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
     public void finalReport(){
@@ -295,10 +463,18 @@ public class RepositoryStub extends SharedRegionStub {
 
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
     public void probPar (int n_passengers, int t_seats)

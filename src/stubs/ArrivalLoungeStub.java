@@ -28,6 +28,8 @@ public class ArrivalLoungeStub extends SharedRegionStub {
 
         newMessage =(Message) cc.readObject();
 
+        cc.close();
+
     }
 
     public PassengerDecisions whatShouldIDo() {
@@ -45,6 +47,8 @@ public class ArrivalLoungeStub extends SharedRegionStub {
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
         return newMessage.getPassengerDecisions1();
     }
 
@@ -61,6 +65,7 @@ public class ArrivalLoungeStub extends SharedRegionStub {
         newMessage =(Message) cc.readObject();
 
         pt.setPlaneHoldEmpty(newMessage.getBooleanValue2());
+        cc.close();
 
         return newMessage.getBooleanValue1();
     }
@@ -75,6 +80,8 @@ public class ArrivalLoungeStub extends SharedRegionStub {
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
         return newMessage.getBag1();
     }
 
@@ -88,6 +95,8 @@ public class ArrivalLoungeStub extends SharedRegionStub {
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
     public void setPlainBags(List<int[]> plainBags){
@@ -101,6 +110,8 @@ public class ArrivalLoungeStub extends SharedRegionStub {
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
     public void setFlightNumber(int flightNumber){
@@ -114,6 +125,8 @@ public class ArrivalLoungeStub extends SharedRegionStub {
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
     public boolean isDayFinished(){
@@ -126,6 +139,8 @@ public class ArrivalLoungeStub extends SharedRegionStub {
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
         return newMessage.getBooleanValue1();
     }
 
@@ -141,6 +156,8 @@ public class ArrivalLoungeStub extends SharedRegionStub {
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
         return newMessage.getIntValue1();
     }
 
@@ -155,6 +172,8 @@ public class ArrivalLoungeStub extends SharedRegionStub {
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
     public boolean ispWake(){
@@ -167,6 +186,8 @@ public class ArrivalLoungeStub extends SharedRegionStub {
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
         return newMessage.getBooleanValue1();
     }
 

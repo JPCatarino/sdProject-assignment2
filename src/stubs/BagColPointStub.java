@@ -21,11 +21,20 @@ public class BagColPointStub extends SharedRegionStub {
         newMessage.setEntityID(p.getID());
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+
         p.setnBagsCollected(newMessage.getIntValue1());
+        cc.close();
+
     }
 
     public void carryItToAppropriateStore(int [] bag){
@@ -35,10 +44,18 @@ public class BagColPointStub extends SharedRegionStub {
         newMessage.setBag1(bag);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
     public void setNoMoreBags(boolean noMoreBags){
@@ -48,10 +65,18 @@ public class BagColPointStub extends SharedRegionStub {
         newMessage.setBooleanValue1(noMoreBags);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
     public void resetBagColPoint(){
@@ -60,9 +85,17 @@ public class BagColPointStub extends SharedRegionStub {
         newMessage.setMessageType(MessageType.RESETBAGCOLPOINT);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 }

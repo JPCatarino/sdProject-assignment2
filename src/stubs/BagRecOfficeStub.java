@@ -20,9 +20,18 @@ public class BagRecOfficeStub extends SharedRegionStub {
         newMessage.setIntValue1(p.getnBagsCollected());
         newMessage.setIntValue2(p.getnBagsToCollect());
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 }

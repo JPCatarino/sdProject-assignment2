@@ -19,10 +19,18 @@ public class DepartureTerminalEntranceStub extends SharedRegionStub {
         newMessage.setEntityID(p.getID());
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
     public void setAllPassengersFinished(boolean allPassengersFinished){
@@ -32,10 +40,18 @@ public class DepartureTerminalEntranceStub extends SharedRegionStub {
         newMessage.setBooleanValue1(allPassengersFinished);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
     public int getPassengersDTE(){
@@ -44,10 +60,19 @@ public class DepartureTerminalEntranceStub extends SharedRegionStub {
         newMessage.setMessageType(MessageType.GETPASSENGERSDTE);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
         return newMessage.getIntValue1();
     }
 

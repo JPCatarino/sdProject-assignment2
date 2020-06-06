@@ -19,14 +19,17 @@ public class ArrivalTerminalExitStub extends SharedRegionStub {
         newMessage.setMessageType(MessageType.GOHOME);
         newMessage.setEntityID(p.getID());
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
-    }
-
-    // This probably can't be done, we gotta check if there's another way
-    public void setDte(DepartureTerminalEntranceStub dte){
+        cc.close();
 
     }
 
@@ -37,10 +40,18 @@ public class ArrivalTerminalExitStub extends SharedRegionStub {
         newMessage.setBooleanValue1(allPassengersFinished);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
     }
 
     public int getPassengersATE(){
@@ -49,10 +60,18 @@ public class ArrivalTerminalExitStub extends SharedRegionStub {
         newMessage.setMessageType(MessageType.GETPASSENGERSATE);
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
-        cc.open();
+
+        while (!cc.open ()) {
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
         cc.writeObject(newMessage);
 
         newMessage =(Message) cc.readObject();
+        cc.close();
+
         return newMessage.getIntValue1();
     }
 
