@@ -57,7 +57,7 @@ public class DepartureTerminalEntrance implements DTEPassenger {
      * Maximum number of passengers on this flight.
      * @serialField maxNumberOfPassengers
      */
-    private final int maxNumberOfPassengers;
+    private int maxNumberOfPassengers;
 
     /**
      * DepartureTerminalEntrance Shared Memory.
@@ -69,7 +69,6 @@ public class DepartureTerminalEntrance implements DTEPassenger {
     public DepartureTerminalEntrance(RepositoryStub repo, ArrivalLoungeStub al, ArrivalTerminalExitStub ate){
         this.repo = repo;
         this.al = al;
-        this.maxNumberOfPassengers = al.getMaxNumberOfPassengers();
         this.allPassengersFinished = false;
         this.ate = ate;
         this.passengersDTE = 0;
@@ -124,5 +123,14 @@ public class DepartureTerminalEntrance implements DTEPassenger {
      */
     public int getPassengersDTE() {
         return passengersDTE;
+    }
+
+    /**
+     * Setter for the total number of passengers in the flights.
+     *
+     * @param maxNumberOfPassengers set the number of passengers in the flights.
+     */
+    public void setMaxNumberOfPassengers(int maxNumberOfPassengers) {
+        this.maxNumberOfPassengers = maxNumberOfPassengers;
     }
 }

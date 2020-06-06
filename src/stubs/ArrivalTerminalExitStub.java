@@ -68,7 +68,9 @@ public class ArrivalTerminalExitStub extends SharedRegionStub {
             catch (InterruptedException e) {}
         }
 
-        outMessage = new Message (MessageType.SETNFIC, n_passengers);
+        outMessage = new Message();
+        outMessage.setMessageType(MessageType.SETNFIC);
+        outMessage.setN_passengers(n_passengers);
         con.writeObject (outMessage);
         inMessage = (Message) con.readObject ();
 

@@ -50,4 +50,25 @@ public class DepartureTerminalEntranceStub extends SharedRegionStub {
         newMessage =(Message) cc.readObject();
         return newMessage.getIntValue1();
     }
+
+    public void probPar (int n_passengers)
+    {
+        ClientCom con = new ClientCom (super.getServerHostName(), super.getServerPort());
+        Message inMessage, outMessage;
+
+        while (!con.open ()){
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+
+        outMessage = new Message();
+        outMessage.setMessageType(MessageType.SETNPDTE);
+        outMessage.setN_passengers(n_passengers);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+
+        con.close ();
+    }
 }

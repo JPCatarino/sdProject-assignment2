@@ -140,6 +140,10 @@ public class Message implements Serializable {
         this.passengerDecisions1 = passengerDecisions1;
     }
 
+    public void setN_passengers(int n_passengers) {
+        this.n_passengers = n_passengers;
+    }
+
     public void setMessageType(MessageType messageType) {
         this.messageType = messageType;
     }

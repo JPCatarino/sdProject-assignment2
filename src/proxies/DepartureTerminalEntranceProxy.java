@@ -1,6 +1,7 @@
 package proxies;
 
 import common.Message;
+import common.MessageType;
 import common.ServerCom;
 import sharedRegions.DepartureTerminalEntrance;
 
@@ -34,6 +35,9 @@ public class DepartureTerminalEntranceProxy implements  SharedRegionProxy {
                 break;
             case GETPASSENGERSDTE:
                 nm.setIntValue1(departureTerminalEntrance.getPassengersDTE());
+                break;
+            case SETNPDTE:
+                departureTerminalEntrance.setMaxNumberOfPassengers(msg.getN_passengers());
                 break;
         }
 
