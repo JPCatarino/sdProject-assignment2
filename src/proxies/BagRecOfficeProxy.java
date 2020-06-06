@@ -1,6 +1,7 @@
 package proxies;
 
 import common.Message;
+import common.MessageType;
 import common.ServerCom;
 import sharedRegions.BagRecOffice;
 
@@ -30,6 +31,7 @@ public class BagRecOfficeProxy implements SharedRegionProxy {
                 serviceProviderProxy.setnBagsCollected(msg.getIntValue1());
                 serviceProviderProxy.setnBagsToCollect(msg.getIntValue2());
                 bagRecOffice.reportMissingBags();
+                nm.setMessageType(MessageType.REPORTMISSINGBAGS);
                 break;
         }
 

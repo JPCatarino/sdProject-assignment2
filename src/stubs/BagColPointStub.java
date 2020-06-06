@@ -38,6 +38,11 @@ public class BagColPointStub extends SharedRegionStub {
 
         p.setnBagsCollected(inMessage.getIntValue1());
 
+        if (inMessage.getMessageType() != MessageType.GOCOLLECTABAG) {
+            System.out.println ("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
         cc.close();
     }
 
@@ -62,6 +67,11 @@ public class BagColPointStub extends SharedRegionStub {
 
         inMessage =(Message) cc.readObject();
 
+        if (inMessage.getMessageType() != MessageType.CARRYITTOAPPROPRIATESTOREBCP) {
+            System.out.println ("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
         cc.close();
     }
 
@@ -85,6 +95,11 @@ public class BagColPointStub extends SharedRegionStub {
 
         inMessage = (Message) cc.readObject();
 
+        if (inMessage.getMessageType() != MessageType.SETNOMOREBAGS) {
+            System.out.println ("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
         cc.close();
     }
 
@@ -107,6 +122,11 @@ public class BagColPointStub extends SharedRegionStub {
 
         inMessage =(Message) cc.readObject();
 
+        if (inMessage.getMessageType() != MessageType.RESETBAGCOLPOINT) {
+            System.out.println ("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
         cc.close();
     }
 }

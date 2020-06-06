@@ -35,6 +35,11 @@ public class ArrivalQuayStub extends SharedRegionStub {
 
         inMessage =(Message) cc.readObject();
 
+        if (inMessage.getMessageType() != MessageType.HASDAYSWORKENDED) {
+            System.out.println ("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
         cc.close();
 
         return inMessage.getBooleanValue1();
@@ -57,8 +62,13 @@ public class ArrivalQuayStub extends SharedRegionStub {
 
         cc.writeObject(outMessage);
 
-        inMessage =(Message) cc.readObject();
+        inMessage = (Message) cc.readObject();
 
+        if (inMessage.getMessageType() != MessageType.ANNOUNCINGBUSBOARDING) {
+            System.out.println ("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
         cc.close();
     }
 
@@ -85,6 +95,11 @@ public class ArrivalQuayStub extends SharedRegionStub {
 
         bd.setBusSeats(inMessage.getIntList1());
 
+        if (inMessage.getMessageType() != MessageType.GOTODEPARTURETERMINAL) {
+            System.out.println ("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
         cc.close();
     }
 
@@ -107,6 +122,11 @@ public class ArrivalQuayStub extends SharedRegionStub {
 
         inMessage = (Message) cc.readObject();
 
+        if (inMessage.getMessageType() != MessageType.PARKTHEBUS) {
+            System.out.println ("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
         cc.close();
     }
 
@@ -134,15 +154,20 @@ public class ArrivalQuayStub extends SharedRegionStub {
 
         p.setBusSeat(inMessage.getIntValue1());
 
+        if (inMessage.getMessageType() != MessageType.ENTERTHEBUS) {
+            System.out.println ("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
         cc.close();
     }
 
     public void probPar (int t_seats) {
 
-        ClientCom con = new ClientCom (super.getServerHostName(), super.getServerPort());
+        ClientCom cc = new ClientCom (super.getServerHostName(), super.getServerPort());
         Message inMessage, outMessage;
 
-        while (!con.open ()){
+        while (!cc.open ()){
             try {
                 Thread.sleep((long) (10));
             }
@@ -151,15 +176,15 @@ public class ArrivalQuayStub extends SharedRegionStub {
 
         outMessage = new Message (MessageType.SETNFIC, t_seats);
 
-        con.writeObject (outMessage);
+        cc.writeObject (outMessage);
 
-        inMessage = (Message) con.readObject ();
+        inMessage = (Message) cc.readObject ();
 
         if (inMessage.getMessageType() != MessageType.NFICDONE) {
             System.out.println ("Arranque da simulação: Tipo inválido!");
             System.out.println (inMessage.toString ());
             System.exit (1);
         }
-        con.close ();
+        cc.close ();
     }
 }

@@ -35,6 +35,11 @@ public class BagRecOfficeStub extends SharedRegionStub {
 
         inMessage = (Message) cc.readObject();
 
+        if (inMessage.getMessageType() != MessageType.REPORTMISSINGBAGS) {
+            System.out.println ("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
         cc.close();
     }
 }

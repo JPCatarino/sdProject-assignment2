@@ -34,6 +34,11 @@ public class ArrivalTerminalExitStub extends SharedRegionStub {
 
         inMessage =(Message) cc.readObject();
 
+        if (inMessage.getMessageType() != MessageType.GOHOME) {
+            System.out.println ("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
         cc.close();
     }
 
@@ -57,6 +62,11 @@ public class ArrivalTerminalExitStub extends SharedRegionStub {
 
         inMessage =(Message) cc.readObject();
 
+        if (inMessage.getMessageType() != MessageType.SETALLPASSENGERSFINISHED) {
+            System.out.println ("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
         cc.close();
     }
 
@@ -79,6 +89,11 @@ public class ArrivalTerminalExitStub extends SharedRegionStub {
 
         inMessage = (Message) cc.readObject();
 
+        if (inMessage.getMessageType() != MessageType.GETPASSENGERSATE) {
+            System.out.println ("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
         cc.close();
 
         return inMessage.getIntValue1();
@@ -86,10 +101,10 @@ public class ArrivalTerminalExitStub extends SharedRegionStub {
 
     public void probPar (int n_passengers)
     {
-        ClientCom con = new ClientCom (super.getServerHostName(), super.getServerPort());
+        ClientCom cc = new ClientCom (super.getServerHostName(), super.getServerPort());
         Message inMessage, outMessage;
 
-        while (!con.open ()){
+        while (!cc.open ()){
             try {
                 Thread.sleep((long) (10));
             }
@@ -100,15 +115,15 @@ public class ArrivalTerminalExitStub extends SharedRegionStub {
         outMessage.setMessageType(MessageType.SETNFIC);
         outMessage.setN_passengers(n_passengers);
 
-        con.writeObject (outMessage);
+        cc.writeObject (outMessage);
 
-        inMessage = (Message) con.readObject ();
+        inMessage = (Message) cc.readObject ();
 
         if (inMessage.getMessageType() != MessageType.NFICDONE) {
             System.out.println ("Arranque da simulação: Tipo inválido!");
             System.out.println (inMessage.toString ());
             System.exit (1);
         }
-        con.close ();
+        cc.close ();
     }
 }

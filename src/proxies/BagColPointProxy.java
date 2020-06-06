@@ -1,6 +1,7 @@
 package proxies;
 
 import common.Message;
+import common.MessageType;
 import common.ServerCom;
 import sharedRegions.BagColPoint;
 
@@ -31,15 +32,19 @@ public class BagColPointProxy implements SharedRegionProxy {
                 serviceProviderProxy.setId(msg.getEntityID());
                 bagColPoint.goCollectABag();
                 nm.setIntValue1(serviceProviderProxy.getnBagsCollected());
+                nm.setMessageType(MessageType.GOCOLLECTABAG);
                 break;
             case CARRYITTOAPPROPRIATESTOREBCP:
                 bagColPoint.carryItToAppropriateStore(msg.getBag1());
+                nm.setMessageType(MessageType.CARRYITTOAPPROPRIATESTOREBCP);
                 break;
             case SETNOMOREBAGS:
                 bagColPoint.setNoMoreBags(msg.getBooleanValue1());
+                nm.setMessageType(MessageType.SETNOMOREBAGS);
                 break;
             case RESETBAGCOLPOINT:
                 bagColPoint.resetBagColPoint();
+                nm.setMessageType(MessageType.RESETBAGCOLPOINT);
                 break;
         }
 

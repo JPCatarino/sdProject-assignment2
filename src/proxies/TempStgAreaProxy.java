@@ -1,6 +1,7 @@
 package proxies;
 
 import common.Message;
+import common.MessageType;
 import common.ServerCom;
 import sharedRegions.TempStgArea;
 
@@ -28,6 +29,7 @@ public class TempStgAreaProxy implements SharedRegionProxy {
         switch (msg.getMessageType()){
             case CARRYITTOAPPROPRIATESTORETMP:
                 tempStgArea.carryItToAppropriateStore(msg.getBag1());
+                nm.setMessageType(MessageType.CARRYITTOAPPROPRIATESTORETMP);
                 break;
         }
         return nm;

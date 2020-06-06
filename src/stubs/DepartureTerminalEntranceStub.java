@@ -33,6 +33,11 @@ public class DepartureTerminalEntranceStub extends SharedRegionStub {
 
         inMessage =(Message) cc.readObject();
 
+        if (inMessage.getMessageType() != MessageType.PREPARENEXTLEG) {
+            System.out.println ("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
         cc.close();
     }
 
@@ -56,6 +61,11 @@ public class DepartureTerminalEntranceStub extends SharedRegionStub {
 
         inMessage =(Message) cc.readObject();
 
+        if (inMessage.getMessageType() != MessageType.SETALLPASSENGERSFINISHED) {
+            System.out.println ("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
         cc.close();
     }
 
@@ -78,6 +88,11 @@ public class DepartureTerminalEntranceStub extends SharedRegionStub {
 
         inMessage =(Message) cc.readObject();
 
+        if (inMessage.getMessageType() != MessageType.GETPASSENGERSDTE) {
+            System.out.println ("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
         cc.close();
 
         return inMessage.getIntValue1();
@@ -103,6 +118,11 @@ public class DepartureTerminalEntranceStub extends SharedRegionStub {
 
         inMessage = (Message) cc.readObject ();
 
+        if (inMessage.getMessageType() != MessageType.NFICDONE) {
+            System.out.println ("Simulation start: Invalid type!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
         cc.close ();
     }
 }

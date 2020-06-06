@@ -31,6 +31,11 @@ public class TempStgAreaStub extends SharedRegionStub {
 
         inMessage =(Message) cc.readObject();
 
+        if (inMessage.getMessageType() != MessageType.CARRYITTOAPPROPRIATESTORETMP) {
+            System.out.println ("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
         cc.close();
     }
 }

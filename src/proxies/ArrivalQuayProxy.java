@@ -29,21 +29,26 @@ public class ArrivalQuayProxy implements SharedRegionProxy {
             case HASDAYSWORKENDED:
                 serviceProviderProxy.setTTL(msg.getIntValue1());
                 nm.setBooleanValue1(arrivalQuay.hasDaysWorkEnded());
+                nm.setMessageType(MessageType.HASDAYSWORKENDED);
                 break;
             case ANNOUNCINGBUSBOARDING:
                 arrivalQuay.announcingBusBoarding();
+                nm.setMessageType(MessageType.ANNOUNCINGBUSBOARDING);
                 break;
             case GOTODEPARTURETERMINAL:
                 arrivalQuay.goToDepartureTerminal();
                 nm.setIntList1(serviceProviderProxy.getBusSeats());
+                nm.setMessageType(MessageType.GOTODEPARTURETERMINAL);
                 break;
             case PARKTHEBUS:
                 arrivalQuay.parkTheBus();
+                nm.setMessageType(MessageType.PARKTHEBUS);
                 break;
             case ENTERTHEBUS:
                 serviceProviderProxy.setId(msg.getEntityID());
                 arrivalQuay.enterTheBus();
                 nm.setIntValue1(serviceProviderProxy.getBusSeat());
+                nm.setMessageType(MessageType.ENTERTHEBUS);
                 break;
             case SETNFIC:
                 arrivalQuay.setMaxNumberOfSeats(msg.getT_seats());

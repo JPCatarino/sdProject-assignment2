@@ -34,6 +34,11 @@ public class DepartureQuayStub extends SharedRegionStub {
 
         inMessage =(Message) cc.readObject();
 
+        if (inMessage.getMessageType() != MessageType.PARKTHEBUSANDLETPASSOFF) {
+            System.out.println ("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
         cc.close();
     }
 
@@ -56,6 +61,11 @@ public class DepartureQuayStub extends SharedRegionStub {
 
         inMessage = (Message) cc.readObject();
 
+        if (inMessage.getMessageType() != MessageType.GOTOARRIVALTERMINAL) {
+            System.out.println ("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
         cc.close();
     }
 
@@ -82,6 +92,11 @@ public class DepartureQuayStub extends SharedRegionStub {
 
         inMessage =(Message) cc.readObject();
 
+        if (inMessage.getMessageType() != MessageType.LEAVETHEBUS) {
+            System.out.println ("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
         cc.close();
     }
 }

@@ -29,15 +29,19 @@ public class DepartureTerminalEntranceProxy implements  SharedRegionProxy {
             case PREPARENEXTLEG:
                 serviceProviderProxy.setId(msg.getEntityID());
                 departureTerminalEntrance.prepareNextLeg();
+                nm.setMessageType(MessageType.PREPARENEXTLEG);
                 break;
             case SETALLPASSENGERSFINISHED:
                 departureTerminalEntrance.setAllPassengersFinished(msg.getBooleanValue1());
+                nm.setMessageType(MessageType.SETALLPASSENGERSFINISHED);
                 break;
             case GETPASSENGERSDTE:
                 nm.setIntValue1(departureTerminalEntrance.getPassengersDTE());
+                nm.setMessageType(MessageType.GETPASSENGERSDTE);
                 break;
             case SETNPDTE:
                 departureTerminalEntrance.setMaxNumberOfPassengers(msg.getN_passengers());
+                nm.setMessageType(MessageType.NFICDONE);
                 break;
         }
 

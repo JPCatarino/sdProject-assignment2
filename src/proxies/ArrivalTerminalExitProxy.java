@@ -30,12 +30,15 @@ public class ArrivalTerminalExitProxy implements SharedRegionProxy {
             case GOHOME:
                 serviceProviderProxy.setId(msg.getEntityID());
                 arrivalTerminalExit.goHome();
+                nm.setMessageType(MessageType.GOHOME);
                 break;
             case SETALLPASSENGERSFINISHED:
                 arrivalTerminalExit.setAllPassengersFinished(msg.getBooleanValue1());
+                nm.setMessageType(MessageType.SETALLPASSENGERSFINISHED);
                 break;
             case GETPASSENGERSATE:
                 nm.setIntValue1(arrivalTerminalExit.getPassengersATE());
+                nm.setMessageType(MessageType.GETPASSENGERSATE);
                 break;
             case SETNFIC:
                 arrivalTerminalExit.setMaxNumberOfPassengers(msg.getN_passengers());
