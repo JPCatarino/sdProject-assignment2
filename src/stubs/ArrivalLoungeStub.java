@@ -101,6 +101,8 @@ public class ArrivalLoungeStub extends SharedRegionStub {
 
         inMessage =(Message) cc.readObject();
 
+        pt.setPlaneHoldEmpty(inMessage.getBooleanValue2());
+
         if (inMessage.getMessageType() != MessageType.ACK) {
             System.out.println ("Thread " + Thread.currentThread ().getName () + ": Invalid type!");
             System.out.println (inMessage.toString ());

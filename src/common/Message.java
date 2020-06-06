@@ -23,6 +23,8 @@ public class Message implements Serializable {
 
     private Boolean booleanValue1;
 
+    private Boolean booleanValue2;
+
     private String stringValue1;
 
     private List<Integer> intList1;
@@ -106,6 +108,14 @@ public class Message implements Serializable {
 
     public int getEntityID() {
         return entityID;
+    }
+
+    public Boolean getBooleanValue2() {
+        return booleanValue2;
+    }
+
+    public void setBooleanValue2(Boolean booleanValue2) {
+        this.booleanValue2 = booleanValue2;
     }
 
     public void setEntityID(int entityID) {
