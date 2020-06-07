@@ -31,7 +31,6 @@ public class ClientBusDriver {
         BusDriver busDriver = new BusDriver(100, arrivalQuay, departureQuay);
 
         //Communicate parameters
-        repository.probPar(N_passengers, T_seats);
         arrivalQuay.probPar(T_seats);
 
         // Join BusDriver

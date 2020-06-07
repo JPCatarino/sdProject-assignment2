@@ -191,6 +191,7 @@ public class Repository {
 
         Arrays.fill(this.ST, "-");
         Arrays.fill(this.SI, "-");
+        reportInitialStatus();
     }
 
     /**
@@ -455,7 +456,9 @@ public class Repository {
      * Write the initial State (Calculate logger file name, create logger file and add header to the logger file).
      */
     public void reportInitialStatus() {
-
+        if(initialized){
+            return;
+        }
         FileWriter fw;
         long count=0;
 
@@ -481,6 +484,7 @@ public class Repository {
                 pw.print(new String(new char[31 + (19 * N_PASSENGERS - 4) / 2 - 34]) + "AIRPORT RHAPSODY - Description of the internal state of the problem\n");
                 pw.println();
                 pw.print(header_debug());
+                fw.close();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -492,9 +496,6 @@ public class Repository {
      * Append the current State to the logger file.
      */
     public synchronized void reportStatus() {
-        if(!initialized){
-            reportInitialStatus();
-        }
         FileWriter fw;
         try {
             fw = new FileWriter(filename, true);
@@ -527,5 +528,6 @@ public class Repository {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        initialized = false;
     }
 }

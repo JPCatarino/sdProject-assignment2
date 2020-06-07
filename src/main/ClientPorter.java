@@ -18,7 +18,6 @@ public class ClientPorter {
         int baseServerPortNumb=33000;                               // server port number
 
         // Initiate Shared Regions
-        RepositoryStub repository = new RepositoryStub(baseServerHostName, baseServerPortNumb+1);
         ArrivalLoungeStub arrivalLounge = new ArrivalLoungeStub(baseServerHostName, baseServerPortNumb+2);
         ArrivalQuayStub arrivalQuay = new ArrivalQuayStub(baseServerHostName, baseServerPortNumb+3);
         ArrivalTerminalExitStub arrivalTerminalExit = new ArrivalTerminalExitStub(baseServerHostName, baseServerPortNumb+4);
@@ -32,7 +31,6 @@ public class ClientPorter {
         Porter porter = new Porter(arrivalLounge, bagColPoint, tempStgArea);
 
         //Communicate parameters
-        repository.probPar(N_passengers, T_seats);
         arrivalLounge.probPar(N_passengers,K_landings);
 
         // Join Porter
