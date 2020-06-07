@@ -54,7 +54,6 @@ public class DepartureQuay implements DTTQBusDriver, DTTQPassenger {
     @Override
     public synchronized void parkTheBusAndLetPassOff(){
         BusDriverInterface bd = (ServiceProviderProxy) Thread.currentThread();
-        bd.setBusDriverState(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
         repo.setD_Stat(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL.getState());
         repo.reportStatus();
         parkedBus = bd.getBusSeats();
@@ -77,7 +76,6 @@ public class DepartureQuay implements DTTQBusDriver, DTTQPassenger {
     @Override
     public synchronized void goToArrivalTerminal(){
         BusDriverInterface bd = (ServiceProviderProxy) Thread.currentThread();
-        bd.setBusDriverState(BusDriverStates.DRIVING_BACKWARD);
         repo.setD_Stat(BusDriverStates.DRIVING_BACKWARD.getState());
         repo.reportStatus();
         try {

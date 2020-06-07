@@ -1,7 +1,5 @@
 package entities;
 
-import states.BusDriverStates;
-
 import java.util.List;
 
 public interface BusDriverInterface {
@@ -19,13 +17,6 @@ public interface BusDriverInterface {
      * @param busSeats New list of bus seats.
      */
     void setBusSeats(List<Integer> busSeats);
-
-    /**
-     * Set Bus Driver state.
-     *
-     * @param state New state of the Bus Driver.
-     */
-    void setBusDriverState(BusDriverStates state);
 
     /**
      * Get time to leave.
