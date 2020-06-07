@@ -16,7 +16,7 @@ import java.util.Random;
  * @author Fábio Alves
  * @author Jorge Catarino
  */
-public class ClientAirportRhapsody {
+public class ClientPassenger {
 
     public static void main(String[] args) {
 
@@ -28,8 +28,8 @@ public class ClientAirportRhapsody {
 
         //
         String fName="Log.txt";                                 // logging file name
-        String baseServerHostName = "localhost";                       // name from the machine where the server is
-        int baseServerPortNumb=33000;                               // server port number
+        String baseServerHostName = "localhost";                // name from the machine where the server is
+        int baseServerPortNumb=33000;                           // server port number
 
         // Constant that characterize the state of the passenger/piece of luggage.
         final int TRANSIT = 0,
@@ -66,13 +66,7 @@ public class ClientAirportRhapsody {
         BagRecOfficeStub bagRecOffice = new BagRecOfficeStub(baseServerHostName, baseServerPortNumb+6);
         DepartureQuayStub departureQuay = new DepartureQuayStub(baseServerHostName, baseServerPortNumb+7);
         DepartureTerminalEntranceStub departureTerminalEntrance = new DepartureTerminalEntranceStub(baseServerHostName, baseServerPortNumb+8);
-        TempStgAreaStub tempStgArea = new TempStgAreaStub(baseServerHostName, baseServerPortNumb+9);
-        // Initiate entities
 
-        // Initiate Bus Driver
-        BusDriver busDriver = new BusDriver(100, arrivalQuay, departureQuay);
-        // Initiate Porter
-        Porter porter = new Porter(arrivalLounge, bagColPoint, tempStgArea);
         // Initiate passengers (For each flight, initiate N passenger)
         Passenger[][] flights = new Passenger[K_landings][N_passengers];
         for(int i = 0; i < flights.length; i++) {
@@ -89,10 +83,6 @@ public class ClientAirportRhapsody {
         departureTerminalEntrance.probPar(N_passengers);
         repository.reportInitialStatus();
 
-
-        // Join BusDriver and Porter
-        porter.start();
-        busDriver.start();
 
         // Join the different passengers for each flight.
 
@@ -131,23 +121,6 @@ public class ClientAirportRhapsody {
             while(arrivalLounge.ispWake() && i+1 != K_landings);
             plainBags.clear();
         }
-
-        try {
-            porter.join();
-        }
-        catch(InterruptedException ex){
-            System.out.println(ex.getMessage());
-            System.exit(1);
-        }
-
-        try {
-            busDriver.join();
-        }
-        catch(InterruptedException ex){
-            System.out.println(ex.getMessage());
-            System.exit(1);
-        }
-
         repository.finalReport();
     }
 }
