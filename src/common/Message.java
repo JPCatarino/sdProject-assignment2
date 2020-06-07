@@ -3,6 +3,7 @@ package common;
 import states.PassengerDecisions;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 
 public class Message implements Serializable {
@@ -156,5 +157,25 @@ public class Message implements Serializable {
 
     public void setMessageType(MessageType messageType) {
         this.messageType = messageType;
+    }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "messageType=" + messageType +
+                ", entityID=" + entityID +
+                ", intValue1=" + intValue1 +
+                ", intValue2=" + intValue2 +
+                ", t_seats=" + t_seats +
+                ", n_passengers=" + n_passengers +
+                ", k_landings=" + k_landings +
+                ", booleanValue1=" + booleanValue1 +
+                ", booleanValue2=" + booleanValue2 +
+                ", stringValue1='" + stringValue1 + '\'' +
+                ", intList1=" + intList1 +
+                ", passengerDecisions1=" + passengerDecisions1 +
+                ", bag1=" + Arrays.toString(bag1) +
+                ", bagList1=" + bagList1 +
+                '}';
     }
 }

@@ -12,9 +12,11 @@ import java.util.List;
 
 public class ServiceProviderProxy extends Thread implements BusDriverInterface, PassengerInterface, PorterInterface {
 
-    private SharedRegionProxy sharedRegionProxy;
+    private final SharedRegionProxy sharedRegionProxy;
 
-    private ServerCom serverCom;
+    private final ServerCom serverCom;
+
+    private static int nProxy = 0;
 
     private int id;
 
@@ -70,6 +72,7 @@ public class ServiceProviderProxy extends Thread implements BusDriverInterface, 
     private boolean planeHoldEmpty;
 
     public ServiceProviderProxy(SharedRegionProxy sharedRegion, ServerCom serverCom) {
+        super ("Proxy_" + getProxyId (sharedRegion));
         this.sharedRegionProxy= sharedRegion;
         this.serverCom = serverCom;
     }
@@ -77,9 +80,44 @@ public class ServiceProviderProxy extends Thread implements BusDriverInterface, 
     @Override
     public void run() {
         Message msg = (Message) serverCom.readObject();
-        msg = sharedRegionProxy.processAndReply(msg);
+
+        try {
+            msg = sharedRegionProxy.processAndReply(msg);
+        }
+        catch (Exception e) {
+            System.out.println ("Thread " + getName () + ": " + e.getMessage () + "!");
+            System.exit (1);
+        }
+
         serverCom.writeObject(msg);
         serverCom.close();
+    }
+
+    /**
+     *  Generate instantiation identifier.
+     *
+     *    @return instantiation identifier
+     */
+    private static int getProxyId (SharedRegionProxy sharedRegion) {
+        Class<?> cl = null;
+
+        int proxyId;
+
+        try {
+            cl = Class.forName ("proxies." + sharedRegion.getClass().getSimpleName());
+        }
+        catch (ClassNotFoundException e) {
+            System.out.println ("The type of data" +  sharedRegion.getClass().getSimpleName() + " was not found!");
+            e.printStackTrace ();
+            System.exit (1);
+        }
+
+        synchronized (cl) {
+            proxyId = nProxy;
+            nProxy += 1;
+        }
+
+        return proxyId;
     }
 
     /**
