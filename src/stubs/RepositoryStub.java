@@ -4,12 +4,27 @@ import common.ClientCom;
 import common.Message;
 import common.MessageType;
 
+/**
+ * Exposes Repository server services to the client side.
+ */
 public class RepositoryStub extends SharedRegionStub {
 
+    /**
+     * Constructor method for Repository Stub
+     *
+     * @param serverHostName Server Host Name
+     * @param serverPort Communication port
+     */
     public RepositoryStub(String serverHostName, int serverPort) {
         super(serverHostName, serverPort);
     }
 
+    /**
+     * Set flight number.
+     * (service solicitation)
+     *
+     * @param fn number of the actual flight.
+     */
     public void setFN(int fn){
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
@@ -38,6 +53,12 @@ public class RepositoryStub extends SharedRegionStub {
         cc.close();
     }
 
+    /**
+     * Set luggage number.
+     * (service solicitation)
+     *
+     * @param bn number of pieces of luggage presently at the plane's hold.
+     */
     public void setBN(int bn){
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
@@ -67,6 +88,12 @@ public class RepositoryStub extends SharedRegionStub {
         cc.close();
     }
 
+    /**
+     * Set conveyor belt.
+     * (service solicitation)
+     *
+     * @param cb number of pieces of luggage presently on the conveyor belt.
+     */
     public void setCB(int cb){
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
@@ -95,6 +122,12 @@ public class RepositoryStub extends SharedRegionStub {
         cc.close();
     }
 
+    /**
+     * Set storeroom.
+     * (service solicitation)
+     *
+     * @param sr number of pieces of luggage belonging to passengers in transit presently stored at the storeroom.
+     */
     public void setSR(int sr){
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
@@ -123,6 +156,12 @@ public class RepositoryStub extends SharedRegionStub {
         cc.close();
     }
 
+    /**
+     * Set porter state.
+     * (service solicitation)
+     *
+     * @param p_Stat state of the porter.
+     */
     public void setP_Stat(String p_Stat){
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
@@ -151,6 +190,12 @@ public class RepositoryStub extends SharedRegionStub {
         cc.close();
     }
 
+    /**
+     * Set driver state.
+     * (service solicitation)
+     *
+     * @param d_Stat state of the driver.
+     */
     public void setD_Stat(String d_Stat){
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
@@ -180,6 +225,13 @@ public class RepositoryStub extends SharedRegionStub {
         cc.close();
     }
 
+    /**
+     * Set occupation state for the waiting queue (passenger id / - (empty)).
+     * (service solicitation)
+     *
+     * @param num position of the queue to add one passenger.
+     * @param q passenger to put in the queue position.
+     */
     public void setQIn(int num, String q){
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
@@ -209,6 +261,10 @@ public class RepositoryStub extends SharedRegionStub {
         cc.close();
     }
 
+    /**
+     * Remove first element from the waiting queue and add '-' (empty) to the last position.
+     * (service solicitation)
+     */
     public void setQOut(){
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
@@ -236,6 +292,13 @@ public class RepositoryStub extends SharedRegionStub {
         cc.close();
     }
 
+    /**
+     * Set occupation state for seat in the bus (passenger id / - (empty)).
+     * (service solicitation)
+     *
+     * @param num seat position to put the passenger.
+     * @param s passenger to put in the seat position.
+     */
     public void setS(int num, String s){
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
@@ -265,6 +328,13 @@ public class RepositoryStub extends SharedRegionStub {
         cc.close();
     }
 
+    /**
+     * Set state of passenger # (# - 0 .. 5).
+     * (service solicitation)
+     *
+     * @param num passenger to set state.
+     * @param st state of the passenger.
+     */
     public void setST(int num, String st){
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
@@ -294,6 +364,14 @@ public class RepositoryStub extends SharedRegionStub {
         cc.close();
     }
 
+    /**
+     * Set situation of passenger # (# - 0 .. 5) – TRT (in transit) / FDT (has this airport as her final destination).
+     * Count total number of passengers in transit and with this airport as final destination (all flights).
+     * (service solicitation)
+     *
+     * @param num passenger to set situation.
+     * @param si situation of the passenger.
+     */
     public void setSI(int num, String si){
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
@@ -323,6 +401,14 @@ public class RepositoryStub extends SharedRegionStub {
         cc.close();
     }
 
+    /**
+     * Set number of pieces of luggage the passenger # (# - 0 .. 5) carried at the start of her journey.
+     * Count total number of pieces of luggage (all flights).
+     * (service solicitation)
+     *
+     * @param num passenger that carried the pieces of luggage at the start of her journey.
+     * @param nr number of pieces of luggage the passenger carried at the start of her journey.
+     */
     public void setNR(int num, int nr){
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
@@ -353,6 +439,13 @@ public class RepositoryStub extends SharedRegionStub {
         cc.close();
     }
 
+    /**
+     * Set number of pieces of luggage the passenger # (# - 0 .. 5) he has presently collected.
+     * (service solicitation)
+     *
+     * @param num passenger that has presently collected the pieces of luggage.
+     * @param na number of pieces of luggage that the passenger has presently collected.
+     */
     public void setNA(int num, int na){
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
@@ -382,6 +475,12 @@ public class RepositoryStub extends SharedRegionStub {
         cc.close();
     }
 
+    /**
+     * Add one to the number of piece of luggage lost.
+     * (service solicitation)
+     *
+     * @param nBagsLost Number of bags the passengers reported lost.
+     */
     public void addBagsLost(int nBagsLost){
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
@@ -410,6 +509,13 @@ public class RepositoryStub extends SharedRegionStub {
         cc.close();
     }
 
+    /**
+     * Count number of pieces of luggage that the passenger has presently collected (all passengers in all flight).
+     * Reset passenger to the initial state.
+     * (service solicitation)
+     *
+     * @param num passenger to be put in the initial state.
+     */
     public void reset_Passenger(int num) {
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
@@ -438,6 +544,10 @@ public class RepositoryStub extends SharedRegionStub {
         cc.close();
     }
 
+    /**
+     * Write the initial State (Calculate logger file name, create logger file and add header to the logger file).
+     * (service solicitation)
+     */
     public void reportInitialStatus() {
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
@@ -465,6 +575,10 @@ public class RepositoryStub extends SharedRegionStub {
         cc.close();
     }
 
+    /**
+     * Append the current State to the logger file.
+     * (service solicitation)
+     */
     public void reportStatus() {
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
@@ -491,6 +605,11 @@ public class RepositoryStub extends SharedRegionStub {
         cc.close();
     }
 
+    /**
+     * Calculate the number of pieces of luggage missing.
+     * Append the final report to the logger file.
+     * (service solicitation)
+     */
     public void finalReport(){
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
@@ -518,6 +637,11 @@ public class RepositoryStub extends SharedRegionStub {
         cc.close();
     }
 
+    /**
+     * Sets needed global parameters
+     * @param n_passengers Number of passenger per flight
+     * @param t_seats Maximum number of bus seats
+     */
     public void probPar (int n_passengers, int t_seats) {
 
         ClientCom con = new ClientCom (super.getServerHostName(), super.getServerPort());
@@ -544,6 +668,10 @@ public class RepositoryStub extends SharedRegionStub {
         con.close ();
     }
 
+    /**
+     * Signals the servers that a entity has ended. If all 3 entities are down, the server can shutdown safely (service solicitation)
+     * @param value signal flag
+     */
     public void shutdown (int value) {
 
         ClientCom cc = new ClientCom (super.getServerHostName(), super.getServerPort());

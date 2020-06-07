@@ -6,12 +6,25 @@ import common.MessageType;
 import entities.BusDriver;
 import entities.Passenger;
 
+/**
+ * Exposes Departure Quay server services to the client side.
+ */
 public class DepartureQuayStub extends SharedRegionStub {
 
+    /**
+     * Constructor method for Departure Quay Stub
+     *
+     * @param serverHostName Server Host Name
+     * @param serverPort Communication port
+     */
     public DepartureQuayStub(String serverHostName, int serverPort) {
         super(serverHostName, serverPort);
     }
 
+    /**
+     * The busDriver parks the bus and waits till every passenger has gotten off.
+     * (service solicitation)
+     */
     public void parkTheBusAndLetPassOff(){
 
         BusDriver bd = (BusDriver) Thread.currentThread();
@@ -42,6 +55,10 @@ public class DepartureQuayStub extends SharedRegionStub {
         cc.close();
     }
 
+    /**
+     * After letting the passengers off, the bus driver goes back to the Arrival Terminal.
+     * (service solicitation)
+     */
     public void goToArrivalTerminal(){
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
@@ -69,6 +86,10 @@ public class DepartureQuayStub extends SharedRegionStub {
         cc.close();
     }
 
+    /**
+     * Arriving at the Departure Terminal Transfer Quay, the passenger leaves the bus.
+     * (service solicitation)
+     */
     public void leaveTheBus(){
 
         Passenger p = (Passenger) Thread.currentThread();
@@ -100,6 +121,10 @@ public class DepartureQuayStub extends SharedRegionStub {
         cc.close();
     }
 
+    /**
+     * Signals the servers that a entity has ended. If all 3 entities are down, the server can shutdown safely (service solicitation)
+     * @param value signal flag
+     */
     public void shutdown (int value) {
 
         ClientCom cc = new ClientCom (super.getServerHostName(), super.getServerPort());

@@ -4,13 +4,28 @@ import common.ClientCom;
 import common.Message;
 import common.MessageType;
 
+/**
+ * Exposes Temporary Storage Area server services to the client side.
+ */
 public class TempStgAreaStub extends SharedRegionStub {
 
+    /**
+     * Constructor method for Temporary Storage Area Stub
+     *
+     * @param serverHostName Server Host Name
+     * @param serverPort Communication port
+     */
     public TempStgAreaStub(String serverHostName, int serverPort) {
 
         super(serverHostName, serverPort);
     }
 
+    /**
+     * Move a bag from the plane hold to the temporary storage area.
+     * (service solicitation)
+     *
+     * @param bag Bag to be moved to the temporary storage area.
+     */
     public void carryItToAppropriateStore(int [] bag){
 
         ClientCom cc = new ClientCom(super.getServerHostName(),super.getServerPort());
@@ -39,6 +54,10 @@ public class TempStgAreaStub extends SharedRegionStub {
         cc.close();
     }
 
+    /**
+     * Signals the servers that a entity has ended. If all 3 entities are down, the server can shutdown safely (service solicitation)
+     * @param value signal flag
+     */
     public void shutdown (int value) {
 
         ClientCom cc = new ClientCom (super.getServerHostName(), super.getServerPort());
