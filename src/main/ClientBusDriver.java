@@ -17,7 +17,6 @@ public class ClientBusDriver {
         int baseServerPortNumb=33000;                           // server port number
 
         // Initiate Shared Regions
-        RepositoryStub repository = new RepositoryStub(baseServerHostName, baseServerPortNumb+1);
         ArrivalQuayStub arrivalQuay = new ArrivalQuayStub(baseServerHostName, baseServerPortNumb+3);
         DepartureQuayStub departureQuay = new DepartureQuayStub(baseServerHostName, baseServerPortNumb+7);
 
@@ -25,7 +24,6 @@ public class ClientBusDriver {
         BusDriver busDriver = new BusDriver(100, arrivalQuay, departureQuay);
 
         //Communicate parameters
-        repository.probPar(N_passengers, T_seats);
         arrivalQuay.probPar(T_seats);
 
         // Join BusDriver
