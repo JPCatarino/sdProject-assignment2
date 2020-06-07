@@ -43,6 +43,10 @@ public class DepartureTerminalEntranceProxy implements  SharedRegionProxy {
                 departureTerminalEntrance.setMaxNumberOfPassengers(msg.getN_passengers());
                 nm.setMessageType(MessageType.NFICDONE);
                 break;
+            case SHUT:
+                nm.setMessageType(MessageType.ACK);
+                serviceProviderProxy.shutdown(msg.getIntValue1(),6);
+                break;
         }
 
         return nm;

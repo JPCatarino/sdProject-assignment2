@@ -11,7 +11,7 @@ import java.net.SocketTimeoutException;
 public class BagRecOfficeServer {
 
     private static final int portNumb = 33006;
-    public static boolean waitConnection;
+    public static int waitConnection;
 
     public static void main (String [] args)
     {
@@ -30,8 +30,8 @@ public class BagRecOfficeServer {
 
         // Process requests
 
-        waitConnection = true;
-        while (waitConnection)
+        waitConnection = 0;
+        while (waitConnection!=3)
             try
             { sconi = scon.accept ();
                 bagRecOfficeProxy= new BagRecOfficeProxy(bagRecOffice);

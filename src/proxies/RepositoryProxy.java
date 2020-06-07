@@ -23,6 +23,7 @@ public class RepositoryProxy implements SharedRegionProxy {
     @Override
     public Message processAndReply(Message msg) {
         Message nm = new Message();
+        ServiceProviderProxy serviceProviderProxy = (ServiceProviderProxy) Thread.currentThread();
 
         switch(msg.getMessageType()) {
             case SETFN:
@@ -117,6 +118,10 @@ public class RepositoryProxy implements SharedRegionProxy {
                 repository.setN_PASSENGERS(msg.getN_passengers());
                 repository.setT_seats(msg.getT_seats());
                 nm.setMessageType(MessageType.NFICDONE);
+                break;
+            case SHUT:
+                nm.setMessageType(MessageType.ACK);
+                serviceProviderProxy.shutdown(msg.getIntValue1(),7);
                 break;
         }
         return nm;

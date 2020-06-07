@@ -66,6 +66,7 @@ public class ClientPassenger {
         BagRecOfficeStub bagRecOffice = new BagRecOfficeStub(baseServerHostName, baseServerPortNumb+6);
         DepartureQuayStub departureQuay = new DepartureQuayStub(baseServerHostName, baseServerPortNumb+7);
         DepartureTerminalEntranceStub departureTerminalEntrance = new DepartureTerminalEntranceStub(baseServerHostName, baseServerPortNumb+8);
+        TempStgAreaStub tempStgArea = new TempStgAreaStub(baseServerHostName, baseServerPortNumb+9);
 
         // Initiate passengers (For each flight, initiate N passenger)
         Passenger[][] flights = new Passenger[K_landings][N_passengers];
@@ -120,6 +121,15 @@ public class ClientPassenger {
             while(arrivalLounge.ispWake() && i+1 != K_landings);
             plainBags.clear();
         }
-        repository.finalReport();
+
+        arrivalLounge.shutdown(1);
+        arrivalQuay.shutdown(1);
+        arrivalTerminalExit.shutdown(1);
+        bagColPoint.shutdown(1);
+        bagRecOffice.shutdown(1);
+        departureQuay.shutdown(1);
+        departureTerminalEntrance.shutdown(1);
+        repository.shutdown(1);
+        tempStgArea.shutdown(1);
     }
 }

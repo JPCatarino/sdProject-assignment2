@@ -5,6 +5,7 @@ import common.ServerCom;
 import entities.BusDriverInterface;
 import entities.PassengerInterface;
 import entities.PorterInterface;
+import main.*;
 import states.BusDriverStates;
 import states.PassengerStates;
 
@@ -58,22 +59,22 @@ public class ServiceProviderProxy extends Thread implements BusDriverInterface, 
     private boolean journeyEnding;
 
     /**
-     *  Bag being carried from the plane hold to the baggage collection point or to the temporary storage area.
+     * Bag being carried from the plane hold to the baggage collection point or to the temporary storage area.
      *
-     *  @serialField bag
+     * @serialField bag
      */
     private int[] bag;
 
     /**
-     *  Report if the plane hold is empty.
+     * Report if the plane hold is empty.
      *
-     *  @serialField planeHoldEmpty
+     * @serialField planeHoldEmpty
      */
     private boolean planeHoldEmpty;
 
     public ServiceProviderProxy(SharedRegionProxy sharedRegion, ServerCom serverCom) {
-        super ("Proxy_" + getProxyId (sharedRegion));
-        this.sharedRegionProxy= sharedRegion;
+        super("Proxy_" + getProxyId(sharedRegion));
+        this.sharedRegionProxy = sharedRegion;
         this.serverCom = serverCom;
     }
 
@@ -83,10 +84,9 @@ public class ServiceProviderProxy extends Thread implements BusDriverInterface, 
 
         try {
             msg = sharedRegionProxy.processAndReply(msg);
-        }
-        catch (Exception e) {
-            System.out.println ("Thread " + getName () + ": " + e.getMessage () + "!");
-            System.exit (1);
+        } catch (Exception e) {
+            System.out.println("Thread " + getName() + ": " + e.getMessage() + "!");
+            System.exit(1);
         }
 
         serverCom.writeObject(msg);
@@ -94,22 +94,21 @@ public class ServiceProviderProxy extends Thread implements BusDriverInterface, 
     }
 
     /**
-     *  Generate instantiation identifier.
+     * Generate instantiation identifier.
      *
-     *    @return instantiation identifier
+     * @return instantiation identifier
      */
-    private static int getProxyId (SharedRegionProxy sharedRegion) {
+    private static int getProxyId(SharedRegionProxy sharedRegion) {
         Class<?> cl = null;
 
         int proxyId;
 
         try {
-            cl = Class.forName ("proxies." + sharedRegion.getClass().getSimpleName());
-        }
-        catch (ClassNotFoundException e) {
-            System.out.println ("The type of data" +  sharedRegion.getClass().getSimpleName() + " was not found!");
-            e.printStackTrace ();
-            System.exit (1);
+            cl = Class.forName("proxies." + sharedRegion.getClass().getSimpleName());
+        } catch (ClassNotFoundException e) {
+            System.out.println("The type of data" + sharedRegion.getClass().getSimpleName() + " was not found!");
+            e.printStackTrace();
+            System.exit(1);
         }
 
         synchronized (cl) {
@@ -282,7 +281,62 @@ public class ServiceProviderProxy extends Thread implements BusDriverInterface, 
         this.bag = bag;
     }
 
-    public void setId(int id){
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public ServerCom getServerCom() {
+        return serverCom;
+    }
+
+    public void shutdown(int value, int value2) {
+
+        switch (value2) {
+            case 0:
+                ArrivalLoungeServer.waitConnection += value;
+                if (ArrivalLoungeServer.waitConnection == 3)
+                    (((ServiceProviderProxy) (Thread.currentThread())).getServerCom()).setTimeout(1);
+                break;
+            case 1:
+                ArrivalQuayServer.waitConnection += value;
+                if (ArrivalQuayServer.waitConnection == 3)
+                    (((ServiceProviderProxy) (Thread.currentThread())).getServerCom()).setTimeout(1);
+                break;
+            case 2:
+                ArrivalTerminalExitServer.waitConnection += value;
+                if (ArrivalTerminalExitServer.waitConnection == 3)
+                    (((ServiceProviderProxy) (Thread.currentThread())).getServerCom()).setTimeout(1);
+                break;
+            case 3:
+                BagColPointServer.waitConnection += value;
+                if (BagColPointServer.waitConnection == 3)
+                    (((ServiceProviderProxy) (Thread.currentThread())).getServerCom()).setTimeout(1);
+                break;
+            case 4:
+                BagRecOfficeServer.waitConnection += value;
+                if (BagRecOfficeServer.waitConnection == 3)
+                    (((ServiceProviderProxy) (Thread.currentThread())).getServerCom()).setTimeout(1);
+                break;
+            case 5:
+                DepartureQuayServer.waitConnection += value;
+                if (DepartureQuayServer.waitConnection == 3)
+                    (((ServiceProviderProxy) (Thread.currentThread())).getServerCom()).setTimeout(1);
+                break;
+            case 6:
+                DepartureTerminalEntranceServer.waitConnection += value;
+                if (DepartureTerminalEntranceServer.waitConnection == 3)
+                    (((ServiceProviderProxy) (Thread.currentThread())).getServerCom()).setTimeout(1);
+                break;
+            case 7:
+                RepositoryServer.waitConnection += value;
+                if (RepositoryServer.waitConnection == 3)
+                    (((ServiceProviderProxy) (Thread.currentThread())).getServerCom()).setTimeout(1);
+                break;
+            case 8:
+                TempStgAreaServer.waitConnection += value;
+                if (TempStgAreaServer.waitConnection == 3)
+                    (((ServiceProviderProxy) (Thread.currentThread())).getServerCom()).setTimeout(1);
+                break;
+        }
     }
 }

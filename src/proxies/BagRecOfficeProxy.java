@@ -33,6 +33,10 @@ public class BagRecOfficeProxy implements SharedRegionProxy {
                 bagRecOffice.reportMissingBags();
                 nm.setMessageType(MessageType.REPORTMISSINGBAGS);
                 break;
+            case SHUT:
+                nm.setMessageType(MessageType.ACK);
+                serviceProviderProxy.shutdown(msg.getIntValue1(),4);
+                break;
         }
 
         return nm;

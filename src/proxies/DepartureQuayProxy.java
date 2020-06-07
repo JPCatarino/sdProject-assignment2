@@ -41,6 +41,10 @@ public class DepartureQuayProxy implements SharedRegionProxy {
                 departureQuay.leaveTheBus();
                 nm.setMessageType(MessageType.LEAVETHEBUS);
                 break;
+            case SHUT:
+                nm.setMessageType(MessageType.ACK);
+                serviceProviderProxy.shutdown(msg.getIntValue1(),5);
+                break;
         }
 
         return nm;

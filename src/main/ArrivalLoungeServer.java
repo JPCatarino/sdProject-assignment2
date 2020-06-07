@@ -11,7 +11,7 @@ import java.net.SocketTimeoutException;
 public class ArrivalLoungeServer {
 
     private static final int portNumb = 33002;
-    public static boolean waitConnection;
+    public static int waitConnection;
 
     public static void main (String [] args)
     {
@@ -30,8 +30,8 @@ public class ArrivalLoungeServer {
 
         // Process requests
 
-        waitConnection = true;
-        while (waitConnection)
+        waitConnection = 0;
+        while (waitConnection!=3)
             try
             { sconi = scon.accept ();
                 arrivalLoungeProxy = new ArrivalLoungeProxy(arrivalLounge);

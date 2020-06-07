@@ -54,6 +54,10 @@ public class ArrivalQuayProxy implements SharedRegionProxy {
                 arrivalQuay.setMaxNumberOfSeats(msg.getT_seats());
                 nm.setMessageType(MessageType.NFICDONE);
                 break;
+            case SHUT:
+                nm.setMessageType(MessageType.ACK);
+                serviceProviderProxy.shutdown(msg.getIntValue1(),1);
+                break;
         }
 
         return nm;

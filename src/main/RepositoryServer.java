@@ -10,7 +10,7 @@ import java.net.SocketTimeoutException;
 public class RepositoryServer {
 
     private static final int portNumb = 33001;
-    public static boolean waitConnection;
+    public static int waitConnection;
 
     public static void main (String [] args)
     {
@@ -29,8 +29,8 @@ public class RepositoryServer {
 
         // Process requests
 
-        waitConnection = true;
-        while (waitConnection)
+        waitConnection = 0;
+        while (waitConnection!=3)
             try
             { sconi = scon.accept ();
                 repositoryProxy = new RepositoryProxy(repository);
@@ -41,6 +41,7 @@ public class RepositoryServer {
             {
             }
         scon.end ();
+        repository.finalReport();
         System.out.println ("O servidor foi desactivado.");
     }
 }

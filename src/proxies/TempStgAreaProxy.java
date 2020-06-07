@@ -31,6 +31,10 @@ public class TempStgAreaProxy implements SharedRegionProxy {
                 tempStgArea.carryItToAppropriateStore(msg.getBag1());
                 nm.setMessageType(MessageType.CARRYITTOAPPROPRIATESTORETMP);
                 break;
+            case SHUT:
+                nm.setMessageType(MessageType.ACK);
+                serviceProviderProxy.shutdown(msg.getIntValue1(),8);
+                break;
         }
         return nm;
     }

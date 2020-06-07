@@ -13,7 +13,7 @@ import java.net.SocketTimeoutException;
 public class DepartureTerminalEntranceServer {
 
     private static final int portNumb = 33008;
-    public static boolean waitConnection;
+    public static int waitConnection;
 
     public static void main (String [] args)
     {
@@ -32,8 +32,8 @@ public class DepartureTerminalEntranceServer {
 
         // Process requests
 
-        waitConnection = true;
-        while (waitConnection)
+        waitConnection = 0;
+        while (waitConnection!=3)
             try
             { sconi = scon.accept ();
                 departureTerminalEntranceProxy = new DepartureTerminalEntranceProxy(departureTerminalEntrance);

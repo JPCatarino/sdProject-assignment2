@@ -44,6 +44,10 @@ public class ArrivalTerminalExitProxy implements SharedRegionProxy {
                 arrivalTerminalExit.setMaxNumberOfPassengers(msg.getN_passengers());
                 nm.setMessageType(MessageType.NFICDONE);
                 break;
+            case SHUT:
+                nm.setMessageType(MessageType.ACK);
+                serviceProviderProxy.shutdown(msg.getIntValue1(),2);
+                break;
         }
 
         return nm;

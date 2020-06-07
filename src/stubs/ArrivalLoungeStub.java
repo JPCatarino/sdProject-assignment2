@@ -313,10 +313,10 @@ public class ArrivalLoungeStub extends SharedRegionStub {
 
     public void probPar (int n_passengers, int k_landings)
     {
-        ClientCom con = new ClientCom (super.getServerHostName(), super.getServerPort());
+        ClientCom cc = new ClientCom (super.getServerHostName(), super.getServerPort());
         Message inMessage, outMessage;
 
-        while (!con.open ()){
+        while (!cc.open ()){
             try {
                 Thread.sleep((long) (10));
             }
@@ -324,14 +324,42 @@ public class ArrivalLoungeStub extends SharedRegionStub {
         }
 
         outMessage = new Message (MessageType.SETNFIC, n_passengers, k_landings);
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
+        cc.writeObject (outMessage);
+        inMessage = (Message) cc.readObject ();
 
         if (inMessage.getMessageType() != MessageType.NFICDONE) {
             System.out.println ("Simulation start: Invalid type!");
             System.out.println (inMessage.toString ());
             System.exit (1);
         }
-        con.close ();
+        cc.close ();
+    }
+
+    public void shutdown (int value) {
+
+        ClientCom cc = new ClientCom (super.getServerHostName(), super.getServerPort());
+        Message inMessage, outMessage;
+
+        while (!cc.open ()){
+            try {
+                Thread.sleep((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+
+        outMessage = new Message ();
+        outMessage.setMessageType(MessageType.SHUT);
+        outMessage.setIntValue1(value);
+
+        cc.writeObject (outMessage);
+
+        inMessage = (Message) cc.readObject ();
+
+        if (inMessage.getMessageType () != MessageType.ACK) {
+            System.out.println ("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
+        cc.close ();
     }
 }

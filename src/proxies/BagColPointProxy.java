@@ -46,6 +46,10 @@ public class BagColPointProxy implements SharedRegionProxy {
                 bagColPoint.resetBagColPoint();
                 nm.setMessageType(MessageType.RESETBAGCOLPOINT);
                 break;
+            case SHUT:
+                nm.setMessageType(MessageType.ACK);
+                serviceProviderProxy.shutdown(msg.getIntValue1(),3);
+                break;
         }
 
         return nm;

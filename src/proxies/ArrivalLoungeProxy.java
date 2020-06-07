@@ -81,6 +81,10 @@ public class ArrivalLoungeProxy implements SharedRegionProxy {
                 nm.setIntValue1(arrivalLounge.getMaxNumberOfPassengers());
                 nm.setMessageType(MessageType.GETMAXNUMBEROFPASSENGERS);
                 break;
+            case SHUT:
+                nm.setMessageType(MessageType.ACK);
+                serviceProviderProxy.shutdown(msg.getIntValue1(),0);
+                break;
         }
 
         return nm;
