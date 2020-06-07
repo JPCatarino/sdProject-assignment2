@@ -197,7 +197,6 @@ public class ArrivalQuay implements ATTQBusDriver, ATTQPassenger {
             }
         }
 
-        // TODO check this function
         synchronized (this) {
             p.setPassengerState(PassengerStates.TERMINAL_TRANSFER);
             repo.setST(p.getID(), PassengerStates.TERMINAL_TRANSFER.getState());

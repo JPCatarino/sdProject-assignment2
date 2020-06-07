@@ -10,10 +10,8 @@ public class ClientPorter {
         // Global variables.
         int K_landings = 5;
         int N_passengers = 6;
-        int T_seats = 3;
 
-        //
-        String fName="Log.txt";                                     // logging file name
+        // Server global variables.
         String baseServerHostName = "localhost";                    // name from the machine where the server is
         int baseServerPortNumb=33000;                               // server port number
 
@@ -44,6 +42,8 @@ public class ClientPorter {
             System.out.println(ex.getMessage());
             System.exit(1);
         }
+
+        //Shutdown
         arrivalLounge.shutdown(1);
         arrivalQuay.shutdown(1);
         arrivalTerminalExit.shutdown(1);

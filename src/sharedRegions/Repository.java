@@ -170,7 +170,7 @@ public class Repository {
      *
      * @param t_seats number of seats from the actual flight.
      */
-    public void setT_seats(int t_seats) {
+    public void InitializeT_seats(int t_seats) {
         this.S = new String[t_seats];
         Arrays.fill(this.S, "-");
     }
@@ -180,7 +180,7 @@ public class Repository {
      *
      * @param n_PASSENGERS number of passengers from the actual flight.
      */
-    public void setN_PASSENGERS(int n_PASSENGERS) {
+    public void InitializeN_PASSENGERS(int n_PASSENGERS) {
         this.N_PASSENGERS = n_PASSENGERS;
         this.ST = new String[n_PASSENGERS];
         this.SI = new String[n_PASSENGERS];

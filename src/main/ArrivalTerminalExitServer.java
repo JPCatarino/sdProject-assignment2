@@ -13,18 +13,25 @@ import java.net.SocketTimeoutException;
 
 public class ArrivalTerminalExitServer {
 
+    /**
+     * Listening port number of the service provided
+     *
+     *  @serialField portNumb
+     */
     private static final int portNumb = 33004;
     public static int waitConnection;
 
-    public static void main (String [] args)
-    {
+    /**
+     *  Main program.
+     */
+    public static void main (String [] args) {
+
         ServiceProviderProxy serviceProviderProxy;
         ArrivalTerminalExitProxy arrivalTerminalExitProxy;
         ArrivalTerminalExit arrivalTerminalExit ;
         ServerCom scon, sconi;
 
         // Start service
-
         scon = new ServerCom(portNumb);
         scon.start ();
         arrivalTerminalExit = new ArrivalTerminalExit(new RepositoryStub("localhost", 33001),new ArrivalLoungeStub("localhost", 33002), new DepartureTerminalEntranceStub("localhost", 33008));

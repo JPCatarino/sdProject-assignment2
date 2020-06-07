@@ -2,7 +2,6 @@ package proxies;
 
 import common.Message;
 import common.MessageType;
-import common.ServerCom;
 import sharedRegions.Repository;
 
 public class RepositoryProxy implements SharedRegionProxy {
@@ -115,8 +114,8 @@ public class RepositoryProxy implements SharedRegionProxy {
                 nm.setMessageType(MessageType.FINALREPORT);
                 break;
             case SETNFIC:
-                repository.setN_PASSENGERS(msg.getN_passengers());
-                repository.setT_seats(msg.getT_seats());
+                repository.InitializeN_PASSENGERS(msg.getN_passengers());
+                repository.InitializeT_seats(msg.getT_seats());
                 nm.setMessageType(MessageType.NFICDONE);
                 break;
             case SHUT:

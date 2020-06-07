@@ -10,18 +10,25 @@ import java.net.SocketTimeoutException;
 
 public class BagColPointServer {
 
+    /**
+     * Listening port number of the service provided
+     *
+     *  @serialField portNumb
+     */
     private static final int portNumb = 33005;
     public static int waitConnection;
 
-    public static void main (String [] args)
-    {
+    /**
+     *  Main program.
+     */
+    public static void main (String [] args) {
+
         ServiceProviderProxy serviceProviderProxy;
         BagColPointProxy bagColPointProxy;
         BagColPoint bagColPoint ;
         ServerCom scon, sconi;
 
         // Start service
-
         scon = new ServerCom(portNumb);
         scon.start ();
         bagColPoint = new BagColPoint(new RepositoryStub("localhost", 33001));
@@ -29,7 +36,6 @@ public class BagColPointServer {
         System.out.println ("O servidor esta em escuta.");
 
         // Process requests
-
         waitConnection = 0;
         while (waitConnection!=3)
             try
@@ -38,11 +44,8 @@ public class BagColPointServer {
                 serviceProviderProxy= new ServiceProviderProxy( bagColPointProxy,sconi);
                 serviceProviderProxy.start ();
             }
-            catch (SocketTimeoutException e)
-            {
-            }
+            catch (SocketTimeoutException ignored) {}
         scon.end ();
         System.out.println ("O servidor foi desactivado.");
     }
-
 }

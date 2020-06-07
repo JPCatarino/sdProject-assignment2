@@ -10,18 +10,25 @@ import java.net.SocketTimeoutException;
 
 public class TempStgAreaServer {
 
+    /**
+     * Listening port number of the service provided
+     *
+     *  @serialField portNumb
+     */
     private static final int portNumb = 33009;
     public static int waitConnection;
 
-    public static void main (String [] args)
-    {
+    /**
+     *  Main program.
+     */
+    public static void main (String [] args) {
+
         ServiceProviderProxy serviceProviderProxy;
         TempStgAreaProxy tempStgAreaProxy;
         TempStgArea tempStgArea;
         ServerCom scon, sconi;
 
         // Start service
-
         scon = new ServerCom(portNumb);
         scon.start ();
         tempStgArea = new TempStgArea(new RepositoryStub("localhost", 33001));
@@ -29,7 +36,6 @@ public class TempStgAreaServer {
         System.out.println ("O servidor esta em escuta.");
 
         // Process requests
-
         waitConnection = 0;
         while (waitConnection!=3)
             try
@@ -38,9 +44,7 @@ public class TempStgAreaServer {
                 serviceProviderProxy= new ServiceProviderProxy( tempStgAreaProxy,sconi);
                 serviceProviderProxy.start ();
             }
-            catch (SocketTimeoutException e)
-            {
-            }
+            catch (SocketTimeoutException ignored) {}
         scon.end ();
         System.out.println ("O servidor foi desactivado.");
     }

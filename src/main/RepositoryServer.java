@@ -9,18 +9,25 @@ import java.net.SocketTimeoutException;
 
 public class RepositoryServer {
 
+    /**
+     * Listening port number of the service provided
+     *
+     *  @serialField portNumb
+     */
     private static final int portNumb = 33001;
     public static int waitConnection;
 
-    public static void main (String [] args)
-    {
+    /**
+     *  Main program.
+     */
+    public static void main (String [] args){
+
         ServiceProviderProxy serviceProviderProxy;
         RepositoryProxy repositoryProxy;
         Repository repository;
         ServerCom scon, sconi;
 
         // Start service
-
         scon = new ServerCom(portNumb);
         scon.start ();
         repository = new Repository();
@@ -28,7 +35,6 @@ public class RepositoryServer {
         System.out.println ("O servidor esta em escuta.");
 
         // Process requests
-
         waitConnection = 0;
         while (waitConnection!=3)
             try
@@ -37,9 +43,7 @@ public class RepositoryServer {
                 serviceProviderProxy= new ServiceProviderProxy( repositoryProxy,sconi);
                 serviceProviderProxy.start ();
             }
-            catch (SocketTimeoutException e)
-            {
-            }
+            catch (SocketTimeoutException ignored) {}
         scon.end ();
         repository.finalReport();
         System.out.println ("O servidor foi desactivado.");
