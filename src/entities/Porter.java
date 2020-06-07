@@ -1,14 +1,8 @@
 package entities;
 
-import sharedRegions.ArrivalLounge;
-import sharedRegions.BagColPoint;
-import sharedRegions.TempStgArea;
-import states.PorterStates;
 import stubs.ArrivalLoungeStub;
 import stubs.BagColPointStub;
 import stubs.TempStgAreaStub;
-
-import java.util.Arrays;
 
 /**
  * Porter thread and life cycle.
@@ -28,21 +22,21 @@ public class Porter extends Thread {
      *
      *  @serialField al
      */
-    private ArrivalLoungeStub al;
+    private final ArrivalLoungeStub al;
 
     /**
      *  Baggage collection point.
      *
      *  @serialField bcp
      */
-    private BagColPointStub bcp;
+    private final BagColPointStub bcp;
 
     /**
      *  Temporary Storage Area.
      *
      *  @serialField tsa
      */
-    private TempStgAreaStub tsa;
+    private final TempStgAreaStub tsa;
 
     /**
      *  Bag being carried from the plane hold to the baggage collection point or to the temporary storage area.

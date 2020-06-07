@@ -9,51 +9,55 @@ public interface PassengerInterface {
      *
      * @return Passenger ID
      */
-    public int getID();
+    int getID();
 
     /**
      * Increments the number of bags collected by the passenger.
      */
-    public void collectedABag();
+    void collectedABag();
 
     /**
      * Getter for nBagsToCollect.
      *
      * @return the number of bags the passenger has to collect.
      */
-    public int getnBagsToCollect();
+    int getnBagsToCollect();
 
     /**
      * Getter for nBagsCollected.
      *
      * @return the number of bags the passenger has collected.
      */
-    public int getnBagsCollected();
+    int getnBagsCollected();
     /**
      * Checks if the passenger has no more flights.
      *
      * @return true if the passenger is going home.
      */
-    public boolean isJourneyEnding();
+    boolean isJourneyEnding();
 
     /**
      * Set Passenger state.
      *
      * @param state new state of the Passenger.
      */
-    public void setPassengerState(PassengerStates state);
+    void setPassengerState(PassengerStates state);
 
     /**
      * Setter for passenger bus seat.
      * @param busSeat Number of the bus seat passenger is using.
      */
-    public void setBusSeat(int busSeat);
+    void setBusSeat(int busSeat);
 
     /**
      * Getter for passenger bus seat.
      * @return Number of the seat the passenger is using.
      */
-    public int getBusSeat();
+    int getBusSeat();
 
-    public void setnBagsCollected(int nBagsCollected);
+    /**
+     * Setter for the number of bags collected.
+     * @param nBagsCollected Number of bags collected.
+     */
+    void setnBagsCollected(int nBagsCollected);
 }

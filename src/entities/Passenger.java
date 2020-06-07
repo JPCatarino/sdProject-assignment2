@@ -1,8 +1,5 @@
 package entities;
 
-import sharedRegions.*;
-import states.PassengerDecisions;
-import states.PassengerStates;
 import stubs.*;
 
 /**
@@ -19,21 +16,14 @@ public class Passenger extends Thread {
      *
      * @serialField id
      */
-    private int id;
-
-    /**
-     * Passenger's current state.
-     *
-     * @serialField PassengerStates
-     */
-    private PassengerStates state;
+    private final int id;
 
     /**
      * Number of bags belonging to the passenger.
      *
      * @serialField nBagsToCollect
      */
-    private int nBagsToCollect;
+    private final int nBagsToCollect;
 
     /**
      * Number of bags collected by the passenger.
@@ -42,6 +32,11 @@ public class Passenger extends Thread {
      */
     private int nBagsCollected;
 
+    /**
+     * Number of seats in the bus.
+     *
+     * @serialField busSeat
+     */
     private int busSeat;
 
     /**
@@ -49,56 +44,56 @@ public class Passenger extends Thread {
      *
      * @serialField journeyEnding
      */
-    private boolean journeyEnding;
+    private final boolean journeyEnding;
 
     /**
      * Arrival Lounge Shared Memory.
      *
      * @serialField al
      */
-    private ArrivalLoungeStub al;
+    private final ArrivalLoungeStub al;
 
     /**
      * BagColPoint Shared Memory.
      *
      * @serialField bcp
      */
-    private BagColPointStub bcp;
+    private final BagColPointStub bcp;
 
     /**
      * BagRecOffice Shared Memory.
      *
      * @serialField bro
      */
-    private BagRecOfficeStub bro;
+    private final BagRecOfficeStub bro;
 
     /**
      * ArrivalQuay Shared Memory.
      *
      * @serialField aq
      */
-    private ArrivalQuayStub aq;
+    private final ArrivalQuayStub aq;
 
     /**
      * DepartureQuay Shared Memory.
      *
      * @serialField dq
      */
-    private DepartureQuayStub dq;
+    private final DepartureQuayStub dq;
 
     /**
      * DepartureTerminalEntrance Shared Memory.
      *
      * @serialField dte
      */
-    private DepartureTerminalEntranceStub dte;
+    private final DepartureTerminalEntranceStub dte;
 
     /**
      * ArrivalTerminalExit Shared Memory.
      *
      * @serialField ate
      */
-    private ArrivalTerminalExitStub ate;
+    private final ArrivalTerminalExitStub ate;
 
     /**
      * Passenger Constructor.
@@ -120,7 +115,6 @@ public class Passenger extends Thread {
         this.nBagsToCollect = nBagsToCollect;
         this.nBagsCollected = 0;
         this.journeyEnding = journeyEnding;
-        this.state = PassengerStates.AT_THE_DISEMBARKING_ZONE;
         this.al = al;
         this.bcp = bcp;
         this.bro = bro;
@@ -170,13 +164,6 @@ public class Passenger extends Thread {
     }
 
     /**
-     * Increments the number of bags collected by the passenger.
-     */
-    public void collectedABag(){
-        this.nBagsCollected++;
-    }
-
-    /**
      * Getter for nBagsToCollect.
      *
      * @return the number of bags the passenger has to collect.
@@ -204,15 +191,6 @@ public class Passenger extends Thread {
     }
 
     /**
-     * Set Passenger state.
-     *
-     * @param state new state of the Passenger.
-     */
-    public void setPassengerState(PassengerStates state) {
-        this.state = state;
-    }
-
-    /**
      * Setter for passenger bus seat.
      * @param busSeat Number of the bus seat passenger is using.
      */
@@ -228,6 +206,10 @@ public class Passenger extends Thread {
         return busSeat;
     }
 
+    /**
+     * Setter for the number of bags collected.
+     * @param nBagsCollected Number of bags collected.
+     */
     public void setnBagsCollected(int nBagsCollected) {
         this.nBagsCollected = nBagsCollected;
     }

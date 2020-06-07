@@ -1,8 +1,5 @@
 package entities;
 
-import sharedRegions.ArrivalQuay;
-import sharedRegions.DepartureQuay;
-import states.BusDriverStates;
 import stubs.ArrivalQuayStub;
 import stubs.DepartureQuayStub;
 
@@ -19,13 +16,6 @@ import java.util.List;
 public class BusDriver extends Thread {
 
     /**
-     * Bus Driver current state.
-     *
-     * @serialField state
-     */
-    private BusDriverStates state;
-
-    /**
      * List of bus seats.
      *
      * @serialField busSeats
@@ -37,7 +27,7 @@ public class BusDriver extends Thread {
      *
      * @serialField TTL
      */
-    private int TTL;
+    private final int TTL;
 
     /**
      * ArrivalQuay Shared Memory.
@@ -66,7 +56,6 @@ public class BusDriver extends Thread {
         this.TTL = TTL;
         this.aq = aq;
         this.dq = dq;
-        this.state = BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL;
     }
 
     /**
@@ -105,15 +94,6 @@ public class BusDriver extends Thread {
      */
     public void setBusSeats(List<Integer> busSeats){
         this.busSeats = busSeats;
-    }
-
-    /**
-     * Set Bus Driver state.
-     *
-     * @param state New state of the Bus Driver.
-     */
-    public void setBusDriverState(BusDriverStates state){
-        this.state = state;
     }
 
     /**
