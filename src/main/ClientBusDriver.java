@@ -27,7 +27,6 @@ public class ClientBusDriver {
         //Communicate parameters
         repository.probPar(N_passengers, T_seats);
         arrivalQuay.probPar(T_seats);
-        repository.reportInitialStatus();
 
         // Join BusDriver
         busDriver.start();

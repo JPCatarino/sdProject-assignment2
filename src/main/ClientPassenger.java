@@ -81,7 +81,6 @@ public class ClientPassenger {
         arrivalQuay.probPar(T_seats);
         arrivalTerminalExit.probPar(N_passengers);
         departureTerminalEntrance.probPar(N_passengers);
-        repository.reportInitialStatus();
 
 
         // Join the different passengers for each flight.

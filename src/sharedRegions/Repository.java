@@ -149,12 +149,20 @@ public class Repository {
     private int bagsLost = 0;
 
     /**
+     * True if repository is ready for writing
+     *
+     * @serialField initialized
+     */
+    private boolean initialized;
+
+    /**
      * Repository Instantiation.
      */
     public Repository(){
         this.Q = new LinkedList<>();
         this.P_Stat = PorterStates.WAITING_FOR_A_PLANE_TO_LAND.getState();
         this.D_Stat = BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL.getState();
+        this.initialized = false;
     }
 
     /**
@@ -477,12 +485,16 @@ public class Repository {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        initialized = true;
     }
 
     /**
      * Append the current State to the logger file.
      */
     public synchronized void reportStatus() {
+        if(!initialized){
+            reportInitialStatus();
+        }
         FileWriter fw;
         try {
             fw = new FileWriter(filename, true);

@@ -29,7 +29,6 @@ public class ClientPorter {
         //Communicate parameters
         repository.probPar(N_passengers, T_seats);
         arrivalLounge.probPar(N_passengers,K_landings);
-        repository.reportInitialStatus();
 
         // Join Porter
         porter.start();
