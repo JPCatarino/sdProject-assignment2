@@ -1,0 +1,1 @@
+for z in $(seq 1 10000); do echo -e "\nRun n.º " $z; ./build_deploy.sh -p; done
