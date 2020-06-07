@@ -13,12 +13,5 @@ public interface SharedRegionProxy {
      * @param msg received messages
      * @return reply
      */
-    public Message processAndReply(Message msg);
-
-    /**
-     * Gets current simulation status
-     * @return true if the simulation has ended
-     */
-    public boolean getSimStatus();
-
+    Message processAndReply(Message msg);
 }

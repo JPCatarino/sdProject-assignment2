@@ -2,24 +2,35 @@ package proxies;
 
 import common.Message;
 import common.MessageType;
-import common.ServerCom;
 import sharedRegions.DepartureQuay;
 
 public class DepartureQuayProxy implements SharedRegionProxy {
 
+    /**
+     * Departure Quay (represents the service to be provided).
+     *
+     * @serialField departureQuay.
+     */
     private final DepartureQuay departureQuay;
 
     /**
-     * The simulation has finished
-     * @serialField simFinished
+     * DepartureQuayProxy Constructor.
+     * It initiates the Departure Quay.
+     *
+     * @param departureQuay Departure Quay.
      */
-    private boolean simFinished;
-
     public DepartureQuayProxy(DepartureQuay departureQuay) {
         this.departureQuay = departureQuay;
-        this.simFinished = false;
     }
 
+    /**
+     * Process messages by executing corresponding task.
+     * Generate answer message.
+     *
+     * @param msg message in the request.
+     *
+     * @return answer message.
+     */
     @Override
     public Message processAndReply(Message msg) {
         Message nm = new Message();
@@ -48,10 +59,5 @@ public class DepartureQuayProxy implements SharedRegionProxy {
         }
 
         return nm;
-    }
-
-    @Override
-    public boolean getSimStatus() {
-        return false;
     }
 }

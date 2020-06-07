@@ -2,24 +2,35 @@ package proxies;
 
 import common.Message;
 import common.MessageType;
-import common.ServerCom;
 import sharedRegions.BagColPoint;
 
 public class BagColPointProxy implements SharedRegionProxy {
 
+    /**
+     * Baggage Collection Point (represents the service to be provided).
+     *
+     * @serialField bagColPoint.
+     */
     private final BagColPoint bagColPoint;
 
     /**
-     * The simulation has finished
-     * @serialField simFinished
+     * ArrivalQuayProxy Constructor.
+     * It initiates the Baggage Collection Point.
+     *
+     * @param bagColPoint Baggage Collection Point.
      */
-    private boolean simFinished;
-
     public BagColPointProxy(BagColPoint bagColPoint) {
         this.bagColPoint = bagColPoint;
-        this.simFinished = false;
     }
 
+    /**
+     * Process messages by executing corresponding task.
+     * Generate answer message.
+     *
+     * @param msg message in the request.
+     *
+     * @return answer message.
+     */
     @Override
     public Message processAndReply(Message msg) {
         Message nm = new Message();
@@ -51,12 +62,6 @@ public class BagColPointProxy implements SharedRegionProxy {
                 serviceProviderProxy.shutdown(msg.getIntValue1(),3);
                 break;
         }
-
         return nm;
-    }
-
-    @Override
-    public boolean getSimStatus() {
-        return false;
     }
 }

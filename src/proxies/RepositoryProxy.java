@@ -6,19 +6,31 @@ import sharedRegions.Repository;
 
 public class RepositoryProxy implements SharedRegionProxy {
 
+    /**
+     * Repository (represents the service to be provided).
+     *
+     * @serialField repository.
+     */
     private final Repository repository;
 
     /**
-     * The simulation has finished
-     * @serialField simFinished
+     * RepositoryProxy Constructor.
+     * It initiates the Repository.
+     *
+     * @param repository Repository.
      */
-    private boolean simFinished;
-
     public RepositoryProxy(Repository repository) {
         this.repository = repository;
-        this.simFinished = false;
     }
 
+    /**
+     * Process messages by executing corresponding task.
+     * Generate answer message.
+     *
+     * @param msg message in the request.
+     *
+     * @return answer message.
+     */
     @Override
     public Message processAndReply(Message msg) {
         Message nm = new Message();
@@ -124,10 +136,5 @@ public class RepositoryProxy implements SharedRegionProxy {
                 break;
         }
         return nm;
-    }
-
-    @Override
-    public boolean getSimStatus() {
-        return false;
     }
 }

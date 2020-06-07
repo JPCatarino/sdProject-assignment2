@@ -2,24 +2,35 @@ package proxies;
 
 import common.Message;
 import common.MessageType;
-import common.ServerCom;
 import sharedRegions.BagRecOffice;
 
 public class BagRecOfficeProxy implements SharedRegionProxy {
 
+    /**
+     * Baggage Reclaim Office (represents the service to be provided).
+     *
+     * @serialField bagRecOffice.
+     */
     private final BagRecOffice bagRecOffice;
 
     /**
-     * The simulation has finished
-     * @serialField simFinished
+     * BagRecOfficeProxy Constructor.
+     * It initiates the Baggage Reclaim Office.
+     *
+     * @param bagRecOffice Baggage Reclaim Office.
      */
-    private boolean simFinished;
-
     public BagRecOfficeProxy( BagRecOffice bagRecOffice) {
         this.bagRecOffice = bagRecOffice;
-        this.simFinished = false;
     }
 
+    /**
+     * Process messages by executing corresponding task.
+     * Generate answer message.
+     *
+     * @param msg message in the request.
+     *
+     * @return answer message.
+     */
     @Override
     public Message processAndReply(Message msg) {
         Message nm = new Message();
@@ -40,10 +51,5 @@ public class BagRecOfficeProxy implements SharedRegionProxy {
         }
 
         return nm;
-    }
-
-    @Override
-    public boolean getSimStatus() {
-        return false;
     }
 }

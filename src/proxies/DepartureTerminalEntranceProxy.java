@@ -2,24 +2,35 @@ package proxies;
 
 import common.Message;
 import common.MessageType;
-import common.ServerCom;
 import sharedRegions.DepartureTerminalEntrance;
 
 public class DepartureTerminalEntranceProxy implements  SharedRegionProxy {
 
+    /**
+     * Departure Terminal Entrance (represents the service to be provided).
+     *
+     * @serialField departureTerminalEntrance.
+     */
     private final DepartureTerminalEntrance departureTerminalEntrance;
 
     /**
-     * The simulation has finished
-     * @serialField simFinished
+     * DepartureTerminalEntranceProxy Constructor.
+     * It initiates the Departure Terminal Entrance.
+     *
+     * @param departureTerminalEntrance Departure Terminal Entrance.
      */
-    private boolean simFinished;
-
     public DepartureTerminalEntranceProxy(DepartureTerminalEntrance departureTerminalEntrance) {
         this.departureTerminalEntrance = departureTerminalEntrance;
-        this.simFinished = false;
     }
 
+    /**
+     * Process messages by executing corresponding task.
+     * Generate answer message.
+     *
+     * @param msg message in the request.
+     *
+     * @return answer message.
+     */
     @Override
     public Message processAndReply(Message msg) {
         Message nm = new Message();
@@ -48,12 +59,6 @@ public class DepartureTerminalEntranceProxy implements  SharedRegionProxy {
                 serviceProviderProxy.shutdown(msg.getIntValue1(),6);
                 break;
         }
-
         return nm;
-    }
-
-    @Override
-    public boolean getSimStatus() {
-        return false;
     }
 }

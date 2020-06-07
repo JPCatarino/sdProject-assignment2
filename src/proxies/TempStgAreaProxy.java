@@ -7,20 +7,31 @@ import sharedRegions.TempStgArea;
 
 public class TempStgAreaProxy implements SharedRegionProxy {
 
+    /**
+     * Temporary Storage Area (represents the service to be provided).
+     *
+     * @serialField tempStgArea.
+     */
     private final TempStgArea tempStgArea;
 
     /**
-     * The simulation has finished
-     * @serialField simFinished
+     * TempStgAreaProxy Constructor.
+     * It initiates the Temporary Storage Area.
+     *
+     * @param tempStgArea Temporary Storage Area.
      */
-    private boolean simFinished;
-
     public TempStgAreaProxy(TempStgArea tempStgArea) {
-
         this.tempStgArea = tempStgArea;
-        this.simFinished = false;
     }
 
+    /**
+     * Process messages by executing corresponding task.
+     * Generate answer message.
+     *
+     * @param msg message in the request.
+     *
+     * @return answer message.
+     */
     @Override
     public Message processAndReply(Message msg) {
         Message nm = new Message();
@@ -37,10 +48,5 @@ public class TempStgAreaProxy implements SharedRegionProxy {
                 break;
         }
         return nm;
-    }
-
-    @Override
-    public boolean getSimStatus() {
-        return false;
     }
 }

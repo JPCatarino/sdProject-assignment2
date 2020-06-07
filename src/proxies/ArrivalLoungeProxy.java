@@ -2,24 +2,35 @@ package proxies;
 
 import common.Message;
 import common.MessageType;
-import common.ServerCom;
 import sharedRegions.ArrivalLounge;
 
 public class ArrivalLoungeProxy implements SharedRegionProxy {
 
+    /**
+     * Arrival Lounge (represents the service to be provided).
+     *
+     * @serialField arrivalLounge.
+     */
     private final ArrivalLounge arrivalLounge;
 
     /**
-     * The simulation has finished
-     * @serialField simFinished
+     * ArrivalLoungeProxy Constructor.
+     * It initiates the Arrival Lounge.
+     *
+     * @param arrivalLounge Arrival Lounge.
      */
-    private boolean simFinished;
-
     public ArrivalLoungeProxy(ArrivalLounge arrivalLounge) {
         this.arrivalLounge = arrivalLounge;
-        this.simFinished = false;
     }
 
+    /**
+     * Process messages by executing corresponding task.
+     * Generate answer message.
+     *
+     * @param msg message in the request.
+     *
+     * @return answer message.
+     */
     @Override
     public Message processAndReply(Message msg) {
         Message nm = new Message();
@@ -86,12 +97,6 @@ public class ArrivalLoungeProxy implements SharedRegionProxy {
                 serviceProviderProxy.shutdown(msg.getIntValue1(),0);
                 break;
         }
-
         return nm;
-    }
-
-    @Override
-    public boolean getSimStatus() {
-        return false;
     }
 }
