@@ -6,19 +6,38 @@ import entities.BusDriverInterface;
 import entities.PassengerInterface;
 import entities.PorterInterface;
 import main.*;
-import states.BusDriverStates;
 import states.PassengerStates;
 
 import java.util.List;
 
 public class ServiceProviderProxy extends Thread implements BusDriverInterface, PassengerInterface, PorterInterface {
 
+    /**
+     * Shared Region Proxy
+     *
+     * @serialField sharedRegionProxy
+     */
     private final SharedRegionProxy sharedRegionProxy;
 
+    /**
+     * Communication channel
+     *
+     * @serialField serverCom
+     */
     private final ServerCom serverCom;
 
+    /**
+     * launched threads counter
+     *
+     *  @serialField nProxy
+     */
     private static int nProxy = 0;
 
+    /**
+     * Passenger id.
+     *
+     * @serialField id
+     */
     private int id;
 
     /**
@@ -49,6 +68,11 @@ public class ServiceProviderProxy extends Thread implements BusDriverInterface, 
      */
     private int nBagsCollected;
 
+    /**
+     * Number of seats in the bus.
+     *
+     * @serialField busSeat
+     */
     private int busSeat;
 
     /**
@@ -137,16 +161,6 @@ public class ServiceProviderProxy extends Thread implements BusDriverInterface, 
     @Override
     public void setBusSeats(List<Integer> busSeats) {
         this.busSeats = busSeats;
-    }
-
-    /**
-     * Set Bus Driver state.
-     *
-     * @param state New state of the Bus Driver.
-     */
-    @Override
-    public void setBusDriverState(BusDriverStates state) {
-
     }
 
     /**
@@ -257,38 +271,85 @@ public class ServiceProviderProxy extends Thread implements BusDriverInterface, 
         this.planeHoldEmpty = planeHoldEmpty;
     }
 
+    /**
+     * Set the time to leave.
+     *
+     * @param TTL time to leave until the bus driver leaves.
+     */
     public void setTTL(int TTL) {
         this.TTL = TTL;
     }
 
+    /**
+     * Set number of bags to collect by the passenger.
+     *
+     * @param nBagsToCollect Total number of bags to collect by the passenger.
+     */
     public void setnBagsToCollect(int nBagsToCollect) {
         this.nBagsToCollect = nBagsToCollect;
     }
 
+    /**
+     * Set number of bags collected by the passenger.
+     *
+     * @param nBagsCollected Number of bags collected by the passenger.
+     */
     public void setnBagsCollected(int nBagsCollected) {
         this.nBagsCollected = nBagsCollected;
     }
 
+    /**
+     * Set for the variable journeyEnding.
+     *
+     * @param journeyEnding True if the passenger has no subsequent flights.
+     */
     public void setJourneyEnding(boolean journeyEnding) {
         this.journeyEnding = journeyEnding;
     }
 
+    /**
+     * Getter for variable baggage.
+     *
+     * @return One bag.
+     */
     public int[] getBag() {
         return bag;
     }
 
+    /**
+     * Set the value of the plane hold.
+     *
+     * @param bag Bag being carried from the plane hold to the baggage collection point or to the temporary storage area.
+     */
     public void setBag(int[] bag) {
         this.bag = bag;
     }
 
+    /**
+     * Set the passenger id.
+     *
+     * @param id passenger id.
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Getter for communication channel.
+     *
+     * @return Communication channel.
+     */
     public ServerCom getServerCom() {
         return serverCom;
     }
 
+    /**
+     * This function increments the number of shutdowns that each server received. When it reaches 3 (One by each client)
+     * the server initiates its shutdown.
+     *
+     * @param value amount of shutdowns.
+     * @param value2 server to shutdown.
+     */
     public void shutdown(int value, int value2) {
 
         switch (value2) {

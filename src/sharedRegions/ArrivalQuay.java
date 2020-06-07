@@ -124,7 +124,6 @@ public class ArrivalQuay implements ATTQBusDriver, ATTQPassenger {
     public synchronized void goToDepartureTerminal(){
         BusDriverInterface bd = (ServiceProviderProxy) Thread.currentThread();
         bd.setBusSeats(parkedBus);
-        bd.setBusDriverState(BusDriverStates.DRIVING_FORWARD);
         repo.setD_Stat(BusDriverStates.DRIVING_FORWARD.getState());
         repo.reportStatus();
 
@@ -140,7 +139,6 @@ public class ArrivalQuay implements ATTQBusDriver, ATTQPassenger {
     public synchronized void parkTheBus(){
         BusDriverInterface bd = (ServiceProviderProxy) Thread.currentThread();
         this.parkedBus = new ArrayList<>();
-        bd.setBusDriverState(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
         repo.setD_Stat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL.getState());
         repo.reportStatus();
         try {
